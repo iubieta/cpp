@@ -1,3 +1,5 @@
+# Normas
+
 ### Compilacion
 - c++
 - flags : -Wall -Wextra - Werror (-std=c++98)
@@ -24,4 +26,18 @@
 - Prohibidas las funciones en archivos de cabecera
 - Los archivos de cabecera deben ser independientes y autonomos
 - Se debe evitar la doble inclusion con `include guards`
+
+# Modulos
+
+## CPP_00
+
+### ex00
+Replicar el siguiente comportamiento:
+
+    $>./megaphone "shhhhh... I think the students are asleep..."
+    SHHHHH... I THINK THE STUDENTS ARE ASLEEP...
+    $>./megaphone Damnit " ! " "Sorry students, I thought this thing was off."
+    DAMNIT ! SORRY STUDENTS, I THOUGHT THIS THING WAS OFF.
+    $>./megaphone
+    * LOUD AND UNBEARABLE FEEDBACK NOISE *
 
