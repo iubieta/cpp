@@ -19,7 +19,7 @@
     - free()
 - Prohibido el uso de `using namespace <>` y `friend`
 - Prohibido los `Containers` (vector/list/map/...) y `Algorithms` (anything that
-requires to include the <algorithm> header) excepto en el modulo 08 y 09
+requires to include the `<algorithm>` header) excepto en el modulo 08 y 09
 
 ### Requisitos
 - Evitar leaks de memoria
