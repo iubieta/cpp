@@ -6,7 +6,7 @@
 /*   By: iubieta- <iubieta@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 20:37:52 by iubieta-          #+#    #+#             */
-/*   Updated: 2025/02/17 20:42:21 by iubieta-         ###   ########.fr       */
+/*   Updated: 2025/02/23 18:19:43 by iubieta-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,18 @@
 //
 //	* Discard wrong commands
 
-#include <cstddef>
+#include <bits/types/wint_t.h>
 #include <iomanip>
 #include <ios>
 #include <iostream>
 #include <cctype>
 #include <string>
+
+std::string truncate(const std::string &str, int width) {
+	if (str.length() > width)
+		return (str.substr(0, width - 1) + ".");
+	return str;
+}
 
 class Contact {
 
@@ -134,57 +140,61 @@ class PhoneBook {
 			size++;
 		}
 		
-		std::cout << "First name: ";
+		std::cout << "  First name: ";
 		std::cin >> input;
 		list[i].set_first_name(input);
 
-		std::cout << "Last name: ";
+		std::cout << "  Last name: ";
 		std::cin >> input;
 		list[i].set_last_name(input);
 		
-		std::cout << "Nickname: ";
+		std::cout << "  Nickname: ";
 		std::cin >> input;
 		list[i].set_nickname(input);
 
-		std::cout << "Phone number: ";
+		std::cout << "  Phone number: ";
 		std::cin >> input;
 		list[i].set_number(input);
+
+		std::cout << "\n";
 	}
 
 	void print_contact(int i) {
 	
 		std::cout 
-			<< "First name: " << list[i].get_first_name() << "\n"
-			<< "Last name: " << list[i].get_last_name() << "\n"
-			<< "Nickname: " << list[i].get_nickname() << "\n"
-			<< "Phone number: " << list[i].get_number() << "\n";
+			<< "  First name: " << list[i].get_first_name() << "\n"
+			<< "  Last name: " << list[i].get_last_name() << "\n"
+			<< "  Nickname: " << list[i].get_nickname() << "\n"
+			<< "  Phone number: " << list[i].get_number() << "\n"
+			<< "\n";
 	}
 
-	void display_contacts() {
-	
+	void search_contact() {
+		int col_width = 10;		
 		std::cout 
 			<< std::left
-			<< std::setw(10) << "Index"
-			<< "| " << std::setw(10) << "First name"
-			<< "| " << std::setw(10) << "Last name"
-			<< "| " << std::setw(10) << "Nickname"
+			<< std::setw(col_width) << "Index"
+			<< "| " << std::setw(col_width) << "First name"
+			<< "| " << std::setw(col_width) << "Last name"
+			<< "| " << std::setw(col_width) << "Nickname"
 			<< "\n";
 	
 		for (int i=0; i<size; i++) {
 			std::cout	
-				<< std::setw(10) << i + 1
-				<< "| " << std::setw(10) << list[i].get_first_name()
-				<< "| " << std::setw(10) << list[i].get_last_name()
-				<< "| " << std::setw(10) << list[i].get_nickname()
+				<< std::setw(col_width) << i + 1
+				<< "| " << std::setw(col_width) << truncate(list[i].get_first_name(), col_width)
+				<< "| " << std::setw(col_width) << truncate(list[i].get_last_name(), col_width)
+				<< "| " << std::setw(col_width) << truncate(list[i].get_nickname(), col_width)
 				<< "\n";
 		}
 
 		int n;
-		std::cout << "Type index of the contact you want to see: ";
+		std::cout << "\nType index of the contact you want to see: ";
 		std::cin >> n;
+		std::cout << "\n";
 
 		if (n > 8) {
-			std::cout << "Contact index out of range\n";
+			std::cout << "  Contact index out of range\n";
 			return;
 		}
 		if (n> 0)
@@ -193,9 +203,26 @@ class PhoneBook {
 };
 
 int main() {
-	PhoneBook contactList;
-	contactList.display_contacts();
-	contactList.addContact();
-	contactList.display_contacts();
+
+	PhoneBook	contactList;
+	std::string	command;
+	
+	
+	while (1) {
+		std::cout 
+			<< "PHONE-BO0K MENU:\n\n"
+			<< "  - ADD (add new contact)\n"
+			<< "  - SEARCH (search for a contact)\n"
+			<< "  - EXIT\n"
+			<< "\n> ";
+		std::cin >> command;
+		if (command == "ADD")
+			contactList.addContact();
+		else if (command == "SEARCH")
+			contactList.search_contact();
+		else if (command == "EXIT")
+			break;
+	}
+
 	return 0;
 }
