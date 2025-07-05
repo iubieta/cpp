@@ -16,5 +16,5 @@ int main() {
 	randomChump("Random");
 	Zombie *z =	newZombie("Zombie");
 	z->announce();
-	delete z;
+	z->destroy();
 }

@@ -25,6 +25,7 @@ $(NAME): $(OBJS)
 
 clean :
 	rm -rf *.o
+	rm -rf *.gch
 
 fclean : clean
 	rm -rf $(NAME)

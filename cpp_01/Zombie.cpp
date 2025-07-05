@@ -19,3 +19,8 @@ Zombie::Zombie(std::string _name) {
 void Zombie::announce(void) {
 	std::cout << name << ": BraiiinnnzzzZ...\n";
 }
+
+void Zombie::destroy(void) {
+	std::cout << name << " deleted\n";
+	delete this;
+}

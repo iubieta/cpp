@@ -1,4 +1,4 @@
-*.out
+*out
 *.exe
 *.o 
 *.h.gch

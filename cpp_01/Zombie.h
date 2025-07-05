@@ -24,6 +24,7 @@ class Zombie {
 		Zombie(std::string _name);
 		
 		void announce(void);
+		void destroy();
 };
 
 Zombie *newZombie(std::string name);
