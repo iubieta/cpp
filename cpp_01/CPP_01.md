@@ -71,3 +71,9 @@
     Jim attacks with their crude spiked club
     Jim attacks with their some other type of club
     ```
+## Ex04:
+- Files: Makefile, main.cpp, *.cpp, *.h 
+- Forbidden: `std::string::replace`
+- Goal: Create a program that takes three parametres `filename`, `s1` y `s2`.
+Opens the file and copies it into `filename.replace` replacing every occurrence of `s1 ` with `s2`.
+- Every function of string class except `replace` are allowed.
