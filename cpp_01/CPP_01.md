@@ -77,3 +77,13 @@
 - Goal: Create a program that takes three parametres `filename`, `s1` y `s2`.
 Opens the file and copies it into `filename.replace` replacing every occurrence of `s1 ` with `s2`.
 - Every function of string class except `replace` are allowed.
+ 
+## Ex05:
+- Files: Makefile, main.cpp, Harl.h, Harl.cpp
+- Goal: Create a `Harl` class with the following private functions:
+    - `void debug(void)`
+    - `void info(void)`
+    - `void warning(void)`
+    - `void error(void)`
+- And a public function `void complain(std::string level)` that calls to the corresponding function using
+pointers to the function
