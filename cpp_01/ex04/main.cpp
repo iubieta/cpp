@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iubieta- <iubieta@student.42.fr>           +#+  +:+       +#+        */
+/*   By: iubieta- <iubieta-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 19:56:53 by iubieta-          #+#    #+#             */
-/*   Updated: 2025/08/04 20:40:49 by iubieta-         ###   ########.fr       */
+/*   Updated: 2025/08/22 14:50:36 by iubieta-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int main (int argc, char *argv[])
 		return (2);
 	}
 
-	std::ofstream file2(std::string(argv[1]) + ".replace");
+	std::string f2_name = std::string(argv[1]) + ".replace";
+	std::ofstream file2(f2_name.c_str());
 	if (!file2) {
 		std::cout << "Error while creating replace file\n";
 		return (3);
@@ -42,21 +43,16 @@ int main (int argc, char *argv[])
 	std::string newline;
 	size_t index;
 	while (std::getline(file1, line)) {
-		std::cout << "line:" << line << "\n";
 		index = line.find(s1);
-		std::cout << "index:" << index << "\n";
 		newline = "";
 		while (line.find(s1) != std::string::npos) {
 			newline.append(line.substr(0, index));
 			newline.append(s2);
 			line = line.substr(index + s1.length());
-			std::cout << "line:" << line << "\n";
 			index = line.find(s1);
-			std::cout << "index:" << index << "\n";
 		}
 		newline.append(line.substr(0, index));
 		newline.append("\n");
-		std::cout << "newline:" << newline << "\n";
 		file2 << newline;
 	}
 }

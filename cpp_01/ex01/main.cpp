@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iubieta- <iubieta@student.42.fr>           +#+  +:+       +#+        */
+/*   By: iubieta- <iubieta-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 20:51:00 by iubieta-          #+#    #+#             */
-/*   Updated: 2025/07/05 18:28:44 by iubieta-         ###   ########.fr       */
+/*   Updated: 2025/08/22 14:42:35 by iubieta-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.h"
 
 int main() {
-	Zombie *z =	zombieHorde(5,"Zombie");
+	Zombie *z =	zombieHorde(50,"Zombie");
 	z->destroy();
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   phonebook.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iubieta- <iubieta@student.42.fr>           +#+  +:+       +#+        */
+/*   By: iubieta- <iubieta-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 18:39:41 by iubieta-          #+#    #+#             */
-/*   Updated: 2025/02/23 18:44:08 by iubieta-         ###   ########.fr       */
+/*   Updated: 2025/08/22 14:37:42 by iubieta-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 #include "contact.h"
 
 inline std::string truncate(const std::string &str, int width) {
-	if (str.length() > width)
+	if (str.length() > (size_t)width)
 		return (str.substr(0, width - 1) + ".");
 	return str;
 }
