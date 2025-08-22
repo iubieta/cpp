@@ -52,7 +52,6 @@ int main() {
 
 ⚠️ `using namespace std;` is convenient, but in professional code it’s discouraged → it pollutes the global namespace.
 
----
 
 ## 2. **`std::string` (instead of `char*`)**
 * Safer and easier than C-style strings.
@@ -65,7 +64,6 @@ int main() {
 
 **Why useful:** Avoids buffer overflows, simplifies text manipulation.
 
----
 
 ## 3. **Streams (I/O in C++)**
 * Replaces `printf` / `scanf`.
@@ -74,7 +72,6 @@ int main() {
 * `std::getline(std::cin, str)` → read full line (including spaces).
 **Why useful:** Type-safe, extensible (can work with custom objects), and integrates with C++ classes.
 
----
 
 ## 4. **Classes and Objects**
 * **Class = blueprint**, **Object = instance** of that blueprint.
@@ -91,7 +88,6 @@ public:
 };
 ```
 
----
 
 ## 5. **Encapsulation**
 * **What:** Keeping data (`private`) safe and only exposing what’s necessary (`public`).
@@ -107,7 +103,6 @@ public:
     int getValue() const { return value; }
 };
 ```
----
 
 ## 6. **Member Functions**
 * Functions that belong to a class.
@@ -125,16 +120,9 @@ void Foo::sayHello() {
 ```
 ---
 
-## **Good Practices in CPP00**
-* Always split code into `.hpp/.h` (headers) and `.cpp` (implementations).
-* Avoid global variables.
-* Don’t abuse `using namespace`.
-
----
-
 # 📘 **CPP01 – Memory, Pointers, and References**
 
-## 7. **Constructors and Destructors**
+## 1. **Constructors and Destructors**
 * **Constructor:** Special method that initializes an object. Runs automatically at creation.
 * **Destructor:** Cleans up resources when the object goes out of scope or is deleted.
 * **Why useful:**
@@ -150,9 +138,8 @@ public:
 };
 ```
 
----
 
-## 8. **Stack vs Heap**
+## 2. **Stack vs Heap**
 * **Stack (automatic storage):**
 
   * Objects are created/destroyed automatically.
@@ -174,8 +161,8 @@ delete z;  // must delete manually
 
 **Why useful:** Understanding memory models is essential for avoiding leaks and crashes.
 
----
-## 9. **References vs Pointers**
+
+## 3. **References vs Pointers**
 
 * **Pointer (`T* p`):** can be `nullptr`, can change what it points to.
 * **Reference (`T& r`):** alias for an object, cannot be null, must be initialized.
@@ -191,9 +178,8 @@ int& r = a;    // reference
 * Use references when you want safe access to an existing object.
 * Use pointers when ownership or nullability matters.
 
----
 
-## 10. **File Streams**
+## 4. **File Streams**
 
 * Reading: `std::ifstream`.
 * Writing: `std::ofstream`.
@@ -209,9 +195,8 @@ std::ofstream out("output.txt");
 
 **Why useful:** Encapsulates file handling with automatic closing (when object goes out of scope).
 
----
 
-## 11. **Function Pointers (member functions)**
+## 5. **Function Pointers (member functions)**
 
 * Pointers that store the address of a function.
 * Member function pointers need the class scope.
@@ -225,5 +210,138 @@ class Harl {
 ```
 
 **Why useful:** They allow flexible mapping of strings → actions (like implementing a custom switch/case for functions).
+
+---
+
+# 📘 **CPP02 – Ad-hoc polymorphism, operator overloading, and Orthodox Canonical Form**
+
+## 1. **Orthodox Canonical Form**
+
+* **What it is:** A standardized way of writing classes in C++98 with the 4 special functions :
+  1. Default constructor
+  2. Copy constructor
+  3. Copy assignment operator
+  4. Destructor
+
+* **Why useful:**
+
+  * Ensures safe copying, assignment, and cleanup.
+  * Critical when managing resources (dynamic memory, file handles).
+  * Sets the foundation for RAII (Resource Acquisition Is Initialization).
+
+```cpp
+class Fixed {
+private:
+    int value;
+    static const int fractionalBits = 8;
+
+public:
+    // 1. Default constructor
+    Fixed() : value(0) {
+    }
+
+    // 2. Copy constructor
+    Fixed(const Fixed& other) {
+        *this = other; // reuse operator=
+    }
+
+    // 3. Copy assignment operator
+    Fixed& operator=(const Fixed& other) {
+        if (this != &other)  // check self-assignment
+            this->value = other.value;
+        return *this;
+    }
+
+    // 4. Destructor
+    ~Fixed() {
+    }
+};
+```
+
+---
+
+## 2. **Fixed-point Numbers**
+
+* **What:** A number representation where a fixed number of bits are reserved for the fractional part. It is saved as an integer escaled up by n power of 2. Where n is the number of bits reserved for the fractional part.
+  * `raw = round( int * 2^n )` 
+* **Why useful:**
+  * Floats are efficient but imprecise; integers are precise but lack fractions.
+  * Using fixed n for the scaling up proccesing you can add, substract and compare raws directly.
+  * Used in graphics, DSP (digital signal processing), and embedded systems because its more efficient.
+* **Warning:** Multiplication and division is not direct between raws.
+```cpp
+class Fixed {
+private:
+    int                 _raw;               // valor crudo escalado
+    static const int    _fbits = 8;         // bits fraccionales (n)
+public:
+    Fixed() : _raw(0) {}
+    // int -> Fixed
+    Fixed(int i) : _raw(i << _fbits) {}
+    // float -> Fixed
+    Fixed(float f) : _raw(static_cast<int>(roundf(f * (1 << _fbits)))) {}
+    // conversiones de vuelta
+    float toFloat() const { return static_cast<float>(_raw) / (1 << _fbits); }
+    int   toInt()   const { return _raw >> _fbits; }
+    int   getRawBits() const { return _raw; }
+    void  setRawBits(int r) { _raw = r; }
+};
+```
+
+---
+
+## 3. **Constructors with Conversions**
+
+* Add constructors that take different types of input variables (int, float, ...)
+* Provide methods to convert class type to other types: `toInt()`, `toFloat()`.
+
+* **Why useful:**
+  * Enables smooth conversions between types.
+  * Improves usability of your class, like a real scalar type.
+
+---
+
+## 4. **Operator Overloading**
+
+* **Comparison operators:** `> < >= <= == !=`
+
+* **Arithmetic operators:** `+ - * /`
+
+* **Increment/Decrement:** pre and post (`++a`, `a++`, `--a`, `a--`)
+
+* **Why useful:**
+
+  * Makes custom types behave like built-in ones.
+  * Enables *ad-hoc polymorphism*: different behavior depending on types.
+
+---
+
+## 5. **Static Member Functions**
+
+* `Fixed::min(a, b)` and `Fixed::max(a, b)`.
+
+* Overloaded for const and non-const references.
+
+* **Why useful:**
+
+  * Utility functions tied to the class but don’t need an instance.
+  * Improves expressiveness (like `std::min`, `std::max`).
+
+---
+
+## 6. **BSP (Binary Space Partitioning)**
+
+* You use your `Fixed` class in geometry: define a `Point` class (with `Fixed x, y`) and check if a point lies inside a triangle.
+
+* Function:
+
+  ```cpp
+  bool bsp(Point const a, Point const b, Point const c, Point const point);
+  ```
+
+* **Why useful:**
+
+  * Practice applying your class in a real-world-like problem.
+  * Strengthens understanding of value semantics (const correctness, canonical form).
 
 ---
