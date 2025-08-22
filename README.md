@@ -258,17 +258,16 @@ public:
 };
 ```
 
----
-
 ## 2. **Fixed-point Numbers**
 
-* **What:** A number representation where a fixed number of bits are reserved for the fractional part. It is saved as an integer escaled up by n power of 2. Where n is the number of bits reserved for the fractional part.
+* **What it is:** A number representation where a fixed number of bits are reserved for the fractional part. It is saved as an integer escaled up by n power of 2. Where n is the number of bits reserved for the fractional part.
   * `raw = round( int * 2^n )` 
 * **Why useful:**
   * Floats are efficient but imprecise; integers are precise but lack fractions.
   * Using fixed n for the scaling up proccesing you can add, substract and compare raws directly.
   * Used in graphics, DSP (digital signal processing), and embedded systems because its more efficient.
-* **Warning:** Multiplication and division is not direct between raws.
+⚠️**Warning:** Multiplication and division is not direct between raws.
+
 ```cpp
 class Fixed {
 private:
@@ -288,60 +287,66 @@ public:
 };
 ```
 
----
-
 ## 3. **Constructors with Conversions**
 
-* Add constructors that take different types of input variables (int, float, ...)
-* Provide methods to convert class type to other types: `toInt()`, `toFloat()`.
+A good class definition have:
+* **Multiple constructors** that take different types of input variables (int, float, ...) makes a class more solid and flexible.
+* **Conversion methods** to convert this class objects to other types: `toInt()`, `toFloat()`.
 
 * **Why useful:**
   * Enables smooth conversions between types.
   * Improves usability of your class, like a real scalar type.
 
----
 
 ## 4. **Operator Overloading**
 
-* **Comparison operators:** `> < >= <= == !=`
-
-* **Arithmetic operators:** `+ - * /`
-
-* **Increment/Decrement:** pre and post (`++a`, `a++`, `--a`, `a--`)
-
+* **What:** redefinition of operators for your class types
 * **Why useful:**
-
   * Makes custom types behave like built-in ones.
   * Enables *ad-hoc polymorphism*: different behavior depending on types.
+```cpp
+//instead of
+Fixed c = a.add(b);
+//redifining operators
+Fixed c = a + b;
+```
 
----
+* **Comparison operators:** `> < >= <= == !=`
+* **Arithmetic operators:** `+ - * /`
+* **Increment/Decrement:** pre and post (`++a`, `a++`, `--a`, `a--`)
+
+```cpp
+class Fixed {
+public:
+    // comparison
+    bool operator>(const Fixed& rhs) const;
+    // arithmetic
+    Fixed operator+(const Fixed& rhs) const;
+    // pre-increment
+    Fixed& operator++();    
+    // post-increment
+    Fixed operator++(int);  
+};
+```
 
 ## 5. **Static Member Functions**
 
-* `Fixed::min(a, b)` and `Fixed::max(a, b)`.
+* **What:** 
+  	* Utility functions tied to the class but don’t need an instance.
+	* Typically take objects of the class as parameters.
+* **Why useful:** Improves expressiveness (like `std::min`, `std::max`).
 
-* Overloaded for const and non-const references.
+```cpp
+class Math {
+public:
+    static int add(int x, int y) {
+        return x + y;
+    }
+};
+// Usage
+int result = Math::add(2, 3);  // 5
+```
 
-* **Why useful:**
-
-  * Utility functions tied to the class but don’t need an instance.
-  * Improves expressiveness (like `std::min`, `std::max`).
-
----
-
-## 6. **BSP (Binary Space Partitioning)**
-
-* You use your `Fixed` class in geometry: define a `Point` class (with `Fixed x, y`) and check if a point lies inside a triangle.
-
-* Function:
-
-  ```cpp
-  bool bsp(Point const a, Point const b, Point const c, Point const point);
-  ```
-
-* **Why useful:**
-
-  * Practice applying your class in a real-world-like problem.
-  * Strengthens understanding of value semantics (const correctness, canonical form).
+⚠️ Is good practice to be overloaded for const and non-const references.
 
 ---
