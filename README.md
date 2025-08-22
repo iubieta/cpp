@@ -300,7 +300,7 @@ A good class definition have:
 
 ## 4. **Operator Overloading**
 
-* **What:** redefinition of operators for your class types
+* **What it is:** redefinition of operators for your class types
 * **Why useful:**
   * Makes custom types behave like built-in ones.
   * Enables *ad-hoc polymorphism*: different behavior depending on types.
@@ -331,7 +331,7 @@ public:
 
 ## 5. **Static Member Functions**
 
-* **What:** 
+* **What it is:** 
   	* Utility functions tied to the class but don’t need an instance.
 	* Typically take objects of the class as parameters.
 * **Why useful:** Improves expressiveness (like `std::min`, `std::max`).
