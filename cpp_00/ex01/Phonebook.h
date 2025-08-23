@@ -6,7 +6,7 @@
 /*   By: iubieta- <iubieta-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 18:39:41 by iubieta-          #+#    #+#             */
-/*   Updated: 2025/08/23 19:36:20 by iubieta-         ###   ########.fr       */
+/*   Updated: 2025/08/23 20:14:56 by iubieta-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include <cctype>
 #include <string>
 #include <limits>
+#include <sstream>
 
 class Contact {
 

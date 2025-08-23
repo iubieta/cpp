@@ -6,7 +6,7 @@
 /*   By: iubieta- <iubieta-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 18:44:41 by iubieta-          #+#    #+#             */
-/*   Updated: 2025/08/23 19:49:34 by iubieta-         ###   ########.fr       */
+/*   Updated: 2025/08/23 20:18:15 by iubieta-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,13 +136,14 @@ void Phonebook::search_contact() {
 	int n;
 	std::wcout << L"\nType index of the contact you want to see: ";
 	std::getline(std::wcin, buff);
-	n = std::stoi(buff);
-	std::wcout << L"\n";
-
-	if (buff < "1" || buff > '8') {
-		std::wcout << L"  Contact index out of range\n";
-		return;
+	std::wistringstream iss(buff);
+	if (!(iss >> n))
+		std::wcout << L" Invalid input"; 
+	else {
+		if (n < 1 || n > 8)
+			std::wcout << L" Index out of range";
+		else
+			print_contact(n - 1);
 	}
-	if (n> 0)
-		print_contact(n - 1);
+	std::wcout << L"\n";
 }
