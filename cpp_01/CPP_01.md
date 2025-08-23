@@ -1,5 +1,3 @@
-# Cpp 01
-
 ## Ex00:
 - Files: Makefile, main.cpp, Zombie.h, Zombie.cpp, newZombie.cpp, randomChump.cpp
 - Goal: Implement a `Zombie` class with the following:
