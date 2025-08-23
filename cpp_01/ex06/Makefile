@@ -6,11 +6,11 @@
 #    By: iubieta- <iubieta@student.42.fr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/22 20:28:37 by iubieta-          #+#    #+#              #
-#    Updated: 2025/08/12 18:43:01 by iubieta-         ###   ########.fr        #
+#    Updated: 2025/08/12 18:36:40 by iubieta-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = a.out
+NAME = harlFilter
 
 CXX := g++
 CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -g

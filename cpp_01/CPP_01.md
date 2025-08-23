@@ -87,3 +87,12 @@ Opens the file and copies it into `filename.replace` replacing every occurrence 
     - `void error(void)`
 - And a public function `void complain(std::string level)` that calls to the corresponding function using
 pointers to the function
+
+## Ex06:
+- Files: Makefile, main.cpp, Harl.h, Harl.cpp
+- Goal: Implement a system to filter what Harl says depending on the log levels.
+- Create a program that take as a parameter one of the four levels and displays only messages from that level
+    and above.
+- Use the function `SWITCH` to filter out the different message functions.
+- Name your executable as `harlFilter`
+
