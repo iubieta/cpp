@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iubieta- <iubieta@student.42.fr>           +#+  +:+       +#+        */
+/*   By: iubieta- <iubieta-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 20:51:00 by iubieta-          #+#    #+#             */
-/*   Updated: 2025/06/22 20:51:52 by iubieta-         ###   ########.fr       */
+/*   Updated: 2025/08/23 13:35:41 by iubieta-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,5 @@ int main() {
 	randomChump("Random");
 	Zombie *z =	newZombie("Zombie");
 	z->announce();
-	z->destroy();
+	delete(z);
 }

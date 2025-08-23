@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Zombie.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iubieta- <iubieta@student.42.fr>           +#+  +:+       +#+        */
+/*   By: iubieta- <iubieta-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 20:43:06 by iubieta-          #+#    #+#             */
-/*   Updated: 2025/06/22 20:46:35 by iubieta-         ###   ########.fr       */
+/*   Updated: 2025/08/23 13:38:56 by iubieta-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void Zombie::announce(void) {
 	std::cout << name << ": BraiiinnnzzzZ...\n";
 }
 
-void Zombie::destroy(void) {
-	std::cout << name << " deleted\n";
-	delete this;
+Zombie::~Zombie(void) {
+	std::cout << name << ": Destroyed \n";
 }
