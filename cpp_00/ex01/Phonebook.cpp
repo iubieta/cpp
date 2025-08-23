@@ -1,0 +1,148 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Phonebook.cpp                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iubieta- <iubieta-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/23 18:44:41 by iubieta-          #+#    #+#             */
+/*   Updated: 2025/08/23 19:49:34 by iubieta-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
+#include "Phonebook.h"
+
+inline std::wstring truncate(const std::wstring &str, int width) {
+	if (str.length() > (size_t)width)
+		return (str.substr(0, width - 1) + L".");
+	return str;
+}
+
+// Contact Class
+// Constructor
+Contact::Contact() {
+	first_name = L"";
+	last_name = L"";
+	nickname = L"";
+	number = L"";
+	secret = L"";
+};
+
+// Sets
+void Contact::set_first_name(std::wstring _first_name) {
+	first_name = _first_name;
+};
+void Contact::set_last_name(std::wstring _last_name) {
+	last_name = _last_name;
+};
+void Contact::set_nickname(std::wstring _nickname) {
+	nickname = _nickname;
+};
+void Contact::set_number(std::wstring _number) {
+	number = _number;
+};
+void Contact::set_secret(std::wstring _secret) {
+	secret = _secret;
+};
+
+// Gets
+std::wstring Contact::get_first_name() {
+	return first_name;
+};
+std::wstring Contact::get_last_name() {
+	return last_name;
+};
+std::wstring Contact::get_nickname() {
+	return nickname;
+};
+std::wstring Contact::get_number() {
+	return number;
+};
+
+// Phonebook Class
+// Constructor
+Phonebook::Phonebook() {
+	size = 0;
+};
+	
+void Phonebook::addContact() {
+	
+	int i;
+	std::wstring	input;
+
+	if (size == 8)
+		i = 0;
+	else {
+		i = size;
+		size++;
+	}
+	
+	std::wcout << L"  First name: ";
+	std::getline(std::wcin, input);
+	list[i].set_first_name(input);
+	//std::wcin.ignore(std::numeric_limits<std::streamsize>::max(), L'\n');
+
+	std::wcout << L"  Last name: ";
+	std::getline(std::wcin, input);
+	list[i].set_last_name(input);
+	//std::wcin.ignore(std::numeric_limits<std::streamsize>::max(), L'\n');
+	
+	std::wcout << L"  Nickname: ";
+	std::getline(std::wcin, input);
+	list[i].set_nickname(input);
+
+	std::wcout << L"  Phone number: ";
+	std::getline(std::wcin, input);
+	list[i].set_number(input);
+
+	std::wcout << L"  Darkest Secrets:";
+	std::getline(std::wcin, input);
+	list[i].set_number(input);
+	
+	std::wcout << L"\n";
+}
+
+void Phonebook::print_contact(int i) {
+
+	std::wcout 
+		<< L"  First name: " << list[i].get_first_name() << "\n"
+		<< L"  Last name: " << list[i].get_last_name() << "\n"
+		<< L"  Nickname: " << list[i].get_nickname() << "\n"
+		<< L"  Phone number: " << list[i].get_number() << "\n"
+		<< L"\n";
+}
+
+void Phonebook::search_contact() {
+	int col_width = 10;		
+	std::wcout 
+		<< std::left
+		<< std::setw(col_width) << L"Index"
+		<< L"| " << std::setw(col_width) << "First name"
+		<< L"| " << std::setw(col_width) << "Last name"
+		<< L"| " << std::setw(col_width) << "Nickname"
+		<< L"\n";
+
+	for (int i=0; i<size; i++) {
+		std::wcout	
+			<< std::setw(col_width) << i + 1
+			<< L"| " << std::setw(col_width) << truncate(list[i].get_first_name(), col_width)
+			<< L"| " << std::setw(col_width) << truncate(list[i].get_last_name(), col_width)
+			<< L"| " << std::setw(col_width) << truncate(list[i].get_nickname(), col_width)
+			<< L"\n";
+	}
+
+	std::wstring buff;
+	int n;
+	std::wcout << L"\nType index of the contact you want to see: ";
+	std::getline(std::wcin, buff);
+	n = std::stoi(buff);
+	std::wcout << L"\n";
+
+	if (buff < "1" || buff > '8') {
+		std::wcout << L"  Contact index out of range\n";
+		return;
+	}
+	if (n> 0)
+		print_contact(n - 1);
+}

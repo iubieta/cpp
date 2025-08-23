@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iubieta- <iubieta@student.42.fr>           +#+  +:+       +#+        */
+/*   By: iubieta- <iubieta-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 20:37:52 by iubieta-          #+#    #+#             */
-/*   Updated: 2025/02/23 18:44:27 by iubieta-         ###   ########.fr       */
+/*   Updated: 2025/08/23 19:41:48 by iubieta-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,18 @@
 //
 //	* Discard wrong commands
 
-#include "phonebook.h"
+#include "Phonebook.h"
+#include <locale>
 
 int main() {
 
-	PhoneBook	contactList;
-	std::string	command;
+	Phonebook	contactList;
+	std::wstring	command;
 	
-	
+    std::locale::global(std::locale(""));
+    std::wcin.imbue(std::locale());
+    std::wcout.imbue(std::locale());
+
 	while (1) {
 		std::cout 
 			<< "PHONE-BO0K MENU:\n\n"
@@ -59,12 +63,17 @@ int main() {
 			<< "  - SEARCH (search for a contact)\n"
 			<< "  - EXIT\n"
 			<< "\n> ";
-		std::cin >> command;
-		if (command == "ADD")
+		std::getline(std::wcin, command);
+		if (command == L"")
+		{
+			std::wcout << "Goodbye!\n";
+			break;
+		}
+		if (command == L"ADD")
 			contactList.addContact();
-		else if (command == "SEARCH")
+		else if (command == L"SEARCH")
 			contactList.search_contact();
-		else if (command == "EXIT")
+		else if (command == L"EXIT")
 			break;
 	}
 
