@@ -107,6 +107,122 @@ int main() {
 * `std::getline(std::cin, str)` → read full line (including spaces).
 **Why useful:** Type-safe, extensible (can work with custom objects), and integrates with C++ classes.
 
+Got it 👍 Here’s a **compact summary in English** of what we discussed about input/output streams, narrow vs. wide, `getline`, integers, and `setw`:
+
+---
+
+# 📌 Input/Output Streams in C++
+
+## 1. Narrow streams
+
+* **Input**: `std::cin`
+* **Output**: `std::cout`
+* **Strings**: `std::string` (`char`-based)
+* **Literals**: `"hello"`
+
+✅ Works everywhere, safe for ASCII.
+❌ May break with accented characters (`ñ`, `á`) in Windows consoles.
+
+---
+
+## 2. Wide streams
+
+* **Input**: `std::wcin`
+* **Output**: `std::wcout`
+* **Strings**: `std::wstring` (`wchar_t`-based)
+* **Literals**: `L"hello"`
+
+✅ Can handle Unicode (like `ñ`, accents) if locale is configured.
+❌ On Windows, you need `_O_U16TEXT`; column alignment with `setw` may break.
+
+---
+
+## 3. Locale setup
+
+Before using wide streams, set locale:
+
+```cpp
+#include <locale>
+#include <clocale>
+
+int main() {
+    std::setlocale(LC_ALL, "");           // C locale
+    std::locale::global(std::locale("")); // C++ locale
+    std::wcin.imbue(std::locale());
+    std::wcout.imbue(std::locale());
+}
+```
+
+---
+
+# 📌 Reading with `>>` vs. `getline`
+
+### `>>`
+
+* Reads until first whitespace.
+* Works directly for numbers:
+
+  ```cpp
+  int n;
+  if (!(std::cin >> n)) { /* error */ }
+  ```
+* On failure:
+
+  ```cpp
+  std::cin.clear();
+  std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+  ```
+
+### `getline`
+
+* Reads an entire line (keeps spaces).
+* Usage:
+
+  ```cpp
+  std::getline(std::cin, str);     // narrow
+  std::getline(std::wcin, wstr);   // wide
+  ```
+* For integers in C++98 (no `stoi`):
+
+  ```cpp
+  std::wistringstream iss(wstr);
+  int n;
+  if (!(iss >> n)) { /* not a number */ }
+  ```
+
+---
+
+# 📌 Output formatting (`setw`)
+
+* `std::setw(n)` sets **minimum width** for the next output:
+
+  ```cpp
+  std::cout << std::setw(10) << "hi";
+  ```
+* Works with `std::left` / `std::right`.
+* Applies **only once**.
+
+⚠️ Issue on Windows with `wcout`:
+
+* `setw` counts characters, but the console counts some Unicode (like `ñ`, emojis) as two cells.
+* Result: table columns misalign.
+
+👉 Practical fix: implement a custom `padRight` function that measures string length and appends spaces.
+
+---
+
+# 📌 Practical recommendations
+
+* **For 42 projects** (`-std=c++98`):
+  🔹 Use **narrow streams** (`cin`, `cout`, `string`).
+  🔹 Stick to plain ASCII → no locale or alignment headaches.
+
+* **If you need accents/Unicode**:
+  🔹 Use wide streams (`wcin`, `wcout`, `wstring`).
+  🔹 Configure locale and `_O_U16TEXT` on Windows.
+  🔹 Replace `setw` with custom padding functions.
+
+---
 
 ## 4. **Classes and Objects**
 * **Class = blueprint**, **Object = instance** of that blueprint.
