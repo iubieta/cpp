@@ -45,6 +45,7 @@
 //	* Discard wrong commands
 
 #include "Phonebook.h"
+#include <iostream>
 #include <locale>
 
 int main() {
@@ -58,23 +59,23 @@ int main() {
 
 	while (1) {
 		std::cout 
-			<< "PHONE-BO0K MENU:\n\n"
+			<< "\nPHONE-BO0K MENU:\n\n"
 			<< "  - ADD (add new contact)\n"
 			<< "  - SEARCH (search for a contact)\n"
 			<< "  - EXIT\n"
 			<< "\n> ";
 		std::getline(std::wcin, command);
-		if (command == L"")
-		{
-			std::wcout << "Goodbye!\n";
-			break;
-		}
 		if (command == L"ADD")
 			contactList.addContact();
 		else if (command == L"SEARCH")
 			contactList.search_contact();
 		else if (command == L"EXIT")
 			break;
+		if (std::wcin.eof())
+		{
+			std::wcout << "Goodbye!\n";
+			break;
+		}
 	}
 
 	return 0;

@@ -100,20 +100,12 @@ int main() {
 **Why useful:** Avoids buffer overflows, simplifies text manipulation.
 
 
-## 3. **Streams (I/O in C++)**
-* Replaces `printf` / `scanf`.
-* `std::cout` → output.
-* `std::cin` → input.
-* `std::getline(std::cin, str)` → read full line (including spaces).
-**Why useful:** Type-safe, extensible (can work with custom objects), and integrates with C++ classes.
+## 3. **Input/Output Streams in C++**
 
-Got it 👍 Here’s a **compact summary in English** of what we discussed about input/output streams, narrow vs. wide, `getline`, integers, and `setw`:
+In cpp there are narrow (1 byte) and wide (2 or 4 bytes) streams
+and you shouldn't mix them
 
----
-
-# 📌 Input/Output Streams in C++
-
-## 1. Narrow streams
+### Narrow streams
 
 * **Input**: `std::cin`
 * **Output**: `std::cout`
@@ -123,9 +115,7 @@ Got it 👍 Here’s a **compact summary in English** of what we discussed about
 ✅ Works everywhere, safe for ASCII.
 ❌ May break with accented characters (`ñ`, `á`) in Windows consoles.
 
----
-
-## 2. Wide streams
+### Wide streams
 
 * **Input**: `std::wcin`
 * **Output**: `std::wcout`
@@ -135,11 +125,16 @@ Got it 👍 Here’s a **compact summary in English** of what we discussed about
 ✅ Can handle Unicode (like `ñ`, accents) if locale is configured.
 ❌ On Windows, you need `_O_U16TEXT`; column alignment with `setw` may break.
 
----
-
-## 3. Locale setup
+### Locale setup
 
 Before using wide streams, set locale:
+
+Locale is a set of rules that tells your program how to handle culture-specific things such as:
+- Character encoding (UTF-8, UTF-16, system code page, etc.)
+- Alphabet and collation order (how strings are sorted: ä after a, etc.)
+- Number formatting (decimal separator: 1,23 vs. 1.23)
+- Date/time formatting (24/08/2025 vs. 08/24/2025)
+- Currency symbols (€ vs. $)
 
 ```cpp
 #include <locale>
@@ -153,9 +148,7 @@ int main() {
 }
 ```
 
----
-
-# 📌 Reading with `>>` vs. `getline`
+### Reading with `>>` vs. `getline`
 
 ### `>>`
 
@@ -182,17 +175,22 @@ int main() {
   std::getline(std::cin, str);     // narrow
   std::getline(std::wcin, wstr);   // wide
   ```
-* For integers in C++98 (no `stoi`):
+#### Processing lines with **stringstream**
+String stream works as a personalt I/O stream as `cin` or `cout`
+You have three main variants of string streams, all declared in <sstream>:
+- std::stringstream → both input and output (can read & write).
+- std::istringstream → input only (read from a string, like cin).
+- std::ostringstream → output only (write into a string, like cout).
 
   ```cpp
+  //Checkin if wstr is a number
   std::wistringstream iss(wstr);
   int n;
   if (!(iss >> n)) { /* not a number */ }
   ```
 
----
 
-# 📌 Output formatting (`setw`)
+### Output formatting (`setw`)
 
 * `std::setw(n)` sets **minimum width** for the next output:
 
@@ -208,19 +206,6 @@ int main() {
 * Result: table columns misalign.
 
 👉 Practical fix: implement a custom `padRight` function that measures string length and appends spaces.
-
----
-
-# 📌 Practical recommendations
-
-* **For 42 projects** (`-std=c++98`):
-  🔹 Use **narrow streams** (`cin`, `cout`, `string`).
-  🔹 Stick to plain ASCII → no locale or alignment headaches.
-
-* **If you need accents/Unicode**:
-  🔹 Use wide streams (`wcin`, `wcout`, `wstring`).
-  🔹 Configure locale and `_O_U16TEXT` on Windows.
-  🔹 Replace `setw` with custom padding functions.
 
 ---
 
