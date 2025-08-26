@@ -6,7 +6,7 @@
 /*   By: iubieta- <iubieta-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 20:37:52 by iubieta-          #+#    #+#             */
-/*   Updated: 2025/08/23 19:41:48 by iubieta-         ###   ########.fr       */
+/*   Updated: 2025/08/26 19:31:31 by iubieta-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@
 //	* Discard wrong commands
 
 #include "Phonebook.h"
+#include "utils.h"
 #include <iostream>
 #include <locale>
 
@@ -63,8 +64,8 @@ int main() {
 			<< "  - ADD (add new contact)\n"
 			<< "  - SEARCH (search for a contact)\n"
 			<< "  - EXIT\n"
-			<< "\n> ";
-		std::getline(std::wcin, command);
+			<< "\n";
+		command = askuser(L"> ");
 		if (command == L"ADD")
 			contactList.addContact();
 		else if (command == L"SEARCH")

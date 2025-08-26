@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = a.out
+NAME = PhoneBook
 
 CXX := g++
 CXXFLAGS := -Wall -Wextra -Werror -g -std=c++98

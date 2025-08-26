@@ -6,7 +6,7 @@
 /*   By: iubieta- <iubieta-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 18:39:41 by iubieta-          #+#    #+#             */
-/*   Updated: 2025/08/23 20:14:56 by iubieta-         ###   ########.fr       */
+/*   Updated: 2025/08/26 19:12:49 by iubieta-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include <string>
 #include <limits>
 #include <sstream>
+#include "utils.h"
 
 class Contact {
 
@@ -45,6 +46,7 @@ class Contact {
 		std::wstring get_last_name();
 		std::wstring get_nickname();
 		std::wstring get_number();
+		std::wstring get_secret();
 };
 
 class Phonebook {
@@ -56,6 +58,7 @@ class Phonebook {
 	public:
 		Phonebook();
 		void addContact();
+		void display_contact_list();
 		void print_contact(int i);
 		void search_contact();
 };

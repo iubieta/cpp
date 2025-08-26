@@ -6,41 +6,13 @@
 /*   By: iubieta- <iubieta-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 18:44:41 by iubieta-          #+#    #+#             */
-/*   Updated: 2025/08/23 20:18:15 by iubieta-         ###   ########.fr       */
+/*   Updated: 2025/08/26 19:33:28 by iubieta-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "Phonebook.h"
-#include <cstddef>
-#include <ios>
-#include <iostream>
-#include <sstream>
-#include <string>
-
-std::wstring truncate(const std::wstring &str, int width) {
-	if (str.length() > (size_t)width)
-		return (str.substr(0, width - 1) + L".");
-	return str;
-}
-
-void spaint(std::wstring &str) {
-	size_t pos;
-	while ((pos = str.find(L"ñ")) != std::string::npos) {
-		str.replace(pos, 1, L"n");
-	}
-	while ((pos = str.find(L"Ñ")) != std::string::npos) {
-		str.replace(pos, 1, L"N");
-	}
-}
-
-std::wstring padright(const std::wstring &str, int width) {
-	int	diff = (size_t)width - str.length();
-	if (diff > 0)
-		return (str + std::wstring(diff, L' '));
-	else
-		return (truncate(str, width));
-}
+#include "utils.h"
 
 // Contact Class
 // Constructor
@@ -82,6 +54,9 @@ std::wstring Contact::get_nickname() {
 std::wstring Contact::get_number() {
 	return number;
 };
+std::wstring Contact::get_secret() {
+	return secret;
+};
 
 // Phonebook Class
 // Constructor
@@ -101,70 +76,48 @@ void Phonebook::addContact() {
 		size++;
 	}
 
-	std::wcout << L"  First name: ";
-	std::getline(std::wcin, input);
-	if (std::wcin.eof())
-		return ;
+	std::wcout << L"\n";
+	
+	input = askuser(L"  First name: ");
+	if (input == L"")
+		return;
 	spaint(input);
 	list[i].set_first_name(input);
 
-	std::wcout << L"  Last name: ";
-	std::getline(std::wcin, input);
-	if (std::wcin.eof())
-		return ;
+	input = askuser(L"  Last name: ");
+	if (input == L"")
+		return;
 	spaint(input);
 	list[i].set_last_name(input);
 
-	std::wcout << L"  Nickname: ";
-	std::getline(std::wcin, input);
-	if (std::wcin.eof())
+	input = askuser(L"  Nickname: ");
+	if (input == L"")
 		return;
 	spaint(input);
 	list[i].set_nickname(input);
 
 	while (1) {
-		std::wcout << L"  Phone number: ";
-		std::getline(std::wcin, input);
-		if (std::wcin.eof())
-			return ;
-		if (input.find_first_not_of(L"0123456789") == std::string::npos)
-		{
-			list[i].set_number(input);
+		input = askuser(L"  Phone number: ");
+		if (input == L"")
+			return;
+		if (input.find_first_not_of(L"-+0123456789") == std::string::npos)
 			break;
-		}
 		std::wcout << L"  Invalid input\n";
 	}
+	list[i].set_number(input);
 
-	std::wcout << L"  Darkest Secrets:";
-	std::getline(std::wcin, input);
-	if (std::wcin.eof())
-		return ;
-	list[i].set_secret(input);
-	spaint(input);
-	std::wcout << L"\n";
-}
-
-void Phonebook::print_contact(int i) {
-
-	std::wcout 
-		<< L"  First name: " << list[i].get_first_name() << "\n"
-		<< L"  Last name: " << list[i].get_last_name() << "\n"
-		<< L"  Nickname: " << list[i].get_nickname() << "\n"
-		<< L"  Phone number: " << list[i].get_number() << "\n"
-		<< L"\n";
-}
-
-void Phonebook::search_contact() {
-	if (size < 1) {
-		std::wcout << "  There are no contacts in the list.\n";
-		std::wstring del;
-		std::getline(std::wcin, del);
+	input = askuser(L"  Darkest secret: ");
+	if (input == L"")
 		return;
-	}
+	spaint(input);
+	list[i].set_secret(input);
+}
+
+void Phonebook::display_contact_list() {
 	int col_width = 10;		
 	std::wcout 
 		<< std::left
-		<< std::setw(col_width) << L"Index"
+		<< L"\n" << std::setw(col_width) << L"Index"
 		<< L"| " << std::setw(col_width) << "First name"
 		<< L"| " << std::setw(col_width) << "Last name"
 		<< L"| " << std::setw(col_width) << "Nickname"
@@ -178,25 +131,45 @@ void Phonebook::search_contact() {
 			<< L"| " << padright(list[i].get_nickname(), col_width)
 			<< L"\n";
 	}
+	std::wcout << L"\n";
+}
+
+void Phonebook::print_contact(int i) {
+
+	std::wcout << L"\n"
+		<< L"  First name: " << list[i].get_first_name() << "\n"
+		<< L"  Last name: " << list[i].get_last_name() << "\n"
+		<< L"  Nickname: " << list[i].get_nickname() << "\n"
+		<< L"  Phone number: " << list[i].get_number() << "\n"
+		<< L"  Darkest secret: " << list[i].get_secret() << "\n";
+}
+
+void Phonebook::search_contact() {
+	if (size < 1) {
+		std::wcout << "  There are no contacts in the list.";
+		std::wstring del;
+		std::getline(std::wcin, del);
+		return;
+	}
+
+	display_contact_list();
 
 	std::wstring buff;
 	int n;
 	while (1) {
-		std::wcout << L"\nType index of the contact you want to see: ";
-		std::getline(std::wcin, buff);
-		if (std::wcin.eof())
-			return ;
+		buff = askuser(L"Type index of the contact you want to see: ");
+		if (buff == L"")
+			return;
 		std::wistringstream iss(buff);
-		std::wcout << L"\n";
 		if (iss >> n) {
 			if (n < 1 || n > size)
-				std::wcout << L" Index out of range";
+				std::wcout << L" Index out of range.";
 			else {
 				print_contact(n - 1);
 				break;
 			}
 		}
-		std::wcout << L" Invalid input"; 
+		std::wcout << L" Invalid input."; 
 		std::wcout << L"\n";
 	}
 }
