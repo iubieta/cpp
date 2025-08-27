@@ -13,6 +13,15 @@
 #include "Zombie.h"
 
 int main() {
-	Zombie *z =	zombieHorde(50,"Zombie");
-	z->destroy();
+	int n = 10;
+	Zombie *z =	zombieHorde(n,"Zombie");
+	for (int i = 0; i<n; i++) {
+		std::cout << "Zombie " << i+1 << "\n";
+		z[i].announce();
+	}
+	delete(z);
+// 	for (int i = 0; i<n; i++) {
+// 		std::cout << "Zombie " << i+1 << "\n";
+// 		z[i].announce();
+// 	}
 }

@@ -13,7 +13,6 @@
 #include "Weapon.h"
 #include "HumanA.h"
 #include "HumanB.h"
-#include <iostream>
 
 int main()
 {

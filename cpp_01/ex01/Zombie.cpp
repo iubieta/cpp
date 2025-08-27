@@ -20,7 +20,17 @@ void Zombie::announce(void) {
 	std::cout << name << ": BraiiinnnzzzZ...\n";
 }
 
-void Zombie::destroy(void) {
-	std::cout << name << " deleted\n";
-	delete this;
+Zombie::~Zombie(void) {
+	std::cout << name << ": Destroyed \n";
+}
+
+Zombie	*zombieHorde(int n, std::string name) {
+	void* tmp = operator new(sizeof(Zombie) * n);
+	Zombie *horde = static_cast<Zombie*>(tmp);
+
+	for (int i = 0; i < n; i++) {
+		new (&horde[i]) Zombie(name);
+		horde[i].announce();
+	}
+	return horde;
 }

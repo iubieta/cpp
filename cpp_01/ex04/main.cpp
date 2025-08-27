@@ -42,17 +42,22 @@ int main (int argc, char *argv[])
 	std::string line;
 	std::string newline;
 	size_t index;
+	int	first = true;
 	while (std::getline(file1, line)) {
 		index = line.find(s1);
+		if (s1.empty())
+			index = std::string::npos;
 		newline = "";
-		while (line.find(s1) != std::string::npos) {
+		if (!first)
+			newline.append("\n");
+		while (index != std::string::npos) {
 			newline.append(line.substr(0, index));
 			newline.append(s2);
 			line = line.substr(index + s1.length());
 			index = line.find(s1);
 		}
 		newline.append(line.substr(0, index));
-		newline.append("\n");
 		file2 << newline;
+		first = false;
 	}
 }

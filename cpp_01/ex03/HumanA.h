@@ -20,6 +20,5 @@ class HumanA {
 
 	public:
 		HumanA(std::string _name, Weapon& _weapon);
-
-		void	attack();
+		void	attack() const;
 };

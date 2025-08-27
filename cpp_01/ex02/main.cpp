@@ -19,7 +19,7 @@ int	main()
 	std::string &ref = str;
 	
 	std::cout 
-		<< "Str: " << str << " (" << &str << ")\n"
-		<< "Ptr: " << *ptr << " (" << &ptr << ")\n"
-		<< "Ref: " << ref << " (" << &ref << ")\n";
+		<< "Str: (" << &str << ") " << str << "\n"
+		<< "Ptr: (" << &ptr << ") " << *ptr << "\n"
+		<< "Ref: (" << &ref << ") " << ref << "\n";
 }
