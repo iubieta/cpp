@@ -87,8 +87,69 @@ int main() {
 
 **Why useful:** Avoids buffer overflows, simplifies text manipulation.
 
+## 2. OOP: Object Oriented Programming 
 
-## 2. Input/Output Streams in C++
+### Classes and Objects
+* **Class = blueprint**, **Object = instance** of that blueprint.
+* **Why useful:** Encapsulation, reusability, and modeling real-world entities.
+
+### Encapsulation
+* **What:** Keeping data (`private`) safe and only exposing what’s necessary (`public`).
+* **Why useful:** Prevents external code from corrupting internal state.
+
+### Member Functions
+* Functions that belong to a class.
+* Defined inside the class (inline) or outside using `::`.
+* **Why useful:** Keeps behavior tightly coupled to data.
+
+```cpp
+#include <iostream>
+#include <string>
+
+// Class definition
+class Person {
+private:
+   // attributes
+	const std::string name ;
+    const int         age;
+    std::string nickname;
+
+public:
+    // constructor
+    Person(std::string n, int a) : name(n), age(a) {}
+   
+	//Member functions
+	std::string getName() const {
+        return name;
+    }
+    int getAge() const {
+        return age;
+    }
+    
+	void setNickname(std::string nick) {
+        nickname = nick;
+    }
+    
+	void sayHello() const {
+        std::cout << name << ": Hi, my name is " << name
+			<< " but people call me " << nickname << "!\n";
+    }
+};
+
+// Usage
+int main() {
+    Person Peter("Peter", 18);
+
+	// Right
+	std::cout << Peter.getName() << " is " << Peter.getAge() << " years old.\n";
+	// Wrong
+	// std::cout << Peter.name << " is " << Peter.age << " years old\n";
+	Peter.setNickname("Pete");
+    Peter.sayHello();
+}
+```
+
+## 3. Input/Output Streams in C++
 
 In cpp there are narrow (1 byte) and wide (2 or 4 bytes) streams
 and you shouldn't mix them
@@ -228,75 +289,11 @@ you must handle that case correctly in all of them
 * Applies **only once**.
 
 ⚠️ Issue with `wcout`:
-
 * `setw` counts characters, but the console counts some Unicode (like `ñ`, emojis) 
 as two cells.
 * Result: table columns misalign.
 
 👉 Practical fix: implement a custom `padRight` function that measures string length and appends spaces.
-
-
-## 3. OOP: Object Oriented Programming 
-
-### Classes and Objects
-* **Class = blueprint**, **Object = instance** of that blueprint.
-* **Why useful:** Encapsulation, reusability, and modeling real-world entities.
-
-### Encapsulation
-* **What:** Keeping data (`private`) safe and only exposing what’s necessary (`public`).
-* **Why useful:** Prevents external code from corrupting internal state.
-
-### Member Functions
-* Functions that belong to a class.
-* Defined inside the class (inline) or outside using `::`.
-* **Why useful:** Keeps behavior tightly coupled to data.
-
-```cpp
-#include <iostream>
-#include <string>
-
-// Class definition
-class Person {
-private:
-   // attributes
-	const std::string name ;
-    const int         age;
-    std::string nickname;
-
-public:
-    // constructor
-    Person(std::string n, int a) : name(n), age(a) {}
-   
-	//Member functions
-	std::string getName() const {
-        return name;
-    }
-    int getAge() const {
-        return age;
-    }
-    
-	void setNickname(std::string nick) {
-        nickname = nick;
-    }
-    
-	void sayHello() const {
-        std::cout << name << ": Hi, my name is " << name
-			<< " but people call me " << nickname << "!\n";
-    }
-};
-
-// Usage
-int main() {
-    Person Peter("Peter", 18);
-
-	// Right
-	std::cout << Peter.getName() << " is " << Peter.getAge() << " years old.\n";
-	// Wrong
-	// std::cout << Peter.name << " is " << Peter.age << " years old\n";
-	Peter.setNickname("Pete");
-    Peter.sayHello();
-}
-```
 
 ---
 
