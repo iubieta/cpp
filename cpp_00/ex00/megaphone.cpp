@@ -30,7 +30,6 @@ std::string trim(const std::string& str) {
 }
 
 int	main(int argc, char **argv) {
-	// Caso sin argumentos
 	if (argc == 1) {
 		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *";
 		return 0;
