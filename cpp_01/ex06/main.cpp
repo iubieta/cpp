@@ -16,8 +16,10 @@
 
 int	main (int argc, char **argv) {
 	
-	if (argc != 2)
+	if (argc != 2) {
 		std::cout << "ERROR: check your arguments\n";
+		return 0;
+	}
 
 	Harl H;
 
@@ -30,16 +32,16 @@ int	main (int argc, char **argv) {
 
 	switch (index) {
 		case 0:
-			H.complain("debug");
+			H.complain("DEBUG");
 			/* fall through */
 		case 1:
-			H.complain("info");
+			H.complain("INFO");
 			/* fall through */
 		case 2:
-			H.complain("warning");
+			H.complain("WARNING");
 			/* fall through */
 		case 3:
-			H.complain("error");
+			H.complain("ERROR");
 			break;
 		default:
 			std::cout << "[Probably complaining...]\n";
