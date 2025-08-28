@@ -52,7 +52,6 @@
 * Any function from the **standard library** is allowed
 * Any other function or library is forbidden
 * The following are also forbidden:
-
   * `printf()`
   * `alloc()`
   * `free()`
@@ -69,9 +68,11 @@
 
 ---
 
-# 📘 **CPP00 – Basics of C++ and OOP**
+# 📘 CPP00 – Basics of C++ and OOP
 
-## 1. **Namespaces**
+## 1. std library
+
+### Namespaces
 * **What:** A way to group identifiers (variables, functions, classes) to avoid name collisions.
 * **Why useful:** Prevents clashes when multiple libraries or files define the same names.
 
@@ -88,7 +89,7 @@ int main() {
 ⚠️ `using namespace std;` is convenient, but in professional code it’s discouraged → it pollutes the global namespace.
 
 
-## 2. **`std::string` (instead of `char*`)**
+### `std::string` (instead of `char*`)
 * Safer and easier than C-style strings.
 * Common operations:
 
@@ -100,16 +101,16 @@ int main() {
 **Why useful:** Avoids buffer overflows, simplifies text manipulation.
 
 
-## 3. **Input/Output Streams in C++**
+## 2. Input/Output Streams in C++
 
 In cpp there are narrow (1 byte) and wide (2 or 4 bytes) streams
 and you shouldn't mix them
 
 ### Narrow streams
 
-* **Input**: `std::cin`
-* **Output**: `std::cout`
-* **Strings**: `std::string` (`char`-based)
+* **Input**:    `std::cin`
+* **Output**:   `std::cout`
+* **Strings**:  `std::string` (`char`-based)
 * **Literals**: `"hello"`
 
 ✅ Works everywhere, safe for ASCII.
@@ -117,15 +118,15 @@ and you shouldn't mix them
 
 ### Wide streams
 
-* **Input**: `std::wcin`
-* **Output**: `std::wcout`
-* **Strings**: `std::wstring` (`wchar_t`-based)
+* **Input**:    `std::wcin`
+* **Output**:   `std::wcout`
+* **Strings**:  `std::wstring` (`wchar_t`-based)
 * **Literals**: `L"hello"`
 
 ✅ Can handle Unicode (like `ñ`, accents) if locale is configured.
 ❌ On Windows, you need `_O_U16TEXT`; column alignment with `setw` may break.
 
-### Locale setup
+#### Locale setup
 
 Before using wide streams, set locale:
 
@@ -147,10 +148,22 @@ int main() {
     std::wcout.imbue(std::locale());
 }
 ```
+### stringstream
+String stream works as a personalt I/O stream as `cin` or `cout`
+You have three main variants of string streams, all declared in <sstream>:
+- std::stringstream → both input and output (can read & write).
+- std::istringstream → input only (read from a string, like cin).
+- std::ostringstream → output only (write into a string, like cout).
 
-### Reading with `>>` vs. `getline`
+  ```cpp
+  //Checkin if wstr is a number
+  std::wistringstream iss(wstr);
+  int n;
+  if (!(iss >> n)) { /* not a number */ }
+  ```
+### `>>` vs. `getline`
 
-### `>>`
+#### `>>`
 
 * Reads until first whitespace.
 * Works directly for numbers:
@@ -166,7 +179,7 @@ int main() {
   std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
   ```
 
-### `getline`
+#### `getline`
 
 * Reads an entire line (keeps spaces).
 * Usage:
@@ -175,19 +188,46 @@ int main() {
   std::getline(std::cin, str);     // narrow
   std::getline(std::wcin, wstr);   // wide
   ```
-#### Processing lines with **stringstream**
-String stream works as a personalt I/O stream as `cin` or `cout`
-You have three main variants of string streams, all declared in <sstream>:
-- std::stringstream → both input and output (can read & write).
-- std::istringstream → input only (read from a string, like cin).
-- std::ostringstream → output only (write into a string, like cout).
 
-  ```cpp
-  //Checkin if wstr is a number
-  std::wistringstream iss(wstr);
-  int n;
-  if (!(iss >> n)) { /* not a number */ }
-  ```
+### Managing ERRORS and EOF
+
+* Input streams can be left closed or useless because of:
+    * `EOF ` char (Ctrl + D)
+    * Error causing input 
+* `cin.eof()` functions let you know if the stream is closed
+* If the stream is closed (`EOF`) you should return or close the program
+* If the stream has failed but is not closed (`EOF`), you can reset it with:
+`cin.clear()` to clear the failure flags and `cin.ignore()` to clear the failing buffer
+
+```cpp
+// Safe input reciever
+int main(){
+    std::string line;
+
+    while (true) {
+        std::cout << "> " << std::flush;
+
+        if (!std::getline(std::cin, line)) {
+            if (std::cin.eof()) {           // Ctrl+D ⇒ EOF
+                std::cout << "\nEOF detected. Exiting.\n";
+                break;
+            } else {    // another input error
+                // clears cin flags
+                std::cin.clear();           
+                //clears residual buffer
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
+                std::cerr << "Input error, try again\n"
+                continue;
+            }
+        }
+
+        if (line == "quit") break; // Input exiting condition          
+        std::cout << "Leído: " << line << "\n";
+    }
+}
+```
+⚠️**Warning:** When asking for input in different points EOF will make them all useless,
+you must handle that case correctly in all of them
 
 
 ### Output formatting (`setw`)
@@ -200,60 +240,78 @@ You have three main variants of string streams, all declared in <sstream>:
 * Works with `std::left` / `std::right`.
 * Applies **only once**.
 
-⚠️ Issue on Windows with `wcout`:
+⚠️ Issue with `wcout`:
 
-* `setw` counts characters, but the console counts some Unicode (like `ñ`, emojis) as two cells.
+* `setw` counts characters, but the console counts some Unicode (like `ñ`, emojis) 
+as two cells.
 * Result: table columns misalign.
 
 👉 Practical fix: implement a custom `padRight` function that measures string length and appends spaces.
 
 ---
 
-## 4. **Classes and Objects**
+## 3. OOP: Object Oriented Programming 
+
+### Classes and Objects
 * **Class = blueprint**, **Object = instance** of that blueprint.
 * **Why useful:** Encapsulation, reusability, and modeling real-world entities.
 
-```cpp
-class Zombie {
-private:
-    std::string name;   // attribute
-
-public:
-    Zombie(std::string n) : name(n) {}   // constructor
-    void announce() { std::cout << name << " BraiiiiiiinnnzzzZ...\n"; }
-};
-```
-
-
-## 5. **Encapsulation**
+### Encapsulation
 * **What:** Keeping data (`private`) safe and only exposing what’s necessary (`public`).
 * **Why useful:** Prevents external code from corrupting internal state.
 
-```cpp
-class Foo {
-private:
-    int value;  // hidden from outside
-
-public:
-    void setValue(int v) { value = v; }
-    int getValue() const { return value; }
-};
-```
-
-## 6. **Member Functions**
+### Member Functions
 * Functions that belong to a class.
 * Defined inside the class (inline) or outside using `::`.
 * **Why useful:** Keeps behavior tightly coupled to data.
+
 ```cpp
-class Foo {
+#include <iostream>
+#include <string>
+
+// Class definition
+class Person {
+private:
+   // attributes
+	const std::string name ;
+    const int         age;
+    std::string nickname;
+
 public:
-    void sayHello();
+    // constructor
+    Person(std::string n, int a) : name(n), age(a) {}
+   
+	//Member functions
+	std::string getName() const {
+        return name;
+    }
+    int getAge() const {
+        return age;
+    }
+    
+	void setNickname(std::string nick) {
+        nickname = nick;
+    }
+    
+	void sayHello() const {
+        std::cout << name << ": Hi, my name is " << name
+			<< " but people call me " << nickname << "!\n";
+    }
 };
 
-void Foo::sayHello() {
-    std::cout << "Hello\n";
+// Usage
+int main() {
+    Person Peter("Peter", 18);
+
+	// Wrong
+	// std::cout << Peter.name << " is " << Peter.age << " years old\n";
+	// Right
+	std::cout << Peter.getName() << " is " << Peter.getAge() << " years old.\n";
+	Peter.setNickname("Pete");
+    Peter.sayHello();
 }
 ```
+
 ---
 
 # 📘 **CPP01 – Memory, Pointers, and References**
