@@ -10,20 +10,26 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef HARL_H
+# define HARL_H
 
-#include <map>
 #include <string>
 class Harl {
 	private:
-		void	debug(void);
-		void	info(void);
-		void	warning(void);
-		void	error(void);
-		
-		using lvl = void (Harl::*)(void);
-		std::map<std::string, lvl> levels;
+		void	debug(void) const;
+		void	info(void) const;
+		void	warning(void) const;
+		void	error(void) const;
+
+		typedef void (Harl::*Fn)() const;
+		struct	Level {
+			std::string	key;
+			Fn	function;
+		};
 
 	public:
 		Harl();
-		void	complain(std::string level);
+		void	complain(std::string level) const;
 };
+
+#endif // !HARL_H
