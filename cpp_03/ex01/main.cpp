@@ -10,49 +10,51 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ClapTrap.h"
+#include "ScavTrap.h"
 #include <iostream>
 #include <ostream>
 
 int main() {
 	
-	std::cout << "========== Constructors Test ==========" << std::endl;
-	ClapTrap ct;
-	ct.status();
-	ClapTrap myCt("myClapTrap");
-	myCt.status();
-	ClapTrap myCtCopy(myCt);
-	myCtCopy.status();
+	std::cout << "========== Default Constructor ==========" << std::endl;
+	
+	ScavTrap scav;
+	scav.status();
+	std::cout << std::endl;
+	
+	std::cout << "========== Named Constructor ==========" << std::endl;
+	ScavTrap myscav("myScav");
+	myscav.status();
+	myscav.attack("enemie");
+	std::cout << std::endl;
+	
+	std::cout << "========== Copy Constructor ==========" << std::endl;
+	ScavTrap myscav_copy(myscav);
+	myscav_copy.status();
 	std::cout << std::endl;
 
-	std::cout << "========== Attack Test ==========" << std::endl;
-	ct.attack("enemie");
-	ct.status();
+	std::cout << "========== Energy Test ==========" << std::endl;
+	int i = 0;
+	while (i < 50) {
+		std::cout << ++i << "  ";
+		scav.attack("enemie");
+	}
+	scav.status();
+	scav.attack("enemie");
+	scav.beReapaired(5);
 	std::cout << std::endl;
 
-	std::cout << "========== Take Damage Test ==========" << std::endl;
-	ct.takeDamage(5);
-	ct.status();
+	std::cout << "========== Damage Test ==========" << std::endl;
+	myscav.takeDamage(10);
+	myscav.takeDamage(10);
+	myscav.status();
 	std::cout << std::endl;
 
 	std::cout << "========== Repair Test ==========" << std::endl;
-	ct.beReapaired(1);
-	ct.status();
+	myscav.beReapaired(10);
+	myscav.status();
 	std::cout << std::endl;
-
-	std::cout << "========== No Energy Test ==========" << std::endl;
-	ct.attack("enemie");
-	ct.attack("enemie");
-	ct.attack("enemie");
-	ct.attack("enemie");
-	ct.attack("enemie");
-	ct.attack("enemie");
-	ct.attack("enemie");
-	ct.attack("enemie");
-	ct.status();
-	ct.attack("enemie");
-	ct.beReapaired(2);
-	ct.status();
-	std::cout << std::endl;
-
+	
+	// std::cout << "========== Part 2 ==========" << std::endl;
+	
 }
