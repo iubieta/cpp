@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ScavTrap.h"
+#include "FragTrap.h"
 #include <iostream>
 #include <ostream>
 
@@ -18,45 +18,46 @@ int main() {
 	
 	std::cout << "========== Default Constructor ==========" << std::endl;
 	
-	ScavTrap scav;
-	scav.status();
+	FragTrap frag;
+	frag.status();
 	std::cout << std::endl;
 	
 	std::cout << "========== Named Constructor ==========" << std::endl;
-	ScavTrap myscav("myScav");
-	myscav.status();
-	myscav.attack("enemie");
+	FragTrap myfrag("myFrag");
+	myfrag.status();
+	myfrag.attack("enemie");
 	std::cout << std::endl;
 	
 	std::cout << "========== Copy Constructor ==========" << std::endl;
-	ScavTrap myscav_copy(myscav);
-	myscav_copy.status();
+	FragTrap myfrag_copy(myfrag);
+	myfrag_copy.status();
 	std::cout << std::endl;
 
 	std::cout << "========== Energy Test ==========" << std::endl;
 	int i = 0;
-	while (i < 50) {
+	while (i < 100) {
 		std::cout << ++i << "  ";
-		scav.attack("enemie");
+		frag.attack("enemie");
 	}
-	scav.status();
-	scav.attack("enemie");
-	scav.beReapaired(5);
+	frag.status();
+	frag.attack("enemie");
+	frag.beReapaired(5);
 	std::cout << std::endl;
 
 	std::cout << "========== Damage Test ==========" << std::endl;
-	myscav.takeDamage(10);
-	myscav.takeDamage(10);
-	myscav.status();
+	myfrag.takeDamage(10);
+	myfrag.takeDamage(10);
+	myfrag.status();
 	std::cout << std::endl;
 
 	std::cout << "========== Repair Test ==========" << std::endl;
-	myscav.beReapaired(10);
-	myscav.status();
+	myfrag.beReapaired(10);
+	myfrag.status();
 	std::cout << std::endl;
 	
 	std::cout << "========== Personal Test ==========" << std::endl;
-	myscav.guardGate();
+	myfrag.highFivesGuys();
 	std::cout << std::endl;
+	
 	
 }
