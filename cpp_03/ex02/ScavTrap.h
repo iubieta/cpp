@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScavTrap.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iubieta- <iubieta@student.42.fr>           +#+  +:+       +#+        */
+/*   By: iubieta- <iubieta-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 14:29:15 by iubieta-          #+#    #+#             */
-/*   Updated: 2025/09/28 14:42:19 by iubieta-         ###   ########.fr       */
+/*   Updated: 2025/10/01 19:13:12 by iubieta-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ class ScavTrap : public ClapTrap {
 		ScavTrap(const std::string& name);
 		ScavTrap(const ScavTrap& other);
 		~ScavTrap();
+
+		ScavTrap& operator=(const ScavTrap& other);
 
 		void guardGate() const;
 };

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   FragTrap.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iubieta- <iubieta@student.42.fr>           +#+  +:+       +#+        */
+/*   By: iubieta- <iubieta-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 14:29:15 by iubieta-          #+#    #+#             */
-/*   Updated: 2025/09/28 14:42:19 by iubieta-         ###   ########.fr       */
+/*   Updated: 2025/10/01 19:06:14 by iubieta-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ class FragTrap : public ClapTrap {
 		FragTrap(const std::string& name);
 		FragTrap(const FragTrap& other);
 		~FragTrap();
+
+		FragTrap& operator=(const FragTrap& other);
 
 		void highFivesGuys() const;
 };

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScavTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iubieta- <iubieta@student.42.fr>           +#+  +:+       +#+        */
+/*   By: iubieta- <iubieta-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 14:29:14 by iubieta-          #+#    #+#             */
-/*   Updated: 2025/09/28 14:42:17 by iubieta-         ###   ########.fr       */
+/*   Updated: 2025/10/01 19:20:02 by iubieta-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,14 @@ ScavTrap::~ScavTrap(){
 }
 
 // Operators ==================================================================
+ScavTrap& ScavTrap::operator=(const ScavTrap& other) {
+	std::cout << YELLOW << "Scav trap copy operator called" << RESET
+		<< std::endl;
+	if (this != &other) {
+		ClapTrap::operator=(other);
+	}
+	return *this;
+}
 
 // Getters ====================================================================
 
