@@ -6,7 +6,7 @@
 /*   By: iubieta- <iubieta@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 12:47:47 by iubieta-          #+#    #+#             */
-/*   Updated: 2025/10/05 17:10:09 by iubieta-         ###   ########.fr       */
+/*   Updated: 2025/10/05 17:17:44 by iubieta-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,11 @@ int main() {
 	
 	std::cout << "========== Destruction Test ==========" << std::endl;
 	std::cout << std::endl;
+	delete ap;
+	delete cp;
+	delete dp;
+	delete wap;
+	delete wcp;
+
 
 }
