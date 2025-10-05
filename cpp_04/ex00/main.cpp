@@ -6,7 +6,7 @@
 /*   By: iubieta- <iubieta@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 12:47:47 by iubieta-          #+#    #+#             */
-/*   Updated: 2025/10/05 17:17:44 by iubieta-         ###   ########.fr       */
+/*   Updated: 2025/10/05 18:10:25 by iubieta-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,24 @@ int main() {
 	std::cout << "========== Constructors Test ==========" << std::endl;
 	const Animal a = Animal();
 	std::cout << a.getType() << std::endl;
+	std::cout << std::endl;
+	
 	const Cat c = Cat();
 	std::cout << c.getType() << std::endl;
+	std::cout << std::endl;
+
 	const Dog d = Dog();
 	std::cout << d.getType() << std::endl;
+	std::cout << std::endl;
+
 	const Animal* ap = new Animal();
 	std::cout << ap->getType() << std::endl;
+	std::cout << std::endl;
+
 	const Animal* cp = new Cat();
 	std::cout << cp->getType() << std::endl;
+	std::cout << std::endl;
+
 	const Animal* dp = new Dog();
 	std::cout << dp->getType() << std::endl;
 	std::cout << std::endl;
@@ -48,21 +58,35 @@ int main() {
 	std::cout << "========== Wrong Class Test ==========" << std::endl;
 	const WrongAnimal wa = WrongAnimal();
 	wa.makeSound();
+	std::cout << std::endl;
+
 	const WrongCat wc = WrongCat();
 	wc.makeSound();
+	std::cout << std::endl;
+
 	const WrongAnimal* wap = new WrongAnimal();
 	wap->makeSound();
+	std::cout << std::endl;
+
 	const WrongAnimal* wcp = new WrongCat();
 	wcp->makeSound();
 	std::cout << std::endl;
 	
 	std::cout << "========== Destruction Test ==========" << std::endl;
-	std::cout << std::endl;
 	delete ap;
+	std::cout << std::endl;
+
 	delete cp;
+	std::cout << std::endl;
+
 	delete dp;
+	std::cout << std::endl;
+
 	delete wap;
+	std::cout << std::endl;
+
 	delete wcp;
+	std::cout << std::endl;
 
 
 }

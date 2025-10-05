@@ -6,7 +6,7 @@
 /*   By: iubieta- <iubieta@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 14:45:08 by iubieta-          #+#    #+#             */
-/*   Updated: 2025/10/05 14:49:29 by iubieta-         ###   ########.fr       */
+/*   Updated: 2025/10/05 18:07:50 by iubieta-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ class	Dog : public Animal {
 		Dog();
 		Dog(const std::string& type);
 		Dog(const Dog& other);
-		virtual ~Dog();
+		~Dog();
 
 		Dog& operator=(const Dog& other);
 
-		virtual void makeSound() const;
+		void makeSound() const;
 };
 
 #endif
