@@ -1,32 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScavTrap.h                                         :+:      :+:    :+:   */
+/*   DiamondTrap.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iubieta- <iubieta-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/28 14:29:15 by iubieta-          #+#    #+#             */
-/*   Updated: 2025/10/10 19:12:48 by iubieta-         ###   ########.fr       */
+/*   Created: 2025/10/01 18:54:07 by iubieta-          #+#    #+#             */
+/*   Updated: 2025/10/01 18:56:58 by iubieta-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ClapTrap.h"
+#include "ScavTrap.h"
+#include "FragTrap.h"
 
-#ifndef SCAVTRAP_H
-
-# define SCAVTRAP_H
-
-class ScavTrap : public ClapTrap {
+class DiamondTrap {
+	private:
+		std::string _name;
 	public:
-		ScavTrap();
-		ScavTrap(const std::string& name);
-		ScavTrap(const ScavTrap& other);
-		~ScavTrap();
-
-		ScavTrap& operator=(const ScavTrap& other);
-
-		void attack(std::string target);
-		void guardGate() const;
-};
-
-#endif // !SCAVTRAP_H
+		
+}

@@ -6,7 +6,7 @@
 /*   By: iubieta- <iubieta-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 14:29:15 by iubieta-          #+#    #+#             */
-/*   Updated: 2025/10/10 19:12:48 by iubieta-         ###   ########.fr       */
+/*   Updated: 2025/10/01 19:13:12 by iubieta-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ class ScavTrap : public ClapTrap {
 
 		ScavTrap& operator=(const ScavTrap& other);
 
-		void attack(std::string target);
 		void guardGate() const;
 };
 

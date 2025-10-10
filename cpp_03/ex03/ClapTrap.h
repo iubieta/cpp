@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ClapTrap.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iubieta- <iubieta-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: iubieta- <iubieta@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 11:57:54 by iubieta-          #+#    #+#             */
-/*   Updated: 2025/10/10 19:05:27 by iubieta-         ###   ########.fr       */
+/*   Updated: 2025/09/28 12:59:19 by iubieta-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 #define WHITE   "\033[37m"
 
 class	ClapTrap {
-	protected:
+	private:
 		std::string	_name;	
 		int			_hitPts;	
 		int			_energyPts;	

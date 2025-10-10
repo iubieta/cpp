@@ -6,7 +6,7 @@
 /*   By: iubieta- <iubieta-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 14:29:14 by iubieta-          #+#    #+#             */
-/*   Updated: 2025/10/01 19:20:02 by iubieta-         ###   ########.fr       */
+/*   Updated: 2025/10/10 19:13:56 by iubieta-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,15 @@ ScavTrap& ScavTrap::operator=(const ScavTrap& other) {
 // Setters ====================================================================
 
 // Member functions ===========================================================
+void	ScavTrap::attack(std::string target) {
+	if (_energyPts < 1) {
+		std::cout << RED << "No energy points left" << RESET << std::endl;
+		return;
+	}
+	std::cout << YELLOW << _name << " attacked " << target << ", causing "
+		<< _attackDmg << " points of damage" << RESET << std::endl;
+	--_energyPts;
+}
 
 void	ScavTrap::guardGate() const {
 	std::cout << getName() << " is now gatekeeping" << std::endl;

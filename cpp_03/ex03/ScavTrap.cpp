@@ -1,45 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   FragTrap.cpp                                       :+:      :+:    :+:   */
+/*   ScavTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iubieta- <iubieta-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 14:29:14 by iubieta-          #+#    #+#             */
-/*   Updated: 2025/10/10 19:25:50 by iubieta-         ###   ########.fr       */
+/*   Updated: 2025/10/01 19:20:02 by iubieta-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "FragTrap.h"
+#include "ScavTrap.h"
 #include <iostream>
 #include <string>
 
 // Constructors ===============================================================
 
-FragTrap::FragTrap() : ClapTrap("Frag", 100, 100, 30) {
-	std::cout << MAGENTA << "Frag trap default constructor called" << RESET 
+ScavTrap::ScavTrap() : ClapTrap("Scav", 100, 50, 20) {
+	std::cout << YELLOW << "Scav trap default constructor called" << RESET 
 		<< std::endl;
 }
 
-FragTrap::FragTrap(const std::string& name) : ClapTrap(name, 100, 100, 30) {
-	std::cout << MAGENTA << "Frag trap name based constructor called" << RESET 
+ScavTrap::ScavTrap(const std::string& name) : ClapTrap(name, 100, 50, 20) {
+	std::cout << YELLOW << "Scav trap name based constructor called" << RESET 
 		<< std::endl;
 }
 
-FragTrap::FragTrap(const FragTrap& other): ClapTrap(other) {
-	std::cout << MAGENTA << "Frag trap copy constructor called" << RESET 
+ScavTrap::ScavTrap(const ScavTrap& other): ClapTrap(other) {
+	std::cout << YELLOW << "Scav trap copy constructor called" << RESET 
 		<< std::endl;
 	*this = other;
 }
 
-FragTrap::~FragTrap(){
-	std::cout << MAGENTA << "Frag trap destructor called" << RESET 
+ScavTrap::~ScavTrap(){
+	std::cout << YELLOW << "Scav trap destructor called" << RESET 
 		<< std::endl;
 }
 
 // Operators ==================================================================
-FragTrap& FragTrap::operator=(const FragTrap& other) {
-	std::cout << MAGENTA << "Frag trap copy operator called" << RESET
+ScavTrap& ScavTrap::operator=(const ScavTrap& other) {
+	std::cout << YELLOW << "Scav trap copy operator called" << RESET
 		<< std::endl;
 	if (this != &other) {
 		ClapTrap::operator=(other);
@@ -52,16 +52,7 @@ FragTrap& FragTrap::operator=(const FragTrap& other) {
 // Setters ====================================================================
 
 // Member functions ===========================================================
-void	FragTrap::attack(std::string target) {
-	if (_energyPts < 1) {
-		std::cout << RED << "No energy points left" << RESET << std::endl;
-		return;
-	}
-	std::cout << MAGENTA << _name << " attacked " << target << ", causing "
-		<< _attackDmg << " points of damage" << RESET << std::endl;
-	--_energyPts;
-}
 
-void	FragTrap::highFivesGuys() const {
-	std::cout << getName() << ": Give me five!!" << std::endl;
+void	ScavTrap::guardGate() const {
+	std::cout << getName() << " is now gatekeeping" << std::endl;
 }
