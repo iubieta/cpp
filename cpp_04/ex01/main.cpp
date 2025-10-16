@@ -71,13 +71,20 @@ int main() {
 	Dog d1;
 	Dog d2;
 	d1.setIdea(0, "I want to eat");
+	d1.setIdea(99, "I want to die");
 	d2 = d1;
 	std::cout << "d1[0]: " << d1.getIdea(0) << std::endl;
 	std::cout << "d2[0]: " << d2.getIdea(0) << std::endl;
+	std::cout << "d1[99]: " << d1.getIdea(99) << std::endl;
+	std::cout << "d2[99]: " << d2.getIdea(99) << std::endl;
 	std::cout << "Changing d2[0] to 'I want to sleep'" << std::endl;
 	d2.setIdea(0, "I want to sleep");
+	std::cout << "Changing d2[100] to 'I dont want to die'" << std::endl;
+	d2.setIdea(99, "I dont want to die");
 	std::cout << "d1[0]: " << d1.getIdea(0) << std::endl;
 	std::cout << "d2[0]: " << d2.getIdea(0) << std::endl;
+	std::cout << "d1[99]: " << d1.getIdea(99) << std::endl;
+	std::cout << "d2[99]: " << d2.getIdea(99) << std::endl;
 	std::cout << std::endl;
 	
 	std::cout << "========== Brain Copy Test from Animal pointer ==========" << std::endl;
