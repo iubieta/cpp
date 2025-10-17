@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   WrongAnimal.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iubieta- <iubieta@student.42.fr>           +#+  +:+       +#+        */
+/*   By: iubieta- <iubieta-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 11:57:54 by iubieta-          #+#    #+#             */
-/*   Updated: 2025/10/05 17:03:22 by iubieta-         ###   ########.fr       */
+/*   Updated: 2025/10/17 16:36:24 by iubieta-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 #define WHITE   "\033[37m"
 
 class	WrongAnimal {
-	private:
+	protected:
 		std::string	_type;	
 
 	public:

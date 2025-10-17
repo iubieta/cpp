@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Animal.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iubieta- <iubieta@student.42.fr>           +#+  +:+       +#+        */
+/*   By: iubieta- <iubieta-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 12:11:34 by iubieta-          #+#    #+#             */
-/*   Updated: 2025/10/05 14:46:35 by iubieta-         ###   ########.fr       */
+/*   Updated: 2025/10/17 16:13:13 by iubieta-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ Animal::Animal() :
 	std::cout << BLUE << "Animal constructor called" << RESET << std::endl;
 }
 
-Animal::Animal(const std::string& type) :
-	_type(type)
-{
-	std::cout << BLUE << "Type based constructor called" << RESET << std::endl;
-}
+//Animal::Animal(const std::string& type) :
+//	_type(type)
+//{
+//	std::cout << BLUE << "Type based constructor called" << RESET << std::endl;
+//}
 
 Animal::Animal(const Animal& other) {
 	std::cout << BLUE << "Copy constructor called" << RESET << std::endl;

@@ -6,7 +6,7 @@
 /*   By: iubieta- <iubieta-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 12:47:47 by iubieta-          #+#    #+#             */
-/*   Updated: 2025/10/13 20:13:55 by iubieta-         ###   ########.fr       */
+/*   Updated: 2025/10/17 16:48:23 by iubieta-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int main() {
 	std::cout << std::endl;
 	for (int idx = 0; idx < 10; idx++)
 		delete animals[idx];
+	std::cout << std::endl;
 	
 	std::cout << "========== Brain copy Test ==========" << std::endl;
 	Brain b1;
@@ -87,20 +88,20 @@ int main() {
 	std::cout << "d2[99]: " << d2.getIdea(99) << std::endl;
 	std::cout << std::endl;
 	
-	std::cout << "========== Brain Copy Test from Animal pointer ==========" << std::endl;
-	Animal* a1 = new Dog();
-	Animal* a2 = new Cat();
-	a1->setIdea(0, "I want to eat");
-	a2 = a1;
-	std::cout << "a1[0]: " << a1->getIdea(0) << std::endl;
-	std::cout << "a2[0]: " << a2->getIdea(0) << std::endl;
-	std::cout << "Changing a2[0] to 'I want to sleep'" << std::endl;
-	a2->setIdea(0, "I want to sleep");
-	std::cout << "a1[0]: " << a1->getIdea(0) << std::endl;
-	std::cout << "a2[0]: " << a2->getIdea(0) << std::endl;
-	delete a1;
-	delete a2;
-	std::cout << std::endl;
+	// std::cout << "========== Brain Copy Test from Animal pointer ==========" << std::endl;
+	// Animal* a1 = new Dog();
+	// Animal* a2 = new Cat();
+	// a1->setIdea(0, "I want to eat");
+	// a2 = a1;
+	// std::cout << "a1[0]: " << a1->getIdea(0) << std::endl;
+	// std::cout << "a2[0]: " << a2->getIdea(0) << std::endl;
+	// std::cout << "Changing a2[0] to 'I want to sleep'" << std::endl;
+	// a2->setIdea(0, "I want to sleep");
+	// std::cout << "a1[0]: " << a1->getIdea(0) << std::endl;
+	// std::cout << "a2[0]: " << a2->getIdea(0) << std::endl;
+	// delete a1;
+	// delete a2;
+	// std::cout << std::endl;
 
 	std::cout << "========== END ==========" << std::endl;
 }

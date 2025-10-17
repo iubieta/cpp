@@ -6,7 +6,7 @@
 /*   By: iubieta- <iubieta-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 11:57:54 by iubieta-          #+#    #+#             */
-/*   Updated: 2025/10/13 20:12:05 by iubieta-         ###   ########.fr       */
+/*   Updated: 2025/10/17 16:10:42 by iubieta-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # define ANIMAL_H
 
 class	Animal {
-	private:
+	protected:
 		std::string	_type;	
 
 	public:

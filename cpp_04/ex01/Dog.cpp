@@ -6,7 +6,7 @@
 /*   By: iubieta- <iubieta-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 14:44:30 by iubieta-          #+#    #+#             */
-/*   Updated: 2025/10/13 19:36:01 by iubieta-         ###   ########.fr       */
+/*   Updated: 2025/10/17 16:41:27 by iubieta-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 // Constructors ===============================================================
 
-Dog::Dog() : Animal("Dog")
+Dog::Dog()
 {
 	std::cout << YELLOW << "Dog constructor called" << RESET << std::endl;
+	this->_type = "Dog";
 	this->_brain = new Brain();
 }
 

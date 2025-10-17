@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Cat.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iubieta- <iubieta@student.42.fr>           +#+  +:+       +#+        */
+/*   By: iubieta- <iubieta-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 14:12:06 by iubieta-          #+#    #+#             */
-/*   Updated: 2025/10/05 14:46:18 by iubieta-         ###   ########.fr       */
+/*   Updated: 2025/10/17 16:33:40 by iubieta-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 // Constructors ===============================================================
 
-Cat::Cat() : Animal("Cat")
+Cat::Cat()
 {
 	std::cout << YELLOW << "Cat constructor called" << RESET << std::endl;
+	this->_type = "Cat";
 }
 
 Cat::Cat(const Cat& other) : Animal(other) {

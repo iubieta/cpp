@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Cat.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iubieta- <iubieta@student.42.fr>           +#+  +:+       +#+        */
+/*   By: iubieta- <iubieta-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 13:53:46 by iubieta-          #+#    #+#             */
-/*   Updated: 2025/10/05 18:07:55 by iubieta-         ###   ########.fr       */
+/*   Updated: 2025/10/17 16:33:20 by iubieta-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@
 #include "Animal.h"
 
 class	Cat : public Animal {
-	private:
-		std::string	_type;	
-
+	
 	public:
 		Cat();
 		Cat(const std::string& type);
