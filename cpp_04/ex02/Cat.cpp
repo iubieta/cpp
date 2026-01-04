@@ -6,7 +6,7 @@
 /*   By: iubieta- <iubieta-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 14:12:06 by iubieta-          #+#    #+#             */
-/*   Updated: 2025/10/13 19:36:23 by iubieta-         ###   ########.fr       */
+/*   Updated: 2025/10/17 16:51:04 by iubieta-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 // Constructors ===============================================================
 
-Cat::Cat() : Animal("Cat")
+Cat::Cat()
 {
 	std::cout << YELLOW << "Cat constructor called" << RESET << std::endl;
+	this->_type = "Cat";
 	this->_brain = new Brain();
 }
 

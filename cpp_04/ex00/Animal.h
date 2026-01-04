@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Animal.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iubieta- <iubieta@student.42.fr>           +#+  +:+       +#+        */
+/*   By: iubieta- <iubieta-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 11:57:54 by iubieta-          #+#    #+#             */
-/*   Updated: 2025/10/05 18:07:57 by iubieta-         ###   ########.fr       */
+/*   Updated: 2025/10/17 16:13:22 by iubieta-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@
 #define WHITE   "\033[37m"
 
 class	Animal {
-	private:
+	protected:
 		std::string	_type;	
 
 	public:
 		Animal();
-		Animal(const std::string& type);
+		//Animal(const std::string& type);
 		Animal(const Animal& other);
 		virtual ~Animal();
 

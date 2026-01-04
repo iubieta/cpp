@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iubieta- <iubieta@student.42.fr>           +#+  +:+       +#+        */
+/*   By: iubieta- <iubieta-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 12:47:47 by iubieta-          #+#    #+#             */
-/*   Updated: 2025/10/05 18:10:25 by iubieta-         ###   ########.fr       */
+/*   Updated: 2025/10/17 16:35:09 by iubieta-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,27 +22,28 @@ int main() {
 	
 	std::cout << "========== Constructors Test ==========" << std::endl;
 	const Animal a = Animal();
-	std::cout << a.getType() << std::endl;
+	std::cout << "Type: " << a.getType() << std::endl;
 	std::cout << std::endl;
 	
 	const Cat c = Cat();
-	std::cout << c.getType() << std::endl;
+	std::cout << "Type: " << c.getType() << std::endl;
 	std::cout << std::endl;
 
 	const Dog d = Dog();
-	std::cout << d.getType() << std::endl;
+	std::cout << "Type: " << d.getType() << std::endl;
 	std::cout << std::endl;
 
+	std::cout << "---------- Animal Pointers ----------" << std::endl;
 	const Animal* ap = new Animal();
-	std::cout << ap->getType() << std::endl;
+	std::cout << "Type: " << ap->getType() << std::endl;
 	std::cout << std::endl;
 
 	const Animal* cp = new Cat();
-	std::cout << cp->getType() << std::endl;
+	std::cout << "Type: " << cp->getType() << std::endl;
 	std::cout << std::endl;
 
 	const Animal* dp = new Dog();
-	std::cout << dp->getType() << std::endl;
+	std::cout << "Type: " << dp->getType() << std::endl;
 	std::cout << std::endl;
 
 	std::cout << "========== Sound Test ==========" << std::endl;

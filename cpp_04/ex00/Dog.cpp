@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Dog.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iubieta- <iubieta@student.42.fr>           +#+  +:+       +#+        */
+/*   By: iubieta- <iubieta-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 14:44:30 by iubieta-          #+#    #+#             */
-/*   Updated: 2025/10/05 14:47:26 by iubieta-         ###   ########.fr       */
+/*   Updated: 2025/10/17 16:14:54 by iubieta-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 // Constructors ===============================================================
 
-Dog::Dog() : Animal("Dog")
+Dog::Dog() : Animal()
 {
 	std::cout << YELLOW << "Dog constructor called" << RESET << std::endl;
+	_type = "Dog";
 }
 
 Dog::Dog(const Dog& other) : Animal(other) {
