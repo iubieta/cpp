@@ -15,26 +15,24 @@
 // Constructors ===============================================================
 
 Bureaucrat::Bureaucrat() 
+	: _name("Default Bureaucrat")
+	, _grade(150)
 {
 	std::cout << YELLOW << "Bureaucrat constructor called" << RESET << std::endl;
-	this->_name = "DefaultName";
-	this->_grade = 150;
 }
 
 Bureaucrat::Bureaucrat(const std::string& name, int grade)
+	: _name(name)
+	, _grade(checkGrade(grade))
 {
 	std::cout << YELLOW << "Bureaucrat constructor called" << RESET << std::endl;
-	if (grade < 1)
-		throw GradeTooHighException();
-	if (grade > 150)
-		throw GradeTooLowException();
-	this->_name = name;
-	this->_grade = grade;
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat& other) {
+Bureaucrat::Bureaucrat(const Bureaucrat& other) 
+	: _name(other.getName())
+	, _grade(other.getGrade())
+{
 	std::cout << YELLOW << "Bureaucrat Copy constructor called" << RESET << std::endl;
-	*this = other;
 }
 
 Bureaucrat::~Bureaucrat() {
@@ -47,7 +45,6 @@ Bureaucrat& Bureaucrat::operator=(const Bureaucrat& other) {
 	std::cout << YELLOW << "Bureaucrat Copy operator called" << RESET << std::endl;
 	if (this != &other)
 	{
-		this->_name = other.getName();
 		this->_grade = other.getGrade();
 	}
 	return(*this);
@@ -69,14 +66,29 @@ int Bureaucrat::getGrade() const {
 }
 // Member functions ===========================================================
 
+int	Bureaucrat::checkGrade(int grade)
+{
+	if (grade < 1) throw GradeTooHighException();
+	if (grade > 150) throw GradeTooLowException();
+	return grade;
+}
+
 void Bureaucrat::upgrade() {
-	if (this->_grade == 1)
-		throw GradeTooHighException();
-	--this->_grade;
+	int grade = this->_grade - 1;
+	try {
+		this->_grade = checkGrade(grade);
+	}
+	catch (std::exception &e) {
+		std::cout << e.what() << std::endl;
+	}
 }
 
 void Bureaucrat::downgrade() {
-	if (this->_grade == 150)
-		throw GradeTooLowException();
-	++this->_grade;
+	int grade = this->_grade + 1;
+	try {
+		this->_grade = checkGrade(grade);
+	}
+	catch (std::exception &e) {
+		std::cout << e.what() << std::endl;
+	}
 }

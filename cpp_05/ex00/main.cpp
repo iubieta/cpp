@@ -42,6 +42,7 @@ int main() {
 	std::cout << copy;
 	std::cout << std::endl;
 
+	std::cout << "Grade 0:" << std::endl;
 	try {
 		Bureaucrat g0("Too High", 0);
 		std::cout << g0;
@@ -51,6 +52,7 @@ int main() {
 	}
 	std::cout << std::endl;
 
+	std::cout << "Grade 200:" << std::endl;
 	try {
 		Bureaucrat g200("Low", 200);
 		std::cout << g200;
@@ -63,71 +65,36 @@ int main() {
 	std::cout << "========== Upgrading Test ==========" << std::endl;
 	
 	std::cout << "Top: ";
-	try {
-		g1.upgrade();
-		std::cout << g1;
-	}
-	catch (std::exception &e) {
-		std::cout << e.what() << std::endl;
-	}
+	g1.upgrade();
+	std::cout << g1;
 	
 	std::cout << "Mid: ";
-	try {
-		g100.upgrade();
-		std::cout << g100;
-	}
-	catch (std::exception& e) {
-		std::cout << e.what() << std::endl;
-	}
+	g100.upgrade();
+	std::cout << g100;
 	
 	std::cout << "Low: ";
-	try {
-		g150.upgrade();
-		std::cout << g150;
-	}
-	catch (std::exception& e) {
-		std::cout << e.what() << std::endl;
-	}
+	g150.upgrade();
+	std::cout << g150;
 	
 	std::cout << std::endl;
 	std::cout << "========== Downgrading Test ==========" << std::endl;
 	
 	std::cout << "Top: ";
-	try {
-		g1.downgrade();
-		std::cout << g1;
-	}
-	catch (std::exception &e) {
-		std::cout << e.what() << std::endl;
-	}
+	g1.downgrade();
+	std::cout << g1;
 
 	std::cout << "Mid: ";
-	try {
-		g100.downgrade();
-		std::cout << g100;
-	}
-	catch (std::exception &e) {
-		std::cout << e.what() << std::endl;
-	}
-	
+	g100.downgrade();
+	std::cout << g100;
+
 	std::cout << "Low (reset): ";
-	try {
-		g150.downgrade();
-		std::cout << g150;
-	}
-	catch (std::exception &e) {
-		std::cout << e.what() << std::endl;
-	}
+	g150.downgrade();
+	std::cout << g150;
 
 	std::cout << "Low: ";
-	try {
-		g150.downgrade();
-		std::cout << g150;
-	}
-	catch (std::exception &e) {
-		std::cout << e.what() << std::endl;
-	}
-	
+	g150.downgrade();
+	std::cout << g150;
+
 	std::cout << std::endl;
 	std::cout << "========== Destruction Test ==========" << std::endl;
 }
