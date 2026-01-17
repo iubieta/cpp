@@ -40,10 +40,26 @@ Crea una clase burocrata con los siguientes condicionantes:
 - Control de permisos mediante excepciones
 
 ### ex02 — AForm + Forms concretos
-- Clase abstracta `AForm`
-- Ejecución polimórfica
-- Separar **validación** de **acción**
-- Tres forms con comportamientos distintos
+- Convertir Form en clase abstracta AForm. Manteniendo sus atributos protegidos y 
+pertenenciendo a la clase base.
+- Añade las siguientes subclases:
+    - `ShrubberyCreationForm` : 
+        - Sign grade = 145, Exec grade = 137
+        - Action: Creates a file `<target>_shrubbery` in `cwd` and writes ASCII trees in it
+    - `RobotomyRequestForm` : 
+        - Sign grade = 72, Exec grade = 45
+        - Action: Makes drilling noises, then informs that (50/50): 
+        a) `<target>` has been robotomized succesfully , 
+        b) robotomy failed
+    - `PresidentialPardonForm` : 
+        - Sign grade = 25, Exec grade = 5
+        - Action: Informs that `<target>`  has been pardoned by Zaphod Beeblebrox
+- Todas las subclases obtienen como unico parametro en su constructor su `<target>`
+- Añade la funcion `execute(Bureaucrat const & executor) const` a la clase base 
+y su implementacion en las subclases. Comprueba siempre que el formulario este firmado
+y el grado de ejecucion del executor.
+- Añade la funcion `executeForm(AForm const & form) const` a la clase burocrata.
+Debe imprimir un mensaje de exito o error adecuado.
 
 ### ex03 — Intern
 - Crear objetos sin conocer su tipo concreto
