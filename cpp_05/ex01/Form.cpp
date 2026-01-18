@@ -12,7 +12,6 @@
 
 #include "Form.h"
 #include "Bureaucrat.h"
-#include <exception>
 #include <iostream>
 
 // Constructors ===============================================================

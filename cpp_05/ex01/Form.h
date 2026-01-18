@@ -27,6 +27,8 @@ class	Form {
 		const int			_signGrade;	
 		const int			_execGrade;	
 		bool				_signed;
+		
+		int		checkGrade(int g);
 
 	public:
 		Form();
@@ -41,30 +43,28 @@ class	Form {
 		int			getExecGrade() const;
 		int			getSigned() const;
 
-		int		checkGrade(int g);
 		void	beSigned(Bureaucrat& bur);
 	
-	
-	class FormIsAlreadySigned : public std::exception {
-		public:
-			const char* what() const throw() {
-				return "Form is already signed";
-			}
-	};
+		class FormIsAlreadySigned : public std::exception {
+			public:
+				const char* what() const throw() {
+					return "Form is already signed";
+				}
+		};
 
-	class GradeTooHighException : public std::exception {
-		public:
-			const char* what() const throw() {
-				return "Grade too high";
-			}
-	};
+		class GradeTooHighException : public std::exception {
+			public:
+				const char* what() const throw() {
+					return "Grade too high";
+				}
+		};
 
-	class GradeTooLowException : public std::exception {
-		public:
-			const char* what() const throw() {
-				return "Grade too low";
-			}
-	};
+		class GradeTooLowException : public std::exception {
+			public:
+				const char* what() const throw() {
+					return "Grade too low";
+				}
+		};
 };
 
 std::ostream& operator<<(std::ostream& os, const Form&);

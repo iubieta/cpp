@@ -21,6 +21,7 @@ class	AForm;
 class	Intern {
 	private:
 		int	_getFormType(const std::string name) const;
+
 	public:
 		Intern();
 		Intern(const Intern& other);

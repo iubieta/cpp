@@ -26,6 +26,7 @@ class	AForm {
 		const int			_execGrade;	
 		bool				_signed;
 
+		int					checkGrade(int g, int max, int min) const;
 		virtual void		doAction() const = 0;
 
 	public:
@@ -41,7 +42,6 @@ class	AForm {
 		int				getExecGrade() const;
 		int				getSigned() const;
 
-		int				checkGrade(int g, int max, int min) const;
 		void			beSigned(const Bureaucrat& signer);
 		void			execute(const Bureaucrat& executor) const;
 
