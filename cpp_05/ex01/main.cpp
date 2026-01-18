@@ -63,6 +63,8 @@ int main() {
 	std::cout << holiday;
 	manager.signForm(holiday);
 	std::cout << holiday;
+	boss.signForm(holiday);
+	std::cout << holiday;
 	std::cout << std::endl;
 	
 	std::cout << "Salary Revision: " << std::endl;

@@ -1,4 +1,4 @@
-# CPP Module 05 — Repetition and Exceptions
+CPP Module 05 — Repetition and Exceptions
 
 ## Objetivo general
 Introducir **excepciones en C++** y reforzar **POO clásica**: encapsulación, herencia, polimorfismo y diseño correcto de clases.
@@ -35,9 +35,22 @@ Crea una clase burocrata con los siguientes condicionantes:
 - Tests
 
 ### ex01 — Form
-- Interacción entre objetos
-- Un `Bureaucrat` firma un `Form`
-- Control de permisos mediante excepciones
+- Crea la clase `Form` con:
+    - Un nombre constante
+    - Un booleano que indique si esta firmado o no
+    - Un entero constante que indique el grado necesario para firmar
+    - Un entero constante que indique el grado necesario para ejecutar
+- Excepciones si el grado es inválido (deben poder recibirse con try catch)
+    - Grade too high
+    - Grade too low
+- Getters para todos los atributos
+- Overload de `<<`
+- Funcion `beSigned()` que recibe un burocrata como parametro y si su grado es suficiente
+firma el formulario. Sino lanza una excepcion
+- Añadir funcion `signForm()` a la clase burocrata, que recibe un Form como parametro
+e intenta firmalo con  `beSigned()`
+    - Si tiene exito imprimir: `<bureaucrat>` signed `<form>`
+    - Sino: `<bureaucrat>` couldn’t sign `<form>` because `<reason>`
 
 ### ex02 — AForm + Forms concretos
 - Convertir Form en clase abstracta AForm. Manteniendo sus atributos protegidos y 

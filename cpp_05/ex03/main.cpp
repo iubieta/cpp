@@ -16,6 +16,7 @@
 #include "ShrubberyCreationForm.h"
 #include "RobotomyRequestForm.h"
 #include "PresidentialPardonForm.h"
+#include <execution>
 #include <iostream>
 #include <ostream>
 
@@ -24,14 +25,21 @@ int main() {
 		<< "========== Construction Test ===================" 
 		<< RESET << std::endl;
 	Bureaucrat				gardener("Gardener", 100);
+	std::cout << gardener;
 	Bureaucrat				engineer("Engineer", 70);
+	std::cout << engineer;
 	Bureaucrat				doc("Doctor", 40);
+	std::cout << doc;
 	Bureaucrat				major("Major", 5);
+	std::cout << major;
 	Intern					intern;
 	
 	AForm *bushForm = intern.makeForm("Shrubbery Creation", "Major's house");
+	std::cout << *bushForm;
 	AForm *robotomy = intern.makeForm("Robotomy Request", "Major's house");
+	std::cout << *robotomy;
 	AForm *pardon = intern.makeForm("Presidential Pardon", "Doctor");
+	std::cout << *pardon;
 	
 	AForm *random = intern.makeForm("non existant form", "Doctor");
 	(void)random;

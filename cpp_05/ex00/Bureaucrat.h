@@ -35,11 +35,11 @@ class	Bureaucrat {
 		Bureaucrat& operator=(const Bureaucrat& other);
 
 		std::string getName() const;
-		int getGrade() const;
+		int			getGrade() const;
 
-		int		checkGrade(int grade);
-		void	upgrade();
-		void 	downgrade();
+		int			checkGrade(int grade);
+		void		upgrade();
+		void 		downgrade();
 };
 
 std::ostream& operator<<(std::ostream& os, const Bureaucrat&);

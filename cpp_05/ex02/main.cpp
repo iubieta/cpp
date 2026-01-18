@@ -23,13 +23,20 @@ int main() {
 		<< "========== Construction Test ===================" 
 		<< RESET << std::endl;
 	Bureaucrat				gardener("Gardener", 100);
+	std::cout << gardener;
 	Bureaucrat				engineer("Engineer", 70);
+	std::cout << engineer;
 	Bureaucrat				doc("Doctor", 40);
+	std::cout << doc;
 	Bureaucrat				major("Major", 5);
+	std::cout << major;
 	
 	ShrubberyCreationForm	bushForm("Major's house");
+	std::cout << bushForm;
 	RobotomyRequestForm		robotomy("Gardener");
+	std::cout << robotomy;
 	PresidentialPardonForm	pardon("Doctor");
+	std::cout << pardon;
 
 	RobotomyRequestForm		robotomy2;
 	robotomy2 = robotomy;
