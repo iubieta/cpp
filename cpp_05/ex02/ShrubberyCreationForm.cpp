@@ -13,8 +13,10 @@
 #include "ShrubberyCreationForm.h"
 #include "AForm.h"
 #include "Bureaucrat.h"
+#include <fstream>
 #include <iostream>
 #include <ostream>
+#include <string>
 
 // Constructors ===============================================================
 
@@ -75,15 +77,26 @@ std::string ShrubberyCreationForm::getTarget() const {
 
 // Private functions ===========================================================
 
-void	ShrubberyCreationForm::doAction() const
-{
-	std::cout 
-		<< "A shrubbery has been created in " << this->_target << std::endl;
-	return;
-}
-
 void ShrubberyCreationForm::print(std::ostream& out) const
 {
 	AForm::print(out);
 	out	<< ", target: " << this->_target;
 }
+
+void	ShrubberyCreationForm::doAction() const
+{
+	std::ifstream	ascii_tree("ascii_tree.txt");
+	std::ofstream	target_file;
+	target_file.open((this->_target + ".txt").c_str(), std::ofstream::app);
+	std::string		line;
+
+	while (std::getline(ascii_tree, line)) {
+		target_file << line << std::endl;
+	}
+	ascii_tree.close();
+	target_file.close();
+	std::cout 
+		<< "A shrubbery has been created in " << this->_target << std::endl;
+	return;
+}
+

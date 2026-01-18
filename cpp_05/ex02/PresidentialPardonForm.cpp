@@ -77,7 +77,7 @@ std::string PresidentialPardonForm::getTarget() const {
 void	PresidentialPardonForm::doAction() const
 {
 	std::cout 
-		<< this->_target << " has been pardoned by Zaphod Beeblebrox." << std::endl;
+		<< this->_target << " has been pardoned by Zaphod Beeblebrox" << std::endl;
 }
 
 void PresidentialPardonForm::print(std::ostream& out) const

@@ -13,6 +13,7 @@
 #include "RobotomyRequestForm.h"
 #include "AForm.h"
 #include "Bureaucrat.h"
+#include <cstdlib>
 #include <iostream>
 
 // Constructors ===============================================================
@@ -73,14 +74,21 @@ std::string RobotomyRequestForm::getTarget() const {
 
 // Private functions ===========================================================
 
-void	RobotomyRequestForm::doAction() const
-{
-	std::cout 
-		<< this->_target << " has been robotomized" << std::endl;
-}
-
 void RobotomyRequestForm::print(std::ostream& out) const
 {
 	AForm::print(out);
 	out	<< ", target: " << this->_target;
 }
+
+void	RobotomyRequestForm::doAction() const
+{
+
+	std::srand(time(0));
+	int	coin = std::rand() % 2;
+	std::cout << "Drilling noises..." << std::endl;
+	if (coin == 1)
+		std::cout << this->_target << " has been robotomized" << std::endl;
+	else
+		std::cout << "robotomy failed" << std::endl;
+}
+
