@@ -1,0 +1,42 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: iubieta- <iubieta@student.42.fr>           +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/09/28 11:56:56 by iubieta-          #+#    #+#              #
+#    Updated: 2026/01/17 16:56:43 by iubieta-         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+NAME = Intern
+
+CXX := c++
+CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -g
+
+SRCS := main.cpp \
+		Bureaucrat.cpp \
+		AForm.cpp \
+		ShrubberyCreationForm.cpp \
+		RobotomyRequestForm.cpp \
+		PresidentialPardonForm.cpp \
+		Intern.cpp
+
+OBJS := $(SRCS:%.cpp=%.o)
+
+all : $(NAME)
+
+$(NAME): $(OBJS)
+	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
+
+clean :
+	rm -rf *.o
+	rm -rf *.gch
+
+fclean : clean
+	rm -rf $(NAME)
+
+re: fclean all
+
+.PHONY: all clean fclean re

@@ -62,9 +62,14 @@ y el grado de ejecucion del executor.
 Debe imprimir un mensaje de exito o error adecuado.
 
 ### ex03 — Intern
-- Crear objetos sin conocer su tipo concreto
-- Factory sin `if/else` gigantes
-- Manejo de errores si el form no existe
+- Crear clase `Intern`: No tiene nombre, grado o atributos especificos.
+- Solo tiene la funcion `makeForm()` con los siguientes parametros.
+    - Nombre del formulario -> `name`
+    - Objetivo del formulario -> `target`
+    - Devuelve un puntero a un objeto `AForm` que corresponde con el nombre pasado
+    - Si tiene exito imprime `Intern creates <form>"`,
+    si el nombre del formulario no existe imprime un mensaje correspondiente
+- No usar `if/else` para gestionar la creacion de formularios
 
 ## Objetivo final
 Pensar en **diseño**, no solo en código:

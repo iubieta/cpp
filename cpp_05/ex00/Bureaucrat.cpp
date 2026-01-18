@@ -79,7 +79,7 @@ void Bureaucrat::upgrade() {
 		this->_grade = checkGrade(grade);
 	}
 	catch (std::exception &e) {
-		std::cout << e.what() << std::endl;
+		std::cout << RED << e.what() << RESET << std::endl;
 	}
 }
 
@@ -89,6 +89,6 @@ void Bureaucrat::downgrade() {
 		this->_grade = checkGrade(grade);
 	}
 	catch (std::exception &e) {
-		std::cout << e.what() << std::endl;
+		std::cout << RED << e.what() << RESET << std::endl;
 	}
 }

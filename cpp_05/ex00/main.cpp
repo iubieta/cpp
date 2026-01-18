@@ -48,17 +48,16 @@ int main() {
 		std::cout << g0;
 	}
 	catch ( std::exception &e) {
-		std::cout << e.what() << std::endl;
+		std::cout << RED << e.what() << RESET << std::endl;
 	}
-	std::cout << std::endl;
 
 	std::cout << "Grade 200:" << std::endl;
 	try {
-		Bureaucrat g200("Low", 200);
+		Bureaucrat g200("Too Low", 200);
 		std::cout << g200;
 	}
 	catch ( std::exception &e) {
-		std::cout << e.what() << std::endl;
+		std::cout << RED << e.what() << RESET << std::endl;
 	}
 	
 	std::cout << std::endl;

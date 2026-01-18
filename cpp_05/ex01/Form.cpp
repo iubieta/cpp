@@ -101,5 +101,7 @@ void	Form::beSigned(Bureaucrat& bur)
 {
 	if (bur.getGrade() > this->_signGrade)
 		throw GradeTooLowException();
+	if (this->getSigned() == true)
+		throw FormIsAlreadySigned();
 	this->_signed = true;
 }

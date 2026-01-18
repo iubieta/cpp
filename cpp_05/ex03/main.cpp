@@ -12,6 +12,7 @@
 
 #include "Bureaucrat.h"
 #include "AForm.h"
+#include "Intern.h"
 #include "ShrubberyCreationForm.h"
 #include "RobotomyRequestForm.h"
 #include "PresidentialPardonForm.h"
@@ -26,37 +27,32 @@ int main() {
 	Bureaucrat				engineer("Engineer", 70);
 	Bureaucrat				doc("Doctor", 40);
 	Bureaucrat				major("Major", 5);
+	Intern					intern;
 	
-	ShrubberyCreationForm	bushForm("Major's house");
-	RobotomyRequestForm		robotomy("Gardener");
-	PresidentialPardonForm	pardon("Doctor");
-
-	RobotomyRequestForm		robotomy2;
-	robotomy2 = robotomy;
-	std::cout << robotomy2;
-
+	AForm *bushForm = intern.makeForm("Shrubbery Creation", "Major's house");
+	AForm *robotomy = intern.makeForm("Robotomy Request", "Major's house");
+	AForm *pardon = intern.makeForm("Presidential Pardon", "Doctor");
+	
+	AForm *random = intern.makeForm("non existant form", "Doctor");
+	(void)random;
 
 	std::cout << std::endl;
 	std::cout << GREEN 
 		<< "========== Sign Test ==========================="
 		<< RESET << std::endl;
-	gardener.signForm(bushForm);
-	doc.signForm(robotomy);
-	engineer.signForm(robotomy);
-	major.signForm(pardon);
-
-
+	gardener.signForm(*bushForm);
+	doc.signForm(*robotomy);
+	engineer.signForm(*robotomy);
+	major.signForm(*pardon);
 
 	std::cout << std::endl;
 	std::cout << GREEN 
 		<< "========== Exec Test ==========================="
 		<< RESET << std::endl;
-	gardener.executeForm(bushForm);
-	engineer.executeForm(robotomy);
-	doc.executeForm(robotomy);
-	major.executeForm(pardon);
-
-
+	gardener.executeForm(*bushForm);
+	engineer.executeForm(*robotomy);
+	doc.executeForm(*robotomy);
+	major.executeForm(*pardon);
 
 	std::cout << std::endl;
 	std::cout << GREEN 
