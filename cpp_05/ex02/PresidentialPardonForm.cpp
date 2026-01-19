@@ -6,7 +6,7 @@
 /*   By: iubieta- <iubieta@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 14:12:06 by iubieta-          #+#    #+#             */
-/*   Updated: 2026/01/17 18:11:09 by iubieta-         ###   ########.fr       */
+/*   Updated: 2026/01/19 18:28:46 by iubieta-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ std::string PresidentialPardonForm::getTarget() const {
 
 // Private functions ===========================================================
 
-void	PresidentialPardonForm::doAction() const
+void	PresidentialPardonForm::_doAction() const
 {
 	std::cout 
 		<< this->_target << " has been pardoned by Zaphod Beeblebrox" << std::endl;

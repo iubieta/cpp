@@ -6,7 +6,7 @@
 /*   By: iubieta- <iubieta@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 16:32:05 by iubieta-          #+#    #+#             */
-/*   Updated: 2026/01/17 18:10:19 by iubieta-         ###   ########.fr       */
+/*   Updated: 2026/01/19 18:28:46 by iubieta-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ class	RobotomyRequestForm : public AForm {
 	private:
 		std::string		_target;
 
-		void			doAction() const;
+		void			_doAction() const;
 		virtual void	print(std::ostream& out) const;
 
 	public:

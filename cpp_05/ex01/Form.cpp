@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.cpp                                       :+:      :+:    :+:   */
+/*   Form.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iubieta- <iubieta@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 14:12:06 by iubieta-          #+#    #+#             */
-/*   Updated: 2025/10/05 17:07:51 by iubieta-         ###   ########.fr       */
+/*   Updated: 2026/01/19 18:26:31 by iubieta-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ Form::Form() :
 
 Form::Form(const std::string& n, const int sg, const int xg, const bool s) :
 	_name(n),
-	_signGrade(checkGrade(sg)),
-	_execGrade(checkGrade(xg)),
+	_signGrade(_checkGrade(sg)),
+	_execGrade(_checkGrade(xg)),
 	_signed(s)
 {
 	std::cout << BLUE << "Form constructor called" << RESET << std::endl;
@@ -89,7 +89,7 @@ int Form::getSigned() const {
 
 // Member functions ===========================================================
 
-int Form::checkGrade(int g)
+int Form::_checkGrade(int g)
 {
 	if (g < 1) throw GradeTooHighException();
 	if (g > 150) throw GradeTooLowException();

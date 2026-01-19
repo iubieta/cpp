@@ -6,7 +6,7 @@
 /*   By: iubieta- <iubieta@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 16:31:04 by iubieta-          #+#    #+#             */
-/*   Updated: 2026/01/17 18:11:37 by iubieta-         ###   ########.fr       */
+/*   Updated: 2026/01/19 18:28:46 by iubieta-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void ShrubberyCreationForm::print(std::ostream& out) const
 	out	<< ", target: " << this->_target;
 }
 
-void	ShrubberyCreationForm::doAction() const
+void	ShrubberyCreationForm::_doAction() const
 {
 	std::ifstream	ascii_tree("ascii_tree.txt");
 	std::ofstream	target_file;

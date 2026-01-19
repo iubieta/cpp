@@ -12,7 +12,6 @@
 
 #include "Bureaucrat.h"
 #include "Form.h"
-#include <exception>
 #include <iostream>
 #include <ostream>
 

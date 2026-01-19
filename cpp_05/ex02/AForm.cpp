@@ -6,7 +6,7 @@
 /*   By: iubieta- <iubieta@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 14:12:06 by iubieta-          #+#    #+#             */
-/*   Updated: 2026/01/17 18:13:45 by iubieta-         ###   ########.fr       */
+/*   Updated: 2026/01/19 18:30:21 by iubieta-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ AForm::AForm() :
 
 AForm::AForm(const std::string& n, const int sg, const int xg, const bool s) :
 	_name(n),
-	_signGrade(checkGrade(sg, 1, 150)),
-	_execGrade(checkGrade(xg, 1, 150)),
+	_signGrade(_checkGrade(sg, 1, 150)),
+	_execGrade(_checkGrade(xg, 1, 150)),
 	_signed(s)
 {
 	std::cout << BLUE << "AForm constructor called" << RESET << std::endl;
@@ -84,7 +84,7 @@ int AForm::getSigned() const {
 
 // Public functions ===========================================================
 
-int AForm::checkGrade(int g, int max, int min) const
+int AForm::_checkGrade(int g, int max, int min) const
 {
 	if (g < max) throw GradeTooHighException();
 	if (g > min) throw GradeTooLowException();
@@ -105,8 +105,8 @@ void	AForm::execute(const Bureaucrat& executor) const
 	if (!this->_signed)
 		throw AForm::NotSignedForm();
 	if (executor.getGrade() > this->_execGrade)
-		throw AForm::GradeTooLowException();
-	this->doAction();
+		throw GradeTooLowException();
+	this->_doAction();
 	return;
 }
 

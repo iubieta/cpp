@@ -6,7 +6,7 @@
 /*   By: iubieta- <iubieta@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 13:53:46 by iubieta-          #+#    #+#             */
-/*   Updated: 2026/01/17 18:13:26 by iubieta-         ###   ########.fr       */
+/*   Updated: 2026/01/19 18:13:34 by iubieta-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 #include <exception>
 #include <iostream>
 #include <string>
+
 #include "colors.h"
+#include "GradeExceptions.h"
 
 class Bureaucrat;
 
@@ -26,8 +28,8 @@ class	AForm {
 		const int			_execGrade;	
 		bool				_signed;
 
-		int					checkGrade(int g, int max, int min) const;
-		virtual void		doAction() const = 0;
+		int					_checkGrade(int g, int max, int min) const;
+		virtual void		_doAction() const = 0;
 
 	public:
 		AForm();
@@ -59,20 +61,6 @@ class	AForm {
 		public:
 			const char* what() const throw() {
 				return "AForm is not signed";
-			}
-	};
-	
-	class GradeTooHighException : public std::exception {
-		public:
-			const char* what() const throw() {
-				return "Grade too high";
-			}
-	};
-
-	class GradeTooLowException : public std::exception {
-		public:
-			const char* what() const throw() {
-				return "Grade too low";
 			}
 	};
 };

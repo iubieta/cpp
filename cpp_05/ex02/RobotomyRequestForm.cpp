@@ -6,7 +6,7 @@
 /*   By: iubieta- <iubieta@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 16:33:29 by iubieta-          #+#    #+#             */
-/*   Updated: 2026/01/17 18:09:30 by iubieta-         ###   ########.fr       */
+/*   Updated: 2026/01/19 18:28:46 by iubieta-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void RobotomyRequestForm::print(std::ostream& out) const
 	out	<< ", target: " << this->_target;
 }
 
-void	RobotomyRequestForm::doAction() const
+void	RobotomyRequestForm::_doAction() const
 {
 
 	std::srand(time(0));

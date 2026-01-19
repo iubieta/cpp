@@ -6,7 +6,7 @@
 /*   By: iubieta- <iubieta@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 13:21:03 by iubieta-          #+#    #+#             */
-/*   Updated: 2026/01/17 18:10:40 by iubieta-         ###   ########.fr       */
+/*   Updated: 2026/01/19 18:28:46 by iubieta-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ class	PresidentialPardonForm : public AForm {
 	private:
 		std::string		_target;
 
-		void			doAction() const;
+		void			_doAction() const;
 		virtual void	print(std::ostream& out) const;
 
 	public:

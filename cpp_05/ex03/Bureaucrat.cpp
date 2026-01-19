@@ -6,7 +6,7 @@
 /*   By: iubieta- <iubieta@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 14:12:06 by iubieta-          #+#    #+#             */
-/*   Updated: 2026/01/17 17:23:56 by iubieta-         ###   ########.fr       */
+/*   Updated: 2026/01/19 18:26:31 by iubieta-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ Bureaucrat::Bureaucrat()
 
 Bureaucrat::Bureaucrat(const std::string& name, int grade)
 	: _name(name)
-	, _grade(checkGrade(grade))
+	, _grade(_checkGrade(grade))
 {
 	std::cout << YELLOW << "Bureaucrat constructor called" << RESET << std::endl;
 }
@@ -70,7 +70,7 @@ int Bureaucrat::getGrade() const {
 
 // Member functions ===========================================================
 
-int	Bureaucrat::checkGrade(int grade)
+int	Bureaucrat::_checkGrade(int grade)
 {
 	if (grade < 1) throw GradeTooHighException();
 	if (grade > 150) throw GradeTooLowException();
@@ -80,7 +80,7 @@ int	Bureaucrat::checkGrade(int grade)
 void Bureaucrat::upgrade() {
 	int grade = this->_grade - 1;
 	try {
-		this->_grade = checkGrade(grade);
+		this->_grade = _checkGrade(grade);
 	}
 	catch (std::exception &e) {
 		std::cout << e.what() << std::endl;
@@ -90,7 +90,7 @@ void Bureaucrat::upgrade() {
 void Bureaucrat::downgrade() {
 	int grade = this->_grade + 1;
 	try {
-		this->_grade = checkGrade(grade);
+		this->_grade = _checkGrade(grade);
 	}
 	catch (std::exception &e) {
 		std::cout << e.what() << std::endl;

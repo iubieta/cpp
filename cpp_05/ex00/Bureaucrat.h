@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Bureaucrat.h                                         :+:      :+:    :+:   */
+/*   Bureaucrat.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iubieta- <iubieta@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 13:53:46 by iubieta-          #+#    #+#             */
-/*   Updated: 2025/10/05 17:04:27 by iubieta-         ###   ########.fr       */
+/*   Updated: 2026/01/19 18:26:31 by iubieta-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,29 +18,16 @@
 #include <iterator>
 #include <string>
 #include <ostream>
-#include "colors.h"
 
+#include "colors.h"
+#include "GradeExceptions.h"
 
 class	Bureaucrat {
 	private:
 		const std::string	_name;	
 		int			_grade;	
 
-		int			checkGrade(int grade);
-
-		class GradeTooHighException : public std::exception {
-			public:
-				const char* what() const throw() {
-					return "Grade too high";
-				}
-		};
-
-		class GradeTooLowException : public std::exception {
-			public:
-				const char* what() const throw() {
-					return "Grade too low";
-				}
-		};
+		int			_checkGrade(int grade);
 
 	public:
 		Bureaucrat();
@@ -55,6 +42,7 @@ class	Bureaucrat {
 
 		void		upgrade();
 		void 		downgrade();
+		
 };
 
 std::ostream& operator<<(std::ostream& os, const Bureaucrat&);
