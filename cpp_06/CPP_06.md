@@ -1,16 +1,18 @@
 # CPP 06 - Conversion entre tipos de datos
 
+### [Subject](CPP_06.pdf)
+
 ## Ejercicios
 
 ### ex00
 - Escribe una clase `ScalarConverter`
-- Con una funcion estatica `convert`: que coja un string que represente un literal de C++
-y lo imprima como: 
+- Esta clase no debe guardar nada por lo tanto no debe ser instanciable
+- Con una funcion estatica `convert` que coja un string que represente un literal 
+en su forma mas comun de C++ y lo devuelva como: 
     - char      ->  'a', 'b', 'c'
     - int       ->  0, -42, 42
     - float     ->  0.0f, -42.0f, 42.0f (incluir: +inff, -inff, nanf)
     - double    ->  0.0, -42.0, 42.0 (incluir: +inf, -inf, nan)
-- Esta clase no debe guardar nada por lo tanto no debe ser instanciable
 - Se usara notacion decimal exceptuando para los caracteres
 - Escribe un programa que testee la funcion:
     - Recoge un literal como argument
@@ -20,6 +22,9 @@ y lo imprima como:
     - Si no tiene sentido o crea indica que la conversion es imposible
     - Incluye los headers necesarios para gestionar los limites numericos 
     y valores excepcionales
+
+> [!WARNING]
+> No se usaran caracteres no imprimible como entrada
 
 ### ex01
 - Escribe una clase `Serializer`
@@ -49,7 +54,9 @@ El resultado final debe ser igual al puntero original.
 
 Explicaciones mas sencillas y directas con ejemplos claros
 
-- [Conversion entre tipo C++](https://www.geeksforgeeks.org/cpp/type-conversion-in-c/)
+- [Funciones Estaticas](https://www.geeksforgeeks.org/cpp/static-member-function-in-cpp/)
+
+- [Conjversion entre tipo C++](https://www.geeksforgeeks.org/cpp/type-conversion-in-c/)
 - [static_cast](https://www.geeksforgeeks.org/cpp/static_cast-in-cpp/)
 - [dynamic_cast](https://www.geeksforgeeks.org/cpp/dynamic-_cast-in-cpp/)
 - [const_cast](https://www.geeksforgeeks.org/cpp/const_cast-in-c-type-casting-operators/)
