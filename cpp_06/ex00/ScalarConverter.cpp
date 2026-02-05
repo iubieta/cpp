@@ -2,7 +2,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScalarConverter.h                                       :+:      :+:    :+:   */
+/*   ScalarConverter.h									:+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iubieta- <iubieta@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,123 +13,73 @@
 
 #include <cctype>
 #include <cfloat>
-#include <cstdint>
+#include <climits>
+#include <cmath>
+#include <cstdlib>
+#include <iomanip>
+#include <ios>
 #include <iostream>
+#include <limits>
 #include <ostream>
+#include <sstream>
 #include <string>
-#include <numeric>
 
 #include "colors.h"
-
 #include "ScalarConverter.hpp"
 
-// Constructors ===============================================================
 
-// ScalarConverter::ScalarConverter() 
-// {
-// 	std::cout << YELLOW << "ScalarConverter constructor called" << RESET << std::endl;
-// }
-//
-// ScalarConverter::ScalarConverter(const ScalarConverter& other) 
-// {
-// 	std::cout << YELLOW << "ScalarConverter Copy constructor called" << RESET << std::endl;
-// }
-//
-// ScalarConverter::~ScalarConverter() {
-// 	std::cout << YELLOW << "ScalarConverter Destructor called" << RESET<< std::endl;
-// }
-//
-// Private Function ============================================================
+// Constructors, destructors and operators are not implemented since this must
+// be a non instantiable class 
 
-enum Flags {
-	CHAR = 1 << 1,
-	PRINTABLE = 1 << 2,
-	INTEGER = 1 << 3,
-	FLOAT = 1 << 4,
-	DOUBLE = 1 << 5,
-};
+// Private functions ===========================================================
 
-
-bool	_isOneChar(const std::string str) {
-	if (str[1])
-		return false;
-	return true;
+double	_checkSpecialValues(std::string str) {
+	if (str == "nan" || str == "nanf")
+		return std::numeric_limits<double>::quiet_NaN();
+	if (str == "inf" || str == "inff")
+		return std::numeric_limits<double>::infinity();
+	if (str == "+inf" || str == "+inff")
+		return std::numeric_limits<double>::infinity();
+	if (str == "-inf" || str == "-inff")
+		return -std::numeric_limits<double>::infinity();
+	return 0;
 }
 
-bool	_isPrintableChar(const std::string str) {
-	if (str[0] < 32 || str[0] > 126)
-		return false;
-	return true;
-}
-
-bool	_isInteger(const std::string str) {
-	long	n = std::stol(str);
-
-	if (n < INT32_MIN || n > INT32_MAX)
-		return false;
-	return true;
-}
-
-bool	_isFloat(const std::string str) {
-	double	f = std::stof(str);
-
-	if (f < FLT_MIN || f > FLT_MAX)
-		return false;
-	return true;
-}
-
-bool	_isDouble(const std::string str) {
-	long double d = std::stold(str);
-
-	if (d < DBL_MIN || d > DBL_MAX)
-		return false;
-	return true;
-}
-
-uint8_t	_getPrintMask(const std::string str) {
-
-	uint8_t	print_flag = 0;
-
-	if (_isOneChar(str))
-		print_flag |= CHAR;
-	if (_isPrintableChar(str))
-		print_flag = print_flag | PRINTABLE;
-	if (_isInteger(str))
-		print_flag = print_flag | INTEGER;
-	if (_isFloat(str))
-		print_flag = print_flag | FLOAT;
-	if (_isDouble(str))
-		print_flag = print_flag | DOUBLE;
-	return print_flag;
-}
-
+// Public Functions ============================================================
 
 void	ScalarConverter::convert(std::string str) {
-	uint8_t	print_mask = _getPrintMask(str);
+	std::stringstream	ss(str);
+	double				val;
 
-	long double s = stold(str);
-
-	if (print_mask & CHAR)
-		if (print_mask & PRINTABLE)
-			std::cout << "char: " << static_cast<char>(s) << std::endl;
-		else 
-			std::cout << "char: non displayable" << std::endl;
-	else
-		std::cout << "char: imposible" << std::endl;
-
-	if (print_mask & INTEGER)
-		std::cout << "int: " << static_cast<int>(s) << std::endl;
-	else
-		std::cout << "int: imposible" << std::endl;
-
-	if (print_mask & FLOAT)
-		std::cout << "float: " << static_cast<float>(s) << std::endl;
-	else
-		std::cout << "float: imposible" << std::endl;
+	ss >> val;
+	if (ss.fail() || !ss.eof())
+	{
+		if ((val = _checkSpecialValues(str)) == 0)
+		{
+			std::cout << RED <<"Conversion error" << RESET << std::endl;
+			return;
+		}
+	}
 	
-	if (print_mask & DOUBLE)
-		std::cout << "double: " << static_cast<double>(s) << std::endl;
+	
+	std::string conversion = "impossible";
+	if (val >= 0 && val < 256)
+		conversion = "Non displayable";
+	if (val > 31 && val < 127)
+		conversion = static_cast<char>(val);
+	std::cout << "char: " << conversion << std::endl;
+	
+	if (val < INT_MIN || val > INT_MAX || str == "nan" || str == "nanf")
+		std::cout << "int: " << "impossible" << std::endl;
 	else
-		std::cout << "double: imposible" << std::endl;
+		std::cout << "int: " << static_cast<int>(val) << std::endl;
 
+	if ((val < -FLT_MAX || val > FLT_MAX) && !(std::isinf(val) || std::isnan(val)))
+		std::cout << "float: " << "impossible" << std::endl;
+	else
+		std::cout << "float: " << std::fixed << std::setprecision(2) 
+			<< static_cast<float>(val) << "f" << std::endl;
+
+	std::cout << "double: " << std::fixed << std::setprecision(2) 
+		<< val << std::endl;
 }
