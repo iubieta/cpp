@@ -31,9 +31,11 @@
 
 // Private functions ===========================================================
 bool	_isChar(std::string str) {
-	if (str.length() != 1 && str.length() != 3)
+	if (str.length() != 3 && str.length() != 1)
 		return false;
 	if (str.length() == 3 && (str[0] != '\'' || str[2] != '\''))
+		return false;
+	if (str.length() == 1 && std::isdigit(str[0]))
 		return false;
 	return true;
 }
@@ -54,6 +56,7 @@ double	_checkSpecialValues(std::string str) {
 
 void	ScalarConverter::convert(std::string str) {
 	std::stringstream	ss(str);
+	double				aux;
 	double				val;
 
 	if (_isChar(str))
@@ -63,34 +66,39 @@ void	ScalarConverter::convert(std::string str) {
 		else
 			val = static_cast<double>(str[0]);
 	}
-	else {
-		ss >> val;
-		if (ss.fail() && (val = _checkSpecialValues(str)) == 0)
+	else if ((aux = _checkSpecialValues(str)) != 0)
+	{
+		val = aux;
+	}
+	else
+	{
+		ss >> aux;
+		if (ss.fail())
 		{
-			std::cout << RED <<"Conversion error" << RESET << std::endl << std::endl;
+			std::cout << RED <<"conversion error:" << RESET << std::endl;
 			return;
 		}
-		if 	(!ss.eof())
+		if 	(ss.peek() != EOF)
 		{
 			char suffix;
 			ss >> suffix;
-			if (suffix != 'f')
+			if (suffix == 'f')
 			{
-				std::cout << RED <<"format error:" << suffix << RESET << std::endl;
-				std::cout << RED <<"val:" << val << RESET << std::endl << std::endl;
-				return;
+				char extra;
+				ss >> extra;
+				if (!ss.fail())
+				{
+					std::cout << RED <<"conversion error:" << RESET << std::endl;
+					return;
+				}
 			}
-			char extra;
-			ss >> extra;
-			if (!ss.fail())
-			{
-				std::cout << RED <<"format error:" << extra << RESET << std::endl;
-				std::cout << RED <<"val:" << val << RESET << std::endl << std::endl;
-				return;
+			else {
+					std::cout << RED <<"conversion error:" << RESET << std::endl;
+					return;
 			}
 		}
+		val = aux;
 	}
-	
 	
 	std::string conversion = "impossible";
 	if (val >= 0 && val < 256)
