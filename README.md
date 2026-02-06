@@ -1,529 +1,210 @@
-# CPP 
+# C++ Learning Journey - 42 School
 
-## Index
+> **A comprehensive educational resource from C basics to advanced STL programming**
 
-* [Rules](#rules)
+## Overview
 
-  * [Compilation](#compilation)
-  * [Format](#format)
-  * [Allowed and Forbidden Functions](#allowed-and-forbidden-functions)
-  * [Requirements](#requirements)
+This repository contains a complete C++ learning journey through 10 modules, progressively building from basic syntax to advanced STL algorithms and data structures. Each module includes practical exercises and comprehensive documentation.
 
-* [📘 CPP00 – Basics of C++ and OOP](#-cpp00--basics-of-c-and-oop)
+## 📚 Module Navigation
 
+| Module | Topic | Status | Documentation |
+|---------|--------|---------|----------------|
+| [CPP_00](cpp_00/README.md) | 📣 Basic C++ & Output | ✅ | [📖 Guide](cpp_00/README.md) |
+| [CPP_01](cpp_01/README.md) | 🧟 Memory & Pointers | ✅ | [📖 Guide](cpp_01/README.md) |
+| [CPP_02](cpp_02/README.md) | ⚙️ OOP Fundamentals | ✅ | [📖 Guide](cpp_02/README.md) |
+| [CPP_03](cpp_03/README.md) | 🧬 Inheritance | ✅ | [📖 Guide](cpp_03/README.md) |
+| [CPP_04](cpp_04/README.md) | 🎭 Subtype Polymorphism | ✅ | [📖 Guide](cpp_04/README.md) |
+| [CPP_05](cpp_05/README.md) | ⚠️ Exceptions & Repetition | ✅ | [📖 Guide](cpp_05/README.md) |
+| [CPP_06](cpp_06/README.md) | 🔄 Type Casting | ✅ | [📖 Guide](cpp_06/README.md) |
+| [CPP_07](cpp_07/README.md) | 📝 Templates | 📝 | [📖 Guide](cpp_07/README.md) |
+| [CPP_08](cpp_08/README.md) | 📦 STL Containers | 📝 | [📖 Guide](cpp_08/README.md) |
+| [CPP_09](cpp_09/README.md) | 🏦 STL Algorithms | 📝 | [📖 Guide](cpp_09/README.md) |
 
-* [📘 CPP01 – Memory, Pointers, and References](#-cpp01--memory-pointers-and-references)
+## 🎯 Learning Path Summary
 
+### **Phase 1: Foundations (Modules 00-02)**
+- **CPP_00:** Master basic C++ syntax, compilation, and I/O
+- **CPP_01:** Understand memory management, pointers, and RAII
+- **CPP_02:** Implement Orthodox Canonical Form and basic OOP
 
-* [📘 CPP02 – Ad-hoc polymorphism, operator overloading, and Orthodox Canonical Form](#-cpp02--ad-hoc-polymorphism-operator-overloading-and-orthodox-canonical-form)
+### **Phase 2: Object-Oriented Programming (Modules 03-05)**
+- **CPP_03:** Explore single inheritance and virtual functions
+- **CPP_04:** Master subtype polymorphism and abstract interfaces
+- **CPP_05:** Handle exceptions and ensure class invariants
 
+### **Phase 3: Advanced C++ (Modules 06-09)**
+- **CPP_06:** Master all four casting operators
+- **CPP_07:** Learn template programming fundamentals
+- **CPP_08:** Utilize STL containers and iterators
+- **CPP_09:** Apply STL algorithms to complex problems
+
+## 🔑 Key Concepts by Module
+
+### **C++ Fundamentals**
+- **CPP_00:** String manipulation, character conversion, I/O formatting
+- **CPP_01:** Stack vs Heap allocation, destructor semantics, smart pointers (basic)
+- **CPP_02:** Copy semantics, assignment operators, operator overloading
+
+### **Object-Oriented Programming**
+- **CPP_03:** Virtual tables, inheritance hierarchies, diamond problem
+- **CPP_04:** Abstract classes, pure virtual functions, interface design
+- **CPP_05:** Exception safety, const correctness, class invariants
+
+### **Advanced Programming**
+- **CPP_06:** Type safety, RTTI, memory reinterpretation
+- **CPP_07:** Generic programming, template specialization
+- **CPP_08:** Container selection, iterator patterns, algorithm usage
+- **CPP_09:** Algorithm complexity, optimization techniques, advanced data structures
+
+## 📋 Common Standards & Rules
+
+### **42 School Requirements**
+- **Standard:** C++98 (for compatibility)
+- **Compilation:** `c++ -Wall -Wextra -Werror -std=c++98`
+- **Format:** Orthodox Canonical Form for classes (unless specified otherwise)
+- **Headers:** 42 School format with proper include guards
+- **Forbidden:** `using namespace`, STL (until module 08), `printf()`, `malloc()/free()`
+
+### **Memory Management**
+- Always use `new`/`delete` for dynamic allocation
+- Prefer stack allocation when possible
+- Follow RAII principles
+- Ensure no memory leaks
+
+### **Class Design Principles**
+- **Orthodox Canonical Form:** Default constructor, copy constructor, assignment operator, destructor
+- **Encapsulation:** Private members, public interface
+- **Const correctness:** Use `const` where appropriate
+
+## 🏗️ Build Commands
+
+### **Individual Modules**
+```bash
+# Build specific module
+make -C cpp_00    # Build current module
+make -C cpp_01    # Build specific exercise
+# ... etc for each module
+
+# Clean individual module
+make -C cpp_00 fclean
+```
+
+### **Testing Commands**
+```bash
+# Run exercise tests
+./cpp_00/exercise_name    # Replace with actual executable
+./cpp_01/zombie_program    # Example for CPP_01
+```
+
+## 📚 Educational Resources
+
+### **Primary Documentation**
+- **[cppreference](https://en.cppreference.com/)** - Official C++ reference
+- **[C++ Standard](https://isocpp.org/)** - C++ language and library standards
+
+### **Educational Resources**
+- **[GeeksforGeeks](https://www.geeksforgeeks.org/c-plus-plus/)** - Clear explanations with examples
+- **[LearnCpp.com](https://www.learncpp.com/)** - Comprehensive C++ tutorial
+- **[42 School Curriculum](https://projects.intra.42.fr/)** - Official requirements
+
+### **By Module**
+| Module | Focus | Recommended GeeksforGeeks Topics |
+|--------|--------|-------------------------------|
+| CPP_00 | Basic Syntax | [C++ Basics](https://www.geeksforgeeks.org/c-plus-plus/), [String Manipulation](https://www.geeksforgeeks.org/string-manipulation-in-cpp/) |
+| CPP_01 | Memory | [Pointers](https://www.geeksforgeeks.org/pointers-in-cpp/), [Memory Allocation](https://www.geeksforgeeks.org/memory-management-in-cpp/) |
+| CPP_02 | OOP | [Classes](https://www.geeksforgeeks.org/classes-objects-cpp/), [Operator Overloading](https://www.geeksforgeeks.org/operator-overloading-cpp/) |
+| CPP_03 | Inheritance | [Inheritance](https://www.geeksforgeeks.org/inheritance-in-c/), [Virtual Functions](https://www.geeksforgeeks.org/virtual-functions-in-cpp/) |
+| CPP_04 | Polymorphism | [Abstract Classes](https://www.geeksforgeeks.org/abstract-classes-in-cpp/), [Interfaces](https://www.geeksforgeeks.org/interfaces-in-cpp/) |
+| CPP_05 | Exceptions | [Exception Handling](https://www.geeksforgeeks.org/exception-handling-in-cpp/), [Custom Exceptions](https://www.geeksforgeeks.org/user-defined-custom-exceptions-in-cpp/) |
+| CPP_06 | Type Casting | [Type Conversion](https://www.geeksforgeeks.org/type-conversion-in-c/), [Casting Operators](https://www.geeksforgeeks.org/static_cast-in-cpp/) |
+| CPP_07 | Templates | [Template Basics](https://www.geeksforgeeks.org/templates-cpp/), [Template Specialization](https://www.geeksforgeeks.org/template-specialization-in-c/) |
+| CPP_08 | STL Containers | [STL Overview](https://www.geeksforgeeks.org/stl-tutorial-in-c/), [Containers](https://www.geeksforgeeks.org/containers-in-cpp-stl/) |
+| CPP_09 | STL Algorithms | [Algorithms](https://www.geeksforgeeks.org/algorithms-in-c-stl/), [Complexity](https://www.geeksforgeeks.org/time-complexity/) |
+
+## 🎯 Module Dependencies
+
+```mermaid
+graph TD
+    A[CPP_00: Basics] --> B[CPP_01: Memory]
+    B --> C[CPP_02: OOP]
+    C --> D[CPP_03: Inheritance]
+    D --> E[CPP_04: Polymorphism]
+    E --> F[CPP_05: Exceptions]
+    F --> G[CPP_06: Type Casting]
+    G --> H[CPP_07: Templates]
+    H --> I[CPP_08: STL Containers]
+    I --> J[CPP_09: STL Algorithms]
+```
+
+## 🏆 Learning Outcomes
+
+Upon completing all modules, you'll have mastered:
+
+### **C++ Language Fundamentals**
+- Complete understanding of C++ syntax and semantics
+- Memory management and RAII principles
+- Object-oriented programming patterns
+
+### **Advanced Concepts**
+- Template metaprogramming fundamentals
+- STL container and algorithm usage
+- Exception safety and error handling
+
+### **Software Engineering Skills**
+- Code organization and modular design
+- Testing strategies and debugging techniques
+- Performance optimization basics
+
+## 📝 Project Structure
+
+```
+CPP/
+├── README.md                    # This file - main navigation
+├── cpp_00/                     # Basic C++ & Output
+│   ├── README.md                 # Module guide
+│   ├── exercises/               # Individual exercises
+│   └── CPP_00.pdf             # Subject requirements
+├── cpp_01/                     # Memory & Pointers
+│   ├── README.md                 # Module guide
+│   ├── exercises/               # Zombie exercises
+│   └── CPP_01.pdf             # Subject requirements
+└── ...                          # Continue for all modules
+```
+
+## 🚀 Getting Started
+
+1. **For Beginners:** Start with [CPP_00](cpp_00/README.md)
+2. **With C++ Experience:** Jump to appropriate module based on your current level
+3. **For Review:** Use the navigation table above to jump between topics
+4. **For Reference:** Use the detailed module guides as quick reference
+
+## 📖 How to Use This Repository
+
+### **Learning Path**
+- Follow the modules in order for progressive learning
+- Each module builds upon concepts from previous ones
+- Complete all exercises before moving to the next module
+
+### **Reference Usage**
+- Use module READMEs as quick reference for specific topics
+- Follow the provided links for deeper understanding
+- Use the build commands as templates for your own projects
+
+### **Troubleshooting**
+- Check module-specific READMEs for common issues
+- Use the provided resources for additional help
+- Each module includes common pitfalls and solutions
 
 ---
 
-## Rules
+## 🔗 Quick Links
 
-### Compilation
-
-* Compiler: **c++**
-* Flags: `-Wall -Wextra -Werror` (`-std=c++98`)
-
-### Format
-
-* Class names in **UpperCamelCase**
-* Files containing classes: `ClassName.extension`
-* Output messages must always end with a newline
-* **No Norminette!**
-
-### Allowed and Forbidden Functions
-
-* Any function from the **standard library** is allowed
-* Any other function or library is forbidden
-* The following are also forbidden:
-  * `printf()`
-  * `alloc()`
-  * `free()`
-* Forbidden: `using namespace <>` and `friend`
-* Forbidden: **Containers** (`vector/list/map/...`) and **Algorithms** (anything that requires including `<algorithm>`) except in modules 08 and 09
-
-### Requirements
-
-* Avoid memory leaks
-* Classes must follow the **Orthodox Canonical Form** unless stated otherwise
-* No function definitions inside header files
-* Header files must be independent and self-contained
-* Double inclusion must be avoided using **include guards**
+- **[Current Module: CPP_06 Type Casting](cpp_06/README.md)** - Complete guide to C++ casting operators
+- **[Module Progression](#module-dependencies)** - Visual learning path
+- **[Build Commands](#build-commands)** - Compilation and testing instructions
+- **[Educational Resources](#educational-resources)** - Learning materials by topic
 
 ---
 
-# 📘 CPP00 – Basics of C++ and OOP
-
-## 1. std library
-
-### Namespaces
-* **What:** A way to group identifiers (variables, functions, classes) to avoid name collisions.
-* **Why useful:** Prevents clashes when multiple libraries or files define the same names.
-
-```cpp
-namespace Foo {
-    int x = 42;
-}
-
-int main() {
-    std::cout << Foo::x << std::endl;  // Access with scope resolution
-}
-```
-
-⚠️ `using namespace std;` is convenient, but in professional code it’s discouraged → it pollutes the global namespace.
-
-
-### `std::string` (instead of `char*`)
-* Safer and easier than C-style strings.
-* Common operations:
-
-  * `s.size()` → length.
-  * `s.find("abc")` → position or `npos` if not found.
-  * `s.substr(pos, len)` → substring.
-  * `+` → concatenation.
-
-**Why useful:** Avoids buffer overflows, simplifies text manipulation.
-
-## 2. OOP: Object Oriented Programming 
-
-### Classes and Objects
-* **Class = blueprint**, **Object = instance** of that blueprint.
-* **Why useful:** Encapsulation, reusability, and modeling real-world entities.
-
-### Encapsulation
-* **What:** Keeping data (`private`) safe and only exposing what’s necessary (`public`).
-* **Why useful:** Prevents external code from corrupting internal state.
-
-### Member Functions
-* Functions that belong to a class.
-* Defined inside the class (inline) or outside using `::`.
-* **Why useful:** Keeps behavior tightly coupled to data.
-
-```cpp
-#include <iostream>
-#include <string>
-
-// Class definition
-class Person {
-private:
-   // attributes
-	const std::string name ;
-    const int         age;
-    std::string nickname;
-
-public:
-    // constructor
-    Person(std::string n, int a) : name(n), age(a) {}
-   
-	//Member functions
-	std::string getName() const {
-        return name;
-    }
-    int getAge() const {
-        return age;
-    }
-    
-	void setNickname(std::string nick) {
-        nickname = nick;
-    }
-    
-	void sayHello() const {
-        std::cout << name << ": Hi, my name is " << name
-			<< " but people call me " << nickname << "!\n";
-    }
-};
-
-// Usage
-int main() {
-    Person Peter("Peter", 18);
-
-	// Right
-	std::cout << Peter.getName() << " is " << Peter.getAge() << " years old.\n";
-	// Wrong
-	// std::cout << Peter.name << " is " << Peter.age << " years old\n";
-	Peter.setNickname("Pete");
-    Peter.sayHello();
-}
-```
-
-## 3. Input/Output Streams in C++
-
-In cpp there are narrow (1 byte) and wide (2 or 4 bytes) streams
-and you shouldn't mix them
-
-### Narrow streams
-
-* **Input**:    `std::cin`
-* **Output**:   `std::cout`
-* **Strings**:  `std::string` (`char`-based)
-* **Literals**: `"hello"`
-
-✅ Works everywhere, safe for ASCII.
-❌ May break with accented characters (`ñ`, `á`) in Windows consoles.
-
-### Wide streams
-
-* **Input**:    `std::wcin`
-* **Output**:   `std::wcout`
-* **Strings**:  `std::wstring` (`wchar_t`-based)
-* **Literals**: `L"hello"`
-
-✅ Can handle Unicode (like `ñ`, accents) if locale is configured.
-❌ On Windows, you need `_O_U16TEXT`; column alignment with `setw` may break.
-
-### Locale setup
-
-Before using wide streams, set locale:
-
-Locale is a set of rules that tells your program how to handle culture-specific things such as:
-- Character encoding (UTF-8, UTF-16, system code page, etc.)
-- Alphabet and collation order (how strings are sorted: ä after a, etc.)
-- Number formatting (decimal separator: 1,23 vs. 1.23)
-- Date/time formatting (24/08/2025 vs. 08/24/2025)
-- Currency symbols (€ vs. $)
-
-```cpp
-#include <locale>
-#include <clocale>
-
-int main() {
-    std::setlocale(LC_ALL, "");           // C locale
-    std::locale::global(std::locale("")); // C++ locale
-    std::wcin.imbue(std::locale());
-    std::wcout.imbue(std::locale());
-}
-```
-### stringstream
-String stream works as a personalt I/O stream as `cin` or `cout`
-You have three main variants of string streams, all declared in <sstream>:
-- std::stringstream → both input and output (can read & write).
-- std::istringstream → input only (read from a string, like cin).
-- std::ostringstream → output only (write into a string, like cout).
-
-  ```cpp
-  //Checkin if wstr is a number
-  std::wistringstream iss(wstr);
-  int n;
-  if (!(iss >> n)) { /* not a number */ }
-  ```
-### `>>` vs. `getline`
-
-#### `>>`
-
-* Reads until first whitespace.
-* Works directly for numbers:
-
-  ```cpp
-  int n;
-  if (!(std::cin >> n)) { /* error */ }
-  ```
-* On failure:
-
-  ```cpp
-  std::cin.clear();
-  std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-  ```
-
-#### `getline`
-
-* Reads an entire line (keeps spaces).
-* Usage:
-
-  ```cpp
-  std::getline(std::cin, str);     // narrow
-  std::getline(std::wcin, wstr);   // wide
-  ```
-
-### Managing ERRORS and EOF
-
-* Input streams can be left closed or useless because of:
-    * `EOF ` char (Ctrl + D)
-    * Error causing input 
-* `cin.eof()` functions let you know if the stream is closed
-* If the stream is closed (`EOF`) you should return or close the program
-* If the stream has failed but is not closed (`EOF`), you can reset it with:
-`cin.clear()` to clear the failure flags and `cin.ignore()` to clear the failing buffer
-
-```cpp
-// Safe input reciever
-int main(){
-    std::string line;
-
-    while (true) {
-        std::cout << "> " << std::flush;
-
-        if (!std::getline(std::cin, line)) {
-            if (std::cin.eof()) {           // Ctrl+D ⇒ EOF
-                std::cout << "\nEOF detected. Exiting.\n";
-                break;
-            } else {    // another input error
-                // clears cin flags
-                std::cin.clear();           
-                //clears residual buffer
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
-                std::cerr << "Input error, try again\n"
-                continue;
-            }
-        }
-
-        if (line == "quit") break; // Input exiting condition          
-        std::cout << "Leído: " << line << "\n";
-    }
-}
-```
-⚠️**Warning:** When asking for input in different points EOF will make them all useless,
-you must handle that case correctly in all of them
-
-
-### Output formatting (`setw`)
-
-* `std::setw(n)` sets **minimum width** for the next output:
-
-  ```cpp
-  std::cout << std::setw(10) << "hi";
-  ```
-* Works with `std::left` / `std::right`.
-* Applies **only once**.
-
-⚠️ Issue with `wcout`:
-* `setw` counts characters, but the console counts some Unicode (like `ñ`, emojis) 
-as two cells.
-* Result: table columns misalign.
-
-👉 Practical fix: implement a custom `padRight` function that measures string length and appends spaces.
-
----
-
-# 📘 **CPP01 – Memory, Pointers, and References**
-
-## 1. **Constructors and Destructors**
-* **Constructor:** Special method that initializes an object. Runs automatically at creation.
-* **Destructor:** Cleans up resources when the object goes out of scope or is deleted.
-* **Why useful:**
-
-  * Ensures objects are always initialized.
-  * Helps manage resources (files, memory, sockets) automatically.
-
-```cpp
-class Test {
-public:
-    Test() { std::cout << "Constructor\n"; }
-    ~Test() { std::cout << "Destructor\n"; }
-};
-```
-
-
-## 2. **Stack vs Heap**
-* **Stack (automatic storage):**
-
-  * Objects are created/destroyed automatically.
-  * Faster, safer.
-
-```cpp
-Zombie z("Bob");  // stack
-```
-
-* **Heap (dynamic storage):**
-
-  * Objects allocated with `new`, destroyed with `delete`.
-  * Required for objects with unknown lifetime or size at compile time.
-
-```cpp
-Zombie* z = new Zombie("Jim");
-delete z;  // must delete manually
-```
-
-**Why useful:** Understanding memory models is essential for avoiding leaks and crashes.
-
-
-## 3. **References vs Pointers**
-
-* **Pointer (`T* p`):** can be `nullptr`, can change what it points to.
-* **Reference (`T& r`):** alias for an object, cannot be null, must be initialized.
-
-```cpp
-int a = 10;
-int* p = &a;   // pointer
-int& r = a;    // reference
-```
-
-**Why useful:**
-
-* Use references when you want safe access to an existing object.
-* Use pointers when ownership or nullability matters.
-
-
-## 4. **File Streams**
-
-* Reading: `std::ifstream`.
-* Writing: `std::ofstream`.
-* Methods:
-
-  * `getline(file, str)` → read line.
-  * `file << data` → write data.
-
-```cpp
-std::ifstream in("input.txt");
-std::ofstream out("output.txt");
-```
-
-**Why useful:** Encapsulates file handling with automatic closing (when object goes out of scope).
-
-
-## 5. **Function Pointers (member functions)**
-
-* Pointers that store the address of a function.
-* Member function pointers need the class scope.
-
-```cpp
-class Harl {
-    void debug();
-    typedef void (Harl::*func)();
-    std::map<std::string, func> actions;
-};
-```
-
-**Why useful:** They allow flexible mapping of strings → actions (like implementing a custom switch/case for functions).
-
----
-
-# 📘 **CPP02 – Ad-hoc polymorphism, operator overloading, and Orthodox Canonical Form**
-
-## 1. **Orthodox Canonical Form**
-
-* **What it is:** A standardized way of writing classes in C++98 with the 4 special functions :
-  1. Default constructor
-  2. Copy constructor
-  3. Copy assignment operator
-  4. Destructor
-
-* **Why useful:**
-
-  * Ensures safe copying, assignment, and cleanup.
-  * Critical when managing resources (dynamic memory, file handles).
-  * Sets the foundation for RAII (Resource Acquisition Is Initialization).
-
-```cpp
-class Fixed {
-private:
-    int value;
-    static const int fractionalBits = 8;
-
-public:
-    // 1. Default constructor
-    Fixed() : value(0) {
-    }
-
-    // 2. Copy constructor
-    Fixed(const Fixed& other) {
-        *this = other; // reuse operator=
-    }
-
-    // 3. Copy assignment operator
-    Fixed& operator=(const Fixed& other) {
-        if (this != &other)  // check self-assignment
-            this->value = other.value;
-        return *this;
-    }
-
-    // 4. Destructor
-    ~Fixed() {
-    }
-};
-```
-
-## 2. **Fixed-point Numbers**
-
-* **What it is:** A number representation where a fixed number of bits are reserved for the fractional part. It is saved as an integer escaled up by n power of 2. Where n is the number of bits reserved for the fractional part.
-  * `raw = round( int * 2^n )` 
-* **Why useful:**
-  * Floats are efficient but imprecise; integers are precise but lack fractions.
-  * Using fixed n for the scaling up proccesing you can add, substract and compare raws directly.
-  * Used in graphics, DSP (digital signal processing), and embedded systems because its more efficient.
-⚠️**Warning:** Multiplication and division is not direct between raws.
-
-```cpp
-class Fixed {
-private:
-    int                 _raw;               // valor crudo escalado
-    static const int    _fbits = 8;         // bits fraccionales (n)
-public:
-    Fixed() : _raw(0) {}
-    // int -> Fixed
-    Fixed(int i) : _raw(i << _fbits) {}
-    // float -> Fixed
-    Fixed(float f) : _raw(static_cast<int>(roundf(f * (1 << _fbits)))) {}
-    // conversiones de vuelta
-    float toFloat() const { return static_cast<float>(_raw) / (1 << _fbits); }
-    int   toInt()   const { return _raw >> _fbits; }
-    int   getRawBits() const { return _raw; }
-    void  setRawBits(int r) { _raw = r; }
-};
-```
-
-## 3. **Constructors with Conversions**
-
-A good class definition have:
-* **Multiple constructors** that take different types of input variables (int, float, ...) makes a class more solid and flexible.
-* **Conversion methods** to convert this class objects to other types: `toInt()`, `toFloat()`.
-
-* **Why useful:**
-  * Enables smooth conversions between types.
-  * Improves usability of your class, like a real scalar type.
-
-
-## 4. **Operator Overloading**
-
-* **What it is:** redefinition of operators for your class types
-* **Why useful:**
-  * Makes custom types behave like built-in ones.
-  * Enables *ad-hoc polymorphism*: different behavior depending on types.
-```cpp
-//instead of
-Fixed c = a.add(b);
-//redifining operators
-Fixed c = a + b;
-```
-
-* **Comparison operators:** `> < >= <= == !=`
-* **Arithmetic operators:** `+ - * /`
-* **Increment/Decrement:** pre and post (`++a`, `a++`, `--a`, `a--`)
-
-```cpp
-class Fixed {
-public:
-    // comparison
-    bool operator>(const Fixed& rhs) const;
-    // arithmetic
-    Fixed operator+(const Fixed& rhs) const;
-    // pre-increment
-    Fixed& operator++();    
-    // post-increment
-    Fixed operator++(int);  
-};
-```
-
-## 5. **Static Member Functions**
-
-* **What it is:** 
-  	* Utility functions tied to the class but don’t need an instance.
-	* Typically take objects of the class as parameters.
-* **Why useful:** Improves expressiveness (like `std::min`, `std::max`).
-
-```cpp
-class Math {
-public:
-    static int add(int x, int y) {
-        return x + y;
-    }
-};
-// Usage
-int result = Math::add(2, 3);  // 5
-```
-
-⚠️ Is good practice to be overloaded for const and non-const references.
-
----
+**🎓 Welcome to your C++ learning journey!** Each module is designed to build practical skills while understanding theoretical concepts. Start where you feel comfortable and progress at your own pace.
