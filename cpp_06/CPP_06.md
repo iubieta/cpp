@@ -30,7 +30,7 @@ en su forma mas comun de C++ y lo devuelva como:
 - Escribe una clase `Serializer`
 - No debe poder inicializarse
 - Tiene que tener los siguientes metodos estaticos:
-    - `uintptr_t serialize(Data* ptr)`: coge un puntero y lo convierte al tipo unsigned int `uintpte_t`
+    - `uintptr_t serialize(Data* ptr)`: coge un puntero y lo convierte al tipo unsigned int `uintptr_t`
     - `Data *deserialize(uintptr_t raw)`: coge un unsigned int y lo convierte a un puntero a Data
 - Crea una estructuta `Data` que no este vacia
 - Escribe un programa que serialice la direccion del objeto Data y deserialice su resultado. 
