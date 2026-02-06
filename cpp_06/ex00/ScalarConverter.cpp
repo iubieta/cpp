@@ -11,11 +11,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cctype>
 #include <cfloat>
 #include <climits>
 #include <cmath>
-#include <cstdlib>
 #include <iomanip>
 #include <ios>
 #include <iostream>
@@ -32,6 +30,13 @@
 // be a non instantiable class 
 
 // Private functions ===========================================================
+bool	_isChar(std::string str) {
+	if (str.length() != 1 && str.length() != 3)
+		return false;
+	if (str.length() == 3 && (str[0] != '\'' || str[2] != '\''))
+		return false;
+	return true;
+}
 
 double	_checkSpecialValues(std::string str) {
 	if (str == "nan" || str == "nanf")
@@ -51,13 +56,38 @@ void	ScalarConverter::convert(std::string str) {
 	std::stringstream	ss(str);
 	double				val;
 
-	ss >> val;
-	if (ss.fail() || !ss.eof())
+	if (_isChar(str))
 	{
-		if ((val = _checkSpecialValues(str)) == 0)
+		if (str.length() == 3)
+			val = static_cast<double>(str[1]);
+		else
+			val = static_cast<double>(str[0]);
+	}
+	else {
+		ss >> val;
+		if (ss.fail() && (val = _checkSpecialValues(str)) == 0)
 		{
-			std::cout << RED <<"Conversion error" << RESET << std::endl;
+			std::cout << RED <<"Conversion error" << RESET << std::endl << std::endl;
 			return;
+		}
+		if 	(!ss.eof())
+		{
+			char suffix;
+			ss >> suffix;
+			if (suffix != 'f')
+			{
+				std::cout << RED <<"format error:" << suffix << RESET << std::endl;
+				std::cout << RED <<"val:" << val << RESET << std::endl << std::endl;
+				return;
+			}
+			char extra;
+			ss >> extra;
+			if (!ss.fail())
+			{
+				std::cout << RED <<"format error:" << extra << RESET << std::endl;
+				std::cout << RED <<"val:" << val << RESET << std::endl << std::endl;
+				return;
+			}
 		}
 	}
 	
@@ -81,5 +111,5 @@ void	ScalarConverter::convert(std::string str) {
 			<< static_cast<float>(val) << "f" << std::endl;
 
 	std::cout << "double: " << std::fixed << std::setprecision(2) 
-		<< val << std::endl;
+		<< val << std::endl << std::endl;
 }
