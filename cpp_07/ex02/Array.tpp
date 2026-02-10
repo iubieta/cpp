@@ -14,6 +14,7 @@
 #define ARRAY_TPP
 
 #include <exception>
+#include <iostream>
 #include <cstddef>
 #include <new>
 #include <stdexcept>
