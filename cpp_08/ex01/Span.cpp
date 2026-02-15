@@ -6,19 +6,16 @@
 /*   By: iubieta- <iubieta@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/15 18:16:34 by iubieta-          #+#    #+#             */
-/*   Updated: 2026/02/15 19:32:01 by iubieta-         ###   ########.fr       */
+/*   Updated: 2026/02/15 23:05:36 by iubieta-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Span.hpp"
 #include <algorithm>
 #include <climits>
-#include <cmath>
 #include <cstddef>
-#include <cstdint>
 #include <cstdlib>
-#include <exception>
-#include <iterator>
+#include <iostream>
 #include <vector>
 
 Span::Span() : _capacity(2), _data(std::vector<int>()) {}
@@ -51,7 +48,7 @@ int Span::shortestSpan() {
 	std::vector<int> sorted = this->_data;
 	std::sort(sorted.begin(), sorted.end());
 	int shortest = INT_MAX;
-	for (size_t i = 0; i < sorted.size(); ++i) {
+	for (size_t i = 0; i < sorted.size() - 1; ++i) {
 		int span = sorted [i+1] - sorted[i];
 		if (span < shortest)
 			shortest = span;
@@ -62,6 +59,6 @@ int Span::shortestSpan() {
 int Span::longestSpan() {
 	if (this->_data.size() < 2)
 		throw NoSpanException();
-	return (std::max_element(this->_data.begin(), this->_data.end())
-			- std::max_element(this->_data.begin(), this->_data.end()));
+	return (*std::max_element(this->_data.begin(), this->_data.end())
+			- *std::min_element(this->_data.begin(), this->_data.end()));
 }

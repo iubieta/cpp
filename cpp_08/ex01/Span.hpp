@@ -6,12 +6,11 @@
 /*   By: iubieta- <iubieta@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/15 17:10:05 by iubieta-          #+#    #+#             */
-/*   Updated: 2026/02/15 19:05:41 by iubieta-         ###   ########.fr       */
+/*   Updated: 2026/02/15 23:03:34 by iubieta-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <exception>
-#include <iterator>
 #include <vector>
 class Span {
 	private:
