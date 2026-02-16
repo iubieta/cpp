@@ -67,6 +67,14 @@ int main() {
 	std::cout << "Shortest span: " << sp2.shortestSpan() << std::endl;
 	std::cout << "Longest span: " << sp2.longestSpan() << std::endl;
 	
+	std::cout << BLUE << "\n=== LARGE SPAN TEST ===\n" << RESET;
+	Span huge_sp(10000);
+	for (size_t i = 0; i < 10000; ++i) {
+		huge_sp.addNumber(i);
+	}
+	std::cout << "Shortest span: " << huge_sp.shortestSpan() << std::endl;
+	std::cout << "Longest span: " << huge_sp.longestSpan() << std::endl;
+	
 	std::cout << BLUE << "\n=== EMPTY SPAN TEST ===\n" << RESET;
 	Span empty_sp;
 	empty_sp.print();
