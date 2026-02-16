@@ -18,12 +18,31 @@
 #include <iostream>
 #include <vector>
 
-Span::Span() : _capacity(2), _data(std::vector<int>()) {}
+#include "../colors.h"
 
-Span::Span(unsigned int n) : _capacity(n), _data(std::vector<int>()) {}
+Span::Span() : _capacity(2), _data(std::vector<int>()) {
+	std::cout << YELLOW 
+		<< "Default constructor:\n"
+		<< "  capacity:" << _capacity << "\n"
+		<< "  data size:" << _data.size() << "\n"
+		<< "\n" << RESET;
+}
+
+Span::Span(unsigned int n) : _capacity(n), _data(std::vector<int>()) {
+	std::cout << YELLOW 
+		<< "Parameter constructor:\n"
+		<< "  capacity:" << _capacity << "\n"
+		<< "  data size:" << _data.size() << "\n"
+		<< "\n" << RESET;
+}
 
 Span::Span(const Span& other) {
 	*this = other;
+	std::cout << YELLOW 
+		<< "Copy constructor:\n"
+		<< "  capacity:" << _capacity << "\n"
+		<< "  data size:" << _data.size() << "\n"
+		<< "\n" << RESET;
 }
 
 Span& Span::operator=(const Span& other){
@@ -42,7 +61,17 @@ void Span::addNumber(int n) {
 	this->_data.push_back(n);
 }
 
-int Span::shortestSpan() {
+void Span::print() const {
+	std::cout << "content: [";
+	for (size_t i = 0; i < _data.size(); ++i) {
+		std::cout << _data[i];
+		if (i < _data.size() - 1)
+			std::cout << ", ";
+	}
+	std::cout << "]\n";
+}
+
+int Span::shortestSpan() const{
 	if (this->_data.size() < 2)
 		throw NoSpanException();
 	std::vector<int> sorted = this->_data;
@@ -56,7 +85,7 @@ int Span::shortestSpan() {
 	return shortest;
 }
 
-int Span::longestSpan() {
+int Span::longestSpan() const{
 	if (this->_data.size() < 2)
 		throw NoSpanException();
 	return (*std::max_element(this->_data.begin(), this->_data.end())
