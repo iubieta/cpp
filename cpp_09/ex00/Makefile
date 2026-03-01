@@ -6,7 +6,7 @@
 #    By: iubieta- <iubieta@student.42.fr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/24 18:26:22 by iubieta-          #+#    #+#              #
-#    Updated: 2026/02/24 18:27:41 by iubieta-         ###   ########.fr        #
+#    Updated: 2026/03/01 16:51:03 by iubieta-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = bitcoinExchange
 CXX := c++
 CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -g
 
-SRCS := main.cpp 
+SRCS := main.cpp BitcoinExchange.cpp
 OBJS := $(SRCS:%.cpp=%.o)
 
 all : $(NAME)

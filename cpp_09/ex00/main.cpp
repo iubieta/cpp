@@ -6,7 +6,13 @@
 /*   By: iubieta- <iubieta@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/24 18:26:18 by iubieta-          #+#    #+#             */
-/*   Updated: 2026/02/24 20:00:17 by iubieta-         ###   ########.fr       */
+/*   Updated: 2026/03/01 16:50:09 by iubieta-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "BitcoinExchange.hpp"
+
+int main() {
+	BtcExch exch("data.csv");
+	exch.printDateValue("2011-01-01");
+}
