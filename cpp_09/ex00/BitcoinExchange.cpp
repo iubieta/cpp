@@ -52,7 +52,6 @@ void	BtcExch::_loadCsv(std::string input_file) {
 	
 	std::getline(input, line);
 	while (std::getline(input,line)) {
-		std::cout << "line: " << line;
 		try {
 			pair = _parseCsvLine(line);
 			this->_hist_data.insert(pair);
@@ -83,4 +82,14 @@ BtcExch::floatPair BtcExch::_parseCsvLine(std::string &line) {
 
 void	BtcExch::printDateValue(std::string date) {
 	std::cout << _hist_data.at(date);
+}
+
+float	BtcExch::calc_price(std::string date, float n) {
+	// try {
+	// 	_isValidDate(date);
+	// 	_isValidValue(n);
+	// } catch (std::runtime_error &e) {
+	// 	std::cout << "Error: " << e.what();
+	// }
+	return (_hist_data.at(date) * n);
 }

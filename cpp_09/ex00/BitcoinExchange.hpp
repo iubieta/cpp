@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "map"
-#include <fstream>
 #include <string>
 
 class BtcExch {
@@ -23,7 +22,7 @@ class BtcExch {
 		~BtcExch();
 
 		void	load_data(std::string input_file);
-		void	calc_price(std::string date, int n);
+		float	calc_price(std::string date, float n);
 		void	printDateValue(std::string date);
 	
 	private:
@@ -37,5 +36,8 @@ class BtcExch {
 
 		void		_loadCsv(std::string input_file);
 		floatPair	_parseCsvLine(std::string &line);
+
+		bool		_isValidDate(std::string date);
+		bool		_isValidValue(float val);
 };
 

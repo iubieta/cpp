@@ -11,8 +11,9 @@
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
+#include <iostream>
 
 int main() {
 	BtcExch exch("data.csv");
-	exch.printDateValue("2011-01-01");
+	std::cout << exch.calc_price(std::string("2011-01-01"), 2.5);
 }
