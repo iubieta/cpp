@@ -10,7 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef BITCOINEXCHANGE_HPP
+#define BITCOINEXCHANGE_HPP
+
 #include "map"
+#include <string>
+#include <cctype>
+#include <cstddef>
+#include <ctime>
+#include <iostream>
+#include <sstream>
+#include <fstream>
+#include <stdexcept>
 #include <string>
 
 class BtcExch {
@@ -37,7 +48,9 @@ class BtcExch {
 		void		_loadCsv(std::string input_file);
 		floatPair	_parseCsvLine(std::string &line);
 
+		bool		_isLeapYear(int year);
 		bool		_isValidDate(std::string date);
-		bool		_isValidValue(float val);
+		bool		_isValidValue(float n);
 };
 
+#endif // !BTC_EX_HPP

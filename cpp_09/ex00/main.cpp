@@ -12,8 +12,29 @@
 
 #include "BitcoinExchange.hpp"
 #include <iostream>
+#include <fstream>
+#include <sstream>
 
-int main() {
-	BtcExch exch("data.csv");
-	std::cout << exch.calc_price(std::string("2011-01-01"), 2.5);
+int main(int argc, char *argv[]) {
+	BtcExch btc("data.csv");
+	
+	if (argc != 2) {
+		std::cout << "ERROR: check your arguments\n";
+		return 1;
+	}
+	std::ifstream	input(argv[1], std::ifstream::in);
+	std::string		line;
+	
+	std::getline(input, line);
+	while (std::getline(input,line)) {
+		try {
+			std::string date = line.substr(0, line.find(" "));
+			float	n;
+			std::istringstream (line.substr(line.find(" ") + 1)) >> n;
+			btc.calc_price(date, n);
+		} catch (std::runtime_error &e)  {
+			std::cout << e.what();
+		}
+	}
+	return 0;
 }

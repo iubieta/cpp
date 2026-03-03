@@ -11,12 +11,6 @@
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
-#include <cstddef>
-#include <iostream>
-#include <sstream>
-#include <fstream>
-#include <stdexcept>
-#include <string>
 
 // CHANONICAL FORM =============================================================
 
@@ -70,7 +64,7 @@ BtcExch::floatPair BtcExch::_parseCsvLine(std::string &line) {
 	
 	line = _trim(line);
 	
-	size_t			index = line.find_first_of(',');
+	size_t	index = line.find_first_of(',');
 	key = line.substr(0, index);
 	value_str = line.substr(index + 1);
 	std::istringstream	val_ss(value_str);
@@ -84,12 +78,50 @@ void	BtcExch::printDateValue(std::string date) {
 	std::cout << _hist_data.at(date);
 }
 
+bool	BtcExch::_isLeapYear(int year) {
+	if (year % 400 == 0)
+		return true;
+	if (year % 100 == 0)
+		return false;
+	if (year % 4 == 0)
+		return true;
+	return false;
+}
+
+bool	BtcExch::_isValidDate(std::string date_str) {
+	if (date_str[4] != '-' || date_str[7] != '-')
+		return false;
+
+	time_t now = time(0);
+	struct tm *t = localtime(&now);
+	std::istringstream date(date_str);
+	int	year, month, day;
+	std::istringstream (date_str.substr(0,3)) >> year;
+	std::istringstream (date_str.substr(5,6)) >> month;
+	std::istringstream (date_str.substr(8,9)) >> day;
+	if (year < 2009 || year > t->tm_year)
+		return false;
+	if (month < 1 || month > 12)
+		return false;
+	if (day < 1 || day > 31)
+		return false;
+	if ((month == 4 || month == 6 || month == 9 || month == 11) && day > 30)
+		return false;
+	if (month == 2 && day > 28 && !(_isLeapYear(year) && day < 30))
+		return false;
+	return true;
+}
+
+bool	BtcExch::_isValidValue(float n) {
+	if (n < 0 || n > 1000)
+		return false;
+	return true;
+}
+
 float	BtcExch::calc_price(std::string date, float n) {
-	// try {
-	// 	_isValidDate(date);
-	// 	_isValidValue(n);
-	// } catch (std::runtime_error &e) {
-	// 	std::cout << "Error: " << e.what();
-	// }
+	if (!_isValidDate(date))
+		throw std::runtime_error("Invalid date: " + date);
+	if (!_isValidValue(n))
+		throw std::runtime_error("Invalid value: please enter a number between 0 and 1000");
 	return (_hist_data.at(date) * n);
 }
