@@ -46,10 +46,6 @@ class BtcExch {
 
 		void		loadCsv(std::string input_file);
 		floatpair_t	parseCsvLine(std::string &line);
-
-		bool		isLeapYear(int year);
-		bool		isValidDate(std::string date);
-		bool		isValidValue(float n);
 };
 
 #endif // !BTC_EX_HPP

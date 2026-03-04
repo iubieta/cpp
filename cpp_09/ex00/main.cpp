@@ -15,6 +15,47 @@
 #include <fstream>
 #include <sstream>
 
+
+bool	isLeapYear(int year) {
+	if (year % 400 == 0)
+		return true;
+	if (year % 100 == 0)
+		return false;
+	if (year % 4 == 0)
+		return true;
+	return false;
+}
+
+bool	isValidDate(std::string date_str) {
+	if (date_str[4] != '-' || date_str[7] != '-')
+		return false;
+
+	time_t now = time(NULL);
+	struct tm *t = localtime(&now);
+	std::istringstream date(date_str);
+	int	year, month, day;
+	std::istringstream (date_str.substr(0,4)) >> year;
+	std::istringstream (date_str.substr(5,7)) >> month;
+	std::istringstream (date_str.substr(8,10)) >> day;
+	if (year < 2009 || year > 1900 + t->tm_year)
+		return false;
+	if (month < 1 || month > 12)
+		return false;
+	if (day < 1 || day > 31)
+		return false;
+	if ((month == 4 || month == 6 || month == 9 || month == 11) && day > 30)
+		return false;
+	if (month == 2 && day > 28 && !(isLeapYear(year) && day < 30))
+		return false;
+	return true;
+}
+
+bool	isValidValue(float n) {
+	if (n < 0 || n > 1000)
+		return false;
+	return true;
+}
+
 int main(int argc, char *argv[]) {
 	BtcExch btc("data.csv");
 	
@@ -28,9 +69,18 @@ int main(int argc, char *argv[]) {
 	std::getline(input, line);
 	while (std::getline(input,line)) {
 		try {
-			std::string date = line.substr(0, line.find(" "));
+			size_t	index = line.find("|");
+			std::string date = line.substr(0, index);
+			if (!isValidDate(date)) {
+				std::cout << "Error: bad input => " << date << std::endl;
+				continue;
+			}
 			float	n;
-			std::istringstream (line.substr(line.find(" ") + 1)) >> n;
+			std::istringstream (line.substr(index + 1)) >> n;
+			if (!isValidValue(n)) {
+				std::cout << "Error: Invalid value, enter a number between 0 and 1000\n";
+				continue;
+			}
 			btc.calc_price(date, n);
 		} catch (std::runtime_error &e)  {
 			std::cout << e.what() << std::endl;
