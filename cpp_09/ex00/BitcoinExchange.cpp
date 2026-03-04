@@ -101,14 +101,14 @@ bool	BtcExch::isValidDate(std::string date_str) {
 	if (date_str[4] != '-' || date_str[7] != '-')
 		return false;
 
-	time_t now = time(0);
+	time_t now = time(NULL);
 	struct tm *t = localtime(&now);
 	std::istringstream date(date_str);
 	int	year, month, day;
-	std::istringstream (date_str.substr(0,3)) >> year;
-	std::istringstream (date_str.substr(5,6)) >> month;
-	std::istringstream (date_str.substr(8,9)) >> day;
-	if (year < 2009 || year > t->tm_year)
+	std::istringstream (date_str.substr(0,4)) >> year;
+	std::istringstream (date_str.substr(5,7)) >> month;
+	std::istringstream (date_str.substr(8,10)) >> day;
+	if (year < 2009 || year > 1900 + t->tm_year)
 		return false;
 	if (month < 1 || month > 12)
 		return false;
