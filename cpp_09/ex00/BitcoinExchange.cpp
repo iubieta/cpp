@@ -31,6 +31,20 @@ BtcExch& BtcExch::operator=(BtcExch &other) {
 // DESTRUCTOR
 BtcExch::~BtcExch() {};
 
+// PUBLIC FUNCTIONS =========================================================
+
+void	BtcExch::printDateValue(std::string date) {
+	std::cout << _hist_data.at(date);
+}
+
+float	BtcExch::calc_price(std::string date, float n) {
+	if (!isValidDate(date))
+		throw std::runtime_error("Invalid date: " + date);
+	if (!isValidValue(n))
+		throw std::runtime_error("Invalid value: please enter a number between 0 and 1000");
+	return (_hist_data.at(date).second * n);
+}
+
 // PRIVATE FUNCTIONS =========================================================
 
 std::string	BtcExch::trim(std::string str) {
@@ -72,9 +86,6 @@ BtcExch::floatpair_t BtcExch::parseCsvLine(std::string &line) {
 	return floatpair_t(key, value);
 }
 
-void	BtcExch::printDateValue(std::string date) {
-	std::cout << _hist_data.at(date);
-}
 
 bool	BtcExch::isLeapYear(int year) {
 	if (year % 400 == 0)
@@ -116,10 +127,3 @@ bool	BtcExch::isValidValue(float n) {
 	return true;
 }
 
-float	BtcExch::calc_price(std::string date, float n) {
-	if (!isValidDate(date))
-		throw std::runtime_error("Invalid date: " + date);
-	if (!isValidValue(n))
-		throw std::runtime_error("Invalid value: please enter a number between 0 and 1000");
-	return (_hist_data.at(date) * n);
-}

@@ -32,7 +32,6 @@ class BtcExch {
 		BtcExch& operator=(BtcExch& other);
 		~BtcExch();
 
-		void	load_data(std::string input_file);
 		float	calc_price(std::string date, float n);
 		void	printDateValue(std::string date);
 	
