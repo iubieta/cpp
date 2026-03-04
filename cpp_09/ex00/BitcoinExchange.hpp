@@ -32,13 +32,13 @@ class BtcExch {
 		BtcExch& operator=(BtcExch& other);
 		~BtcExch();
 
-		float	calc_price(std::string date, float n);
-		void	printDateValue(std::string date);
+		void	calc_price(std::string date, float n);
 	
 	private:
 
 		typedef typename std::map<std::string, float> floatmap_t;
 		typedef typename std::pair<std::string, float> floatpair_t ;
+		typedef typename std::map<std::string, float>::iterator floatmapiterator_t;
 		
 		floatmap_t	_hist_data;
 

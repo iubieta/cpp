@@ -33,16 +33,11 @@ BtcExch::~BtcExch() {};
 
 // PUBLIC FUNCTIONS =========================================================
 
-void	BtcExch::printDateValue(std::string date) {
-	std::cout << _hist_data.at(date);
-}
-
-float	BtcExch::calc_price(std::string date, float n) {
-	if (!isValidDate(date))
-		throw std::runtime_error("Invalid date: " + date);
-	if (!isValidValue(n))
-		throw std::runtime_error("Invalid value: please enter a number between 0 and 1000");
-	return (_hist_data.at(date).second * n);
+void	BtcExch::calc_price(std::string date, float n) {
+	floatmapiterator_t it = _hist_data.lower_bound(date);
+	std::cout << it->first << " => " << n
+		<< " = " << it->second * n
+		<< std::endl;
 }
 
 // PRIVATE FUNCTIONS =========================================================
