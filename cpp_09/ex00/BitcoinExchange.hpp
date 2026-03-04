@@ -38,19 +38,19 @@ class BtcExch {
 	
 	private:
 
-		typedef typename std::map<std::string, float> floatMap;
-		typedef typename std::pair<std::string, float> floatPair ;
+		typedef typename std::map<std::string, float> floatmap_t;
+		typedef typename std::pair<std::string, float> floatpair_t ;
 		
-		floatMap	_hist_data;
+		floatmap_t	_hist_data;
 
-		std::string _trim(std::string str);
+		std::string trim(std::string str);
 
-		void		_loadCsv(std::string input_file);
-		floatPair	_parseCsvLine(std::string &line);
+		void		loadCsv(std::string input_file);
+		floatpair_t	parseCsvLine(std::string &line);
 
-		bool		_isLeapYear(int year);
-		bool		_isValidDate(std::string date);
-		bool		_isValidValue(float n);
+		bool		isLeapYear(int year);
+		bool		isValidDate(std::string date);
+		bool		isValidValue(float n);
 };
 
 #endif // !BTC_EX_HPP

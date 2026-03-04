@@ -33,7 +33,7 @@ int main(int argc, char *argv[]) {
 			std::istringstream (line.substr(line.find(" ") + 1)) >> n;
 			btc.calc_price(date, n);
 		} catch (std::runtime_error &e)  {
-			std::cout << e.what();
+			std::cout << e.what() << std::endl;
 		}
 	}
 	return 0;
