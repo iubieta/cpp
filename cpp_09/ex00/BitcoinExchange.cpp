@@ -16,13 +16,13 @@
 
 // CONSTRUCTORS
 BtcExch::BtcExch() {};
-BtcExch::BtcExch(std::string input_file) {
+BtcExch::BtcExch(const std::string &input_file) {
 	loadCsv(input_file);
 };
-BtcExch::BtcExch(BtcExch &other) : _hist_data(other._hist_data) {};
+BtcExch::BtcExch(const BtcExch &other) : _hist_data(other._hist_data) {};
 
 // COPY OPERATOR
-BtcExch& BtcExch::operator=(BtcExch &other) {
+BtcExch& BtcExch::operator=(const BtcExch &other) {
 	if (this != &other)
 		this->_hist_data = other._hist_data;
 	return *this;
@@ -33,8 +33,8 @@ BtcExch::~BtcExch() {};
 
 // PUBLIC FUNCTIONS =========================================================
 
-void	BtcExch::calc_price(std::string date, float n) {
-	floatmapiterator_t it = _hist_data.lower_bound(date);
+void	BtcExch::calc_price(const std::string &date, float n) const {
+	const_floatmapiterator_t it = _hist_data.lower_bound(date);
 	std::cout << it->first << " => " << n
 		<< " = " << it->second * n
 		<< std::endl;
@@ -42,13 +42,13 @@ void	BtcExch::calc_price(std::string date, float n) {
 
 // PRIVATE FUNCTIONS =========================================================
 
-std::string	BtcExch::trim(std::string str) {
+void	BtcExch::trim(std::string &str) const {
 	size_t start = str.find_first_not_of(' ');
 	size_t end = str.find_first_not_of(start, ' ');
-	return str.substr(start, end);
+	str = str.substr(start, end);
 }
 
-void	BtcExch::loadCsv(std::string input_file) {
+void	BtcExch::loadCsv(const std::string &input_file) {
 	std::ifstream	input(input_file.c_str(), std::ifstream::in);
 	std::string		line;
 	floatpair_t		pair;
@@ -56,6 +56,7 @@ void	BtcExch::loadCsv(std::string input_file) {
 	std::getline(input, line);
 	while (std::getline(input,line)) {
 		try {
+			trim(line);
 			pair = parseCsvLine(line);
 			this->_hist_data.insert(pair);
 		} catch (std::runtime_error &e)  {
@@ -64,12 +65,10 @@ void	BtcExch::loadCsv(std::string input_file) {
 	}
 }
 	
-BtcExch::floatpair_t BtcExch::parseCsvLine(std::string &line) {
+BtcExch::floatpair_t BtcExch::parseCsvLine(const std::string &line) {
 	std::string		key;
 	std::string		value_str;
 	float			value;
-	
-	line = trim(line);
 	
 	size_t	index = line.find_first_of(',');
 	key = line.substr(0, index);

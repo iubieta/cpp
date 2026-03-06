@@ -27,25 +27,26 @@
 class BtcExch {
 	public:
 		BtcExch();
-		BtcExch(std::string input_file);
-		BtcExch(BtcExch& other);
-		BtcExch& operator=(BtcExch& other);
+		BtcExch(const std::string &input_file);
+		BtcExch(const BtcExch& other);
+		BtcExch& operator=(const BtcExch& other);
 		~BtcExch();
 
-		void	calc_price(std::string date, float n);
+		void	calc_price(const std::string &date, float n) const;
 	
 	private:
 
-		typedef typename std::map<std::string, float> floatmap_t;
-		typedef typename std::pair<std::string, float> floatpair_t ;
-		typedef typename std::map<std::string, float>::iterator floatmapiterator_t;
+		typedef std::map<std::string, float> floatmap_t;
+		typedef std::pair<std::string, float> floatpair_t ;
+		typedef std::map<std::string, float>::iterator floatmapiterator_t;
+		typedef std::map<std::string, float>::const_iterator const_floatmapiterator_t;
 		
 		floatmap_t	_hist_data;
 
-		std::string trim(std::string str);
+		void		trim(std::string &str) const;
 
-		void		loadCsv(std::string input_file);
-		floatpair_t	parseCsvLine(std::string &line);
+		void		loadCsv(const std::string &input_file);
+		floatpair_t	parseCsvLine(const std::string &line);
 };
 
 #endif // !BTC_EX_HPP
