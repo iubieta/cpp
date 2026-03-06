@@ -22,7 +22,6 @@
 #include <sstream>
 #include <fstream>
 #include <stdexcept>
-#include <string>
 
 class BtcExch {
 	public:
