@@ -82,7 +82,7 @@ int main(int argc, char *argv[]) {
 				continue;
 			}
 			btc.calc_price(date, n);
-		} catch (std::runtime_error &e)  {
+		} catch (std::exception &e)  {
 			std::cout << e.what() << std::endl;
 		}
 	}

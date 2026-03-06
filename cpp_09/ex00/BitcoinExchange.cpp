@@ -35,6 +35,8 @@ BtcExch::~BtcExch() {};
 
 void	BtcExch::calc_price(const std::string &date, float n) const {
 	const_floatmapiterator_t it = _hist_data.lower_bound(date);
+	if (it == _hist_data.end())
+		throw std::runtime_error("Date not found in database");
 	std::cout << it->first << " => " << n
 		<< " = " << it->second * n
 		<< std::endl;
@@ -50,6 +52,8 @@ void	BtcExch::trim(std::string &str) const {
 
 void	BtcExch::loadCsv(const std::string &input_file) {
 	std::ifstream	input(input_file.c_str(), std::ifstream::in);
+	if (!input.is_open())
+		throw std::runtime_error("Error: couldnt open the file");
 	std::string		line;
 	floatpair_t		pair;
 	
@@ -57,10 +61,11 @@ void	BtcExch::loadCsv(const std::string &input_file) {
 	while (std::getline(input,line)) {
 		try {
 			trim(line);
+			if (line.empty()) continue;
 			pair = parseCsvLine(line);
 			this->_hist_data.insert(pair);
-		} catch (std::runtime_error &e)  {
-			std::cout << e.what();
+		} catch (std::exception &e)  {
+			std::cout << e.what() << std::endl;
 		}
 	}
 }
@@ -71,6 +76,8 @@ BtcExch::floatpair_t BtcExch::parseCsvLine(const std::string &line) {
 	float			value;
 	
 	size_t	index = line.find_first_of(',');
+	if (index == std::string::npos)
+		throw std::runtime_error("Error: Invalid line format");
 	key = line.substr(0, index);
 	value_str = line.substr(index + 1);
 	std::istringstream	val_ss(value_str);
