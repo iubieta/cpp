@@ -51,26 +51,30 @@ float	RPN::evaluate() {
 		if (std::isdigit(_expr[i]))
 			op.push(_expr[i] - '0');
 		else {
-			while (op.size() > 1) {
-				b = op.top();
-				op.pop();
-				a = op.top();
-				op.pop();
-				if (_expr[i] == '+') {
-					aux = a + b;
-				}
-				else if (_expr[i] == '-') {
-					aux = a - b;
-				}
-				else if (_expr[i] == '/') {
-					aux = a / b;
-				}
-				else if (_expr[i] == '*') {
-					aux = a * b;
-				}
-				op.push(aux);
+			if (op.size() < 2)
+				throw std::runtime_error("ERROR: insufficient opperands");
+			b = op.top();
+			op.pop();
+			a = op.top();
+			op.pop();
+			if (_expr[i] == '+') {
+				aux = a + b;
 			}
+			else if (_expr[i] == '-') {
+				aux = a - b;
+			}
+			else if (_expr[i] == '/') {
+				if (b == 0)
+					throw std::runtime_error("ERROR: division by zero");
+				aux = a / b;
+			}
+			else if (_expr[i] == '*') {
+				aux = a * b;
+			}
+			op.push(aux);
 		}
 	}
-	return (op.top());
+	if (op.size() != 1) 
+		throw std::runtime_error("ERROR: incomplete expression");
+	return op.top();
 }
