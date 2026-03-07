@@ -24,7 +24,7 @@ RPN::RPN() {};
 RPN::RPN(const std::string &expr) : _expr(expr) {
 	for (size_t i = 0; i < expr.size(); ++i) {
 		if (VALID_TOKENS.find(expr[i]) == std::string::npos)
-			throw (std::runtime_error(std::string("ERROR: Invalid token found: ") += expr[i]));
+			throw std::runtime_error(std::string("ERROR: Invalid token found: ") += expr[i]);
 	}
 }
 
