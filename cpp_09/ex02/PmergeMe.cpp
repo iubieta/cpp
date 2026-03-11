@@ -45,8 +45,11 @@ PmergeMe::PmergeMe(PmergeMe &other) {
 }
 
 PmergeMe& PmergeMe::operator=(PmergeMe &other) {
-	if (this != &other)
+	if (this != &other) {
 		this->_input = other._input;
+		this->_vec = other._vec;
+		this->_ls = other._ls;
+	}
 	return *this;
 }
 
