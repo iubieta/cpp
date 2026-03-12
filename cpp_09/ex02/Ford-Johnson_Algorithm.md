@@ -53,3 +53,11 @@ con coste O(n) en lugar de O(1).
 pero no compensa la complejidad — siempre partes desde el inicio del rango actual.
 4. El algoritmo es estructuralmente idéntico pero con peor rendimiento real debido 
 al coste de desplazar iteradores.
+
+
+## Visualizacion
+
+lvl 0 (group size = 1) ==> { 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 }
+lvl 1 (group size = 2) ==> { 8 , 9 | 6 , 7 | 4 , 5 | 2 , 3 | 1 }
+lvl 2 (group size = 4) ==> { 6 , 7 , 8 , 9 | 2 , 3 , 4 , 5 | 1 }
+lvl 3 (group size = 8) ==> { 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 | 1 }
