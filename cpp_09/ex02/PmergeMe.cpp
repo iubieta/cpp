@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
+#include <iostream>
 #include <stdexcept>
 #include <string>
 #include <sstream>
@@ -30,26 +31,28 @@ PmergeMe::PmergeMe(const std::string &input) : _input(input) {
 			oss << "ERROR: negative integer found => " << value;
 			throw std::runtime_error(oss.str());
 		}
-		_vec.push_back(value);
-		_list.push_back(value);
+		_inputVector.push_back(value);
+		_inputList.push_back(value);
 	}
 	if (in.fail() && !in.eof())
 		throw std::runtime_error("ERROR: invalid input found");
 	if (in.bad())
 		throw std::runtime_error("ERROR: something went wrong during the parsing");
+	std::vector<int> auxVector = _inputVector;
+	_sortedVector = vectorFordJohnson(auxVector, 1);
 }
 
 PmergeMe::PmergeMe(const PmergeMe &other) {
 	this->_input = other._input;
-	this->_vec = other._vec;
-	this->_list = other._list;
+	this->_inputVector = other._inputVector;
+	this->_inputList = other._inputList;
 }
 
 PmergeMe& PmergeMe::operator=(const PmergeMe &other) {
 	if (this != &other) {
 		this->_input = other._input;
-		this->_vec = other._vec;
-		this->_list = other._list;
+		this->_inputVector = other._inputVector;
+		this->_inputList = other._inputList;
 	}
 	return *this;
 }
@@ -62,16 +65,36 @@ std::string PmergeMe::getInput() const {
 	return _input;
 }
 
-std::vector<int> PmergeMe::getVec() const {
-	return _vec;
-}
-std::list<int> PmergeMe::getList() const {
-	return _list;
+std::vector<int> PmergeMe::getInputVector() const {
+	return _inputVector;
 }
 
+std::list<int> PmergeMe::getInputList() const {
+	return _inputList;
+}
 
-std::vector<int> PmergeMe::vectorFordJohnson(std::vector<int> inVector, int groupSize) {
-	
+std::vector<int> PmergeMe::getSortedVector() const {
+	return _sortedVector;
+}
+
+std::list<int> PmergeMe::getSortedList() const {
+	return _sortedList;
+}
+
+void PmergeMe::printSortedVector() const {
+	for (const_vecIntIt it = _sortedVector.begin(); it != _sortedVector.end(); ++it) {
+		if (it == _sortedVector.begin())
+			std::cout << " [ ";
+		std::cout << *it;
+		if (it != _sortedVector.end() - 1)
+			std::cout  << " , ";
+	}
+	std::cout << " ] ";
+}
+
+// Ford Johnson algorithm =====================================================
+//
+std::vector<int> PmergeMe::vectorFordJohnson(std::vector<int> &inVector, diff_t groupSize) {
 	
 	//1. Pairing and comparing
 	for (vecIntIt i = inVector.begin(); inVector.end() - i >= groupSize * 2; i+=groupSize * 2) {
@@ -80,10 +103,10 @@ std::vector<int> PmergeMe::vectorFordJohnson(std::vector<int> inVector, int grou
 	}
 
 	//2. Recursion
-	// groupSize *= 2;
-	// if (inVector.size() > groupSize)
-	// 	vectorFordJohnson(inVector, groupSize);
-	//
+	groupSize *= 2;
+	if (inVector.end() - inVector.begin() > groupSize)
+		vectorFordJohnson(inVector, groupSize);
+	
 	//3. Insercion
 	
 

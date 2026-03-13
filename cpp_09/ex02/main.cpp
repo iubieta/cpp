@@ -23,7 +23,7 @@ int main(int argc, char *argv[]) {
 		if (input == "test") {
 			{
 				PmergeMe util(std::string("9 8 7 6 5 4 3 2 1"));
-				util.vectorFordJohnson(util.getVec(), 1);
+				util.printSortedVector();
 			}
 		} else {
 		}

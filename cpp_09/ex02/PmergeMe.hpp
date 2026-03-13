@@ -18,15 +18,23 @@
 #include <vector>
 
 typedef std::vector<int>::iterator vecIntIt;
+typedef std::vector<int>::const_iterator const_vecIntIt;
 typedef std::list<int>::iterator listIntIt;
+typedef std::iterator_traits<vecIntIt>::difference_type diff_t;
 
 class PmergeMe {
 	private:
 		std::string			_input;
-		std::vector<int>	_vec;
-		std::list<int>		_list;
+		std::vector<int>	_inputVector;
+		std::list<int>		_inputList;
+		
+		std::vector<int>	_sortedVector;
+		std::list<int>		_sortedList;
 
-		void	swapGroup(std::vector<int> inVector, size_t index, size_t groupSize);
+		std::vector<int>	vectorFordJohnson(std::vector<int> &inVector, diff_t groupSize);
+		std::list<int>		listFordJohnson();
+		
+		void	swapGroup(std::vector<int> inVector, size_t index, diff_t groupSize);
 
 	public:
 		PmergeMe();
@@ -36,11 +44,13 @@ class PmergeMe {
 		~PmergeMe();
 
 		std::string			getInput() const;
-		std::vector<int>	getVec() const;
-		std::list<int>		getList() const;
+		std::vector<int>	getInputVector() const;
+		std::list<int>		getInputList() const;
+		
+		std::vector<int>	getSortedVector() const;
+		std::list<int>		getSortedList() const;
 
-		std::vector<int>	vectorFordJohnson(std::vector<int> inVector, int groupSize);
-		std::list<int>		listFordJohnson();
+		void				printSortedVector() const;
 };
 
 #endif  
