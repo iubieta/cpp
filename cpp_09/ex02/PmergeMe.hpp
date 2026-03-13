@@ -13,6 +13,7 @@
 #ifndef PMERGEME_HPP
 #define PMERGEME_HPP
 
+#include <cstddef>
 #include <list>
 #include <string>
 #include <vector>
@@ -34,7 +35,8 @@ class PmergeMe {
 		std::vector<int>	vectorFordJohnson(std::vector<int> &inVector, diff_t groupSize);
 		std::list<int>		listFordJohnson();
 		
-		void	swapGroup(std::vector<int> inVector, size_t index, diff_t groupSize);
+		size_t				jacobsthal(size_t i);
+		std::vector<int>	jacobsthalInsertion(std::vector<int> &inVector, diff_t groupSize);
 
 	public:
 		PmergeMe();
