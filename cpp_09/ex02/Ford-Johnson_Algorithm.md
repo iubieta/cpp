@@ -6,17 +6,17 @@
 
 **Estructura general:** Una función recursiva que opera sobre un solo contenedor, con `groupSize` como parámetro que se duplica en cada nivel.
 
-**Llamada inicial:** `fordJohnson(container, 1)`
+### **Llamada inicial:** `fordJohnson(container, 1)`
 
-**Caso base:** `container.size() / groupSize < 2` (no se pueden formar parejas)
+### **Caso base:** `container.size() / groupSize < 2` (no se pueden formar parejas)
 
-**Fase 1 — Emparejar y comparar:**
+### **Fase 1 — Emparejar y comparar:**
 Recorres el contenedor de 2 en 2 grupos (stride = `2 * groupSize`). Comparas los representantes (último elemento de cada grupo). Si el primero es mayor, haces swap del bloque entero de `groupSize` elementos. Si hay un número impar de grupos, el último es el straggler.
 
-**Fase 2 — Recursión:**
+### **Fase 2 — Recursión:**
 `fordJohnson(container, groupSize * 2)`. Los pends viajan con sus winners automáticamente porque forman un bloque contiguo.
 
-**Fase 3 — Inserción:**
+### **Fase 3 — Inserción:**
 Al volver de la recursión:
 1. Copias winners y pends a **estructuras auxiliares** separadas (bloques de `groupSize`).
 2. `pend₁` va directamente al inicio de la main chain (sin coste de comparación).
@@ -25,7 +25,7 @@ Al volver de la recursión:
 5. El straggler se inserta al final con búsqueda binaria sobre toda la main chain.
 6. Se copia el resultado de vuelta al contenedor original.
 
-**Claves de implementación:**
+### **Claves de implementación:**
 - Se comparan siempre los representantes (último elemento del grupo).
 - Se mueven siempre bloques completos de `groupSize`.
 - `container.insert(pos, first, last)` para insertar rangos sin bucle.
