@@ -178,11 +178,14 @@ std::vector<int> PmergeMe::jacobsthalInsertion(std::vector<int> &inVector, diff_
 
 	// Insert in jacobsthal order
 	// TODO: rethink jacobsthal insertion loop
-	for (size_t i = 1; i < groupNumber; i = jacobsthal(i + 2)) {
-		for (size_t j = i; j < jacobsthal(i + 1); j--) {
-			vecIntIt pos = std::lower_bound(mains.begin(), mains.begin() + positions[j], pends[j * groupSize]);
-			mains.insert(pos, pends.begin() + j * groupSize, pends.begin() + (j + 1) * groupSize);
-			adjustPositions(positions, groupSize, *pos);
+	for (size_t i = 1; i < groupNumber; i = jacobsthal(i)) {
+		for (size_t j = jacobsthal(i + 1); j > i; j--) {
+			if (j <= groupNumber) {
+				int	pendValue = pends[j * groupSize - 1];
+				vecIntIt pos = std::lower_bound(mains.begin(), mains.begin() + positions[j - 1], pendValue);
+				mains.insert(pos, pends.begin() + (j - 1) * groupSize, pends.begin() + j * groupSize);
+				adjustPositions(positions, groupSize, *pos);
+			}
 		}
 	}
 

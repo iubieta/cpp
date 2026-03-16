@@ -66,7 +66,7 @@ commands
 	display positions
 end
 
-break PmergeMe.cpp:182
+break PmergeMe.cpp:184
 commands
 	set confirm off
 	undisplay
@@ -76,11 +76,12 @@ commands
 	display groupNumber
 	display mains
 	display pends
+	display pos
+	display pendValue
 	display positions
-	display pos
 end
 
-break PmergeMe.cpp:190
+break PmergeMe.cpp:193
 commands
 	set confirm off
 	undisplay
@@ -93,7 +94,7 @@ commands
 	display pos
 end
 
-break PmergeMe.cpp:194
+break PmergeMe.cpp:197
 commands
 	set confirm off
 	undisplay
