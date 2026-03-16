@@ -37,6 +37,10 @@ class PmergeMe {
 		
 		size_t				jacobsthal(size_t i);
 		std::vector<int>	jacobsthalInsertion(std::vector<int> &inVector, diff_t groupSize);
+		void				splitGroups(const std::vector<int> &inVector, std::vector<int> &mains,
+								std::vector<int> &pends, const diff_t &groupSize);
+		void				adjustPositions(std::vector<size_t> &positions, const diff_t &groupSize,
+								size_t insertPos);
 
 	public:
 		PmergeMe();
