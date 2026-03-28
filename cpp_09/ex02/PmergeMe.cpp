@@ -140,11 +140,10 @@ void PmergeMe::splitGroups(jacobSthalIns_t &jsi) {
 	}
 }
 
-void PmergeMe::adjustPositions(std::vector<size_t> &positions, const diff_t &groupSize, size_t insertPos) {
-	for (size_t i = 0; i < positions.size(); ++i) {
-		if (positions[i] >= insertPos)
-			positions[i] += groupSize;
-	}
+void PmergeMe::adjustPositions(jacobSthalIns_t &jsi, const vecIntIt &pos) {
+	size_t	offset = pos - jsi.mains.begin();
+	for (size_t i = offset; i < jsi.positions.size(); i++)
+		jsi.positions[i] += jsi.groupSize;
 }
 
 jacobSthalIns_t		PmergeMe::initJSStruct(const std::vector<int> &inVector, const diff_t &groupSize) {
@@ -154,18 +153,42 @@ jacobSthalIns_t		PmergeMe::initJSStruct(const std::vector<int> &inVector, const 
 	jsi.inVector = inVector;
 	jsi.groupSize = groupSize;
 	jsi.groupNumber = inVector.size() / groupSize;
-	if (jsi.groupNumber == 0)
-		return jsi;
 
 	// Start to split
 	splitGroups(jsi);
 
 	// Init positions array to keep track of main[k] positions
 	for (size_t i = 0; i < jsi.mains.size() / groupSize; ++i) {
-		jsi.positions.push_back(jsi.mains.begin() + i * groupSize);
+		jsi.positions.push_back(i * groupSize);
 	}
 
 	return jsi;
+}
+
+void	PmergeMe::insertIntoMain(jacobSthalIns_t &jsi, size_t group) {
+	size_t start = (group - 1) * jsi.groupSize;
+	size_t end = group * jsi.groupSize;
+
+	if (start >= jsi.pends.size())
+		return;
+	vecIntIt startIt = jsi.pends.begin() + start;
+	
+	vecIntIt endIt = startIt;
+	if (end >= jsi.pends.size())
+		endIt = jsi.pends.end();
+	else
+		endIt = jsi.pends.begin() + end;
+
+	vecIntIt lowerLimit = jsi.mains.begin();
+	vecIntIt higherLimit;
+	if (group > jsi.groupNumber / 2)
+		higherLimit = jsi.mains.end();
+	else
+		higherLimit = jsi.mains.begin() + jsi.positions[group - 1];
+	vecIntIt pos = std::lower_bound(lowerLimit, higherLimit, jsi.pends[end - 1]);
+	if (group < jsi.groupNumber / 2)
+		adjustPositions(jsi, pos);
+	jsi.mains.insert(pos, startIt, endIt);
 }
 
 std::vector<int> PmergeMe::jacobsthalInsertion(const std::vector<int> &inVector, const diff_t &groupSize) {
@@ -173,6 +196,19 @@ std::vector<int> PmergeMe::jacobsthalInsertion(const std::vector<int> &inVector,
 	// Init JSStruct
 	jacobSthalIns_t jsi = initJSStruct(inVector, groupSize);
 
+	// Insert first pend
+	insertIntoMain(jsi, 1);
+
+	// Insert rest of pair pends in jacobsthal order
+	for (size_t i = 1; jacobsthal(i) < jsi.groupNumber / 2; ++i) {
+		for (size_t j = jacobsthal(i + 1); j > jacobsthal(i);  j--) {
+			insertIntoMain(jsi, j);
+		}
+	}
+
+	// Insert last unpaired pend
+	if (jsi.pends.size() % groupSize > 0) {
+	}
 	// // Insert the first pend at begin
 	// if (pends.end() - pends.begin() >= groupSize) {
 	// 	mains.insert(mains.begin(), pends.begin(), pends.begin() + groupSize);

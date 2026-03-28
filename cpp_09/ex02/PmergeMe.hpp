@@ -24,12 +24,12 @@ typedef std::list<int>::iterator listIntIt;
 typedef std::iterator_traits<vecIntIt>::difference_type diff_t;
 
 typedef struct jacobSthalIns_s{
-	std::vector<int>		inVector;
-	diff_t					groupSize;
-	size_t					groupNumber;
-	std::vector<int>		mains;
-	std::vector<int>		pends;
-	std::vector<vecIntIt>	positions;
+	std::vector<int>	inVector;
+	diff_t				groupSize;
+	size_t				groupNumber;
+	std::vector<int>	mains;
+	std::vector<int>	pends;
+	std::vector<int>	positions;
 }	jacobSthalIns_t;
 
 class PmergeMe {
@@ -48,8 +48,8 @@ class PmergeMe {
 		std::vector<int>	jacobsthalInsertion(const std::vector<int> &inVector, const diff_t &groupSize);
 		jacobSthalIns_t		initJSStruct(const std::vector<int> &inVector, const diff_t &groupSize);
 		void				splitGroups(jacobSthalIns_t &jsi);
-		void				adjustPositions(std::vector<size_t> &positions, const diff_t &groupSize,
-								size_t insertPos);
+		void				insertIntoMain(jacobSthalIns_t &jsi, size_t group);
+		void				adjustPositions(jacobSthalIns_t &jsi, const vecIntIt &pos);
 
 	public:
 		PmergeMe();
