@@ -202,6 +202,7 @@ std::vector<int> PmergeMe::jacobsthalInsertion(const std::vector<int> &inVector,
 	// Insert rest of pair pends in jacobsthal order
 	for (size_t i = 1; jacobsthal(i) < jsi.groupNumber / 2; ++i) {
 		for (size_t j = jacobsthal(i + 1); j > jacobsthal(i);  j--) {
+			// reducir j hasta el primer grupo completo para no coger el ultimo elemento (sin pareja)
 			insertIntoMain(jsi, j);
 		}
 	}
