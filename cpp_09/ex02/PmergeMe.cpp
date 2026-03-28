@@ -114,30 +114,29 @@ std::vector<int> PmergeMe::vectorFordJohnson(std::vector<int> &inVector, diff_t 
 }
 
 
-void PmergeMe::splitGroups(const std::vector<int> &inVector, std::vector<int> &mains, 
-		std::vector<int> &pends, const diff_t &groupSize) {
-	diff_t pairSize = groupSize * 2;
-	const_vecIntIt inBegin = inVector.begin();
-	const_vecIntIt inEnd = inVector.end();
+void PmergeMe::splitGroups(jacobSthalIns_t &jsi) { 
+	diff_t pairSize = jsi.groupSize * 2;
+	const_vecIntIt inBegin = jsi.inVector.begin();
+	const_vecIntIt inEnd = jsi.inVector.end();
 
-	for (size_t i = 0; inBegin + i * groupSize < inEnd ; ++i) {
+	for (size_t i = 0; inBegin + i * jsi.groupSize < inEnd ; ++i) {
 		// Insert pend group 
 		const_vecIntIt pendStart = inBegin + i * pairSize;
 		// If not complete group insert and break
-		if (inEnd - pendStart < groupSize) {
-			pends.insert(pends.end(), pendStart, inEnd);
+		if (inEnd - pendStart < jsi.groupSize) {
+			jsi.pends.insert(jsi.pends.end(), pendStart, inEnd);
 			break;
 		}
-		pends.insert(pends.end(), pendStart, pendStart + groupSize);
+		jsi.pends.insert(jsi.pends.end(), pendStart, pendStart + jsi.groupSize);
 		
 		// Insert main group
-		const_vecIntIt mainStart = inBegin + i * pairSize + groupSize;
+		const_vecIntIt mainStart = inBegin + i * pairSize + jsi.groupSize;
 		// If not a complete group insert into pends and break
-		if (inEnd - mainStart < groupSize) {
-			pends.insert(pends.end(), mainStart, inEnd); 
+		if (inEnd - mainStart < jsi.groupSize) {
+			jsi.pends.insert(jsi.pends.end(), mainStart, inEnd); 
 			break;
 		}
-		mains.insert(mains.end(), mainStart, mainStart + groupSize);
+		jsi.mains.insert(jsi.mains.end(), mainStart, mainStart + jsi.groupSize);
 	}
 }
 
@@ -148,53 +147,57 @@ void PmergeMe::adjustPositions(std::vector<size_t> &positions, const diff_t &gro
 	}
 }
 
-std::vector<int> PmergeMe::jacobsthalInsertion(std::vector<int> &inVector, diff_t groupSize) {
+jacobSthalIns_t		PmergeMe::initJSStruct(const std::vector<int> &inVector, const diff_t &groupSize) {
 
-	// Split into mains and pends
-	
-	// Check for at least 1 group
-	diff_t pairSize = groupSize * 2;
-	size_t groupNumber = inVector.size() / pairSize;
-	if (groupNumber == 0)
-		return inVector;
+	jacobSthalIns_t	jsi;
 
-	std::vector<int> mains;
-	std::vector<int> pends;
+	jsi.inVector = inVector;
+	jsi.groupSize = groupSize;
+	jsi.groupNumber = inVector.size() / groupSize;
+	if (jsi.groupNumber == 0)
+		return jsi;
 
 	// Start to split
-	splitGroups(inVector, mains, pends, groupSize);
+	splitGroups(jsi);
 
 	// Init positions array to keep track of main[k] positions
-	std::vector<size_t> positions;
-	for (size_t i = 0; i < groupNumber; ++i) {
-		positions.push_back(i * groupSize);
+	for (size_t i = 0; i < jsi.mains.size() / groupSize; ++i) {
+		jsi.positions.push_back(jsi.mains.begin() + i * groupSize);
 	}
 
-	// Insert the first pend at begin
-	if (pends.end() - pends.begin() >= groupSize) {
-		mains.insert(mains.begin(), pends.begin(), pends.begin() + groupSize);
-		adjustPositions(positions, groupSize, 0);
-	}
+	return jsi;
+}
 
-	// Insert in jacobsthal order
-	// TODO: rethink jacobsthal insertion loop
-	for (size_t i = 1; i < groupNumber; i = jacobsthal(i)) {
-		for (size_t j = jacobsthal(i + 1); j > i; j--) {
-			if (j <= groupNumber) {
-				int	pendValue = pends[j * groupSize - 1];
-				vecIntIt pos = std::lower_bound(mains.begin(), mains.begin() + positions[j - 1], pendValue);
-				mains.insert(pos, pends.begin() + (j - 1) * groupSize, pends.begin() + j * groupSize);
-				adjustPositions(positions, groupSize, *pos);
-			}
-		}
-	}
+std::vector<int> PmergeMe::jacobsthalInsertion(const std::vector<int> &inVector, const diff_t &groupSize) {
 
-	// Insert last pend
-	if (pends.size() % groupSize > 0) {
-		vecIntIt pos = std::lower_bound(mains.begin(), mains.end(), *(pends.end() - 1));
-		mains.insert(pos, pends.begin() + groupNumber * groupSize, pends.end());
-	}
+	// Init JSStruct
+	jacobSthalIns_t jsi = initJSStruct(inVector, groupSize);
 
+	// // Insert the first pend at begin
+	// if (pends.end() - pends.begin() >= groupSize) {
+	// 	mains.insert(mains.begin(), pends.begin(), pends.begin() + groupSize);
+	// 	adjustPositions(positions, groupSize, 0);
+	// }
+	//
+	// // Insert in jacobsthal order
+	// // TODO: rethink jacobsthal insertion loop
+	// for (size_t i = 1; i < groupNumber; i = jacobsthal(i)) {
+	// 	for (size_t j = jacobsthal(i + 1); j > i; j--) {
+	// 		if (j <= groupNumber) {
+	// 			int	pendValue = pends[j * groupSize - 1];
+	// 			vecIntIt pos = std::lower_bound(mains.begin(), mains.begin() + positions[j - 1], pendValue);
+	// 			mains.insert(pos, pends.begin() + (j - 1) * groupSize, pends.begin() + j * groupSize);
+	// 			adjustPositions(positions, groupSize, *pos);
+	// 		}
+	// 	}
+	// }
+	//
+	// // Insert last pend
+	// if (pends.size() % groupSize > 0) {
+	// 	vecIntIt pos = std::lower_bound(mains.begin(), mains.end(), *(pends.end() - 1));
+	// 	mains.insert(pos, pends.begin() + groupNumber * groupSize, pends.end());
+	// }
+	//
 	return inVector;
 }
 
