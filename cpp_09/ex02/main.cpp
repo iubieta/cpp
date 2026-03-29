@@ -21,9 +21,15 @@ int main(int argc, char *argv[]) {
 	}
 	std::string input(argv[1]);
 		if (input == "test") {
+			// {
+			// 	PmergeMe util(std::string("9 8 7 6 5 4 3 2 1"));
+			// 	util.printSortedVector();
+			// 	std::cout << std::endl;
+			// }
 			{
-				PmergeMe util(std::string("9 8 7 6 5 4 3 2 1"));
+				PmergeMe util(std::string("9 5 2 6 4 7 8 3 1"));
 				util.printSortedVector();
+				std::cout << std::endl;
 			}
 		} else {
 		}
