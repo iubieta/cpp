@@ -49,6 +49,7 @@ class PmergeMe {
 		jacobSthalIns_t		initJSStruct(const std::vector<int> &inVector, const diff_t &groupSize);
 		void				splitGroups(jacobSthalIns_t &jsi);
 		void				insertIntoMain(jacobSthalIns_t &jsi, size_t group);
+		void				insertExcess(jacobSthalIns_t &jsi);
 		void				adjustPositions(jacobSthalIns_t &jsi, const vecIntIt &pos);
 
 	public:

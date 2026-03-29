@@ -23,7 +23,8 @@ Al volver de la recursión:
 3. El resto de pends se insertan con **búsqueda binaria** en el orden dado por **Jacobsthal** (1, 3, 2, 5, 4, 11, 10, 9, 8, 7, 6...).
 4. Para cada `pend_k`, la búsqueda binaria solo abarca desde el inicio de la main chain hasta la posición de `win_k` (no incluido).
 5. El straggler se inserta al final con búsqueda binaria sobre toda la main chain.
-6. Se copia el resultado de vuelta al contenedor original.
+6. Se añaden los elementos sobrantes a la main chain.
+7. Se devuelve la main chain
 
 ### **Claves de implementación:**
 - Se comparan siempre los representantes (último elemento del grupo).
