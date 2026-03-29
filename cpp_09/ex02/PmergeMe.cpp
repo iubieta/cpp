@@ -119,7 +119,7 @@ void PmergeMe::splitGroups(jacobSthalIns_t &jsi) {
 	const_vecIntIt inBegin = jsi.inVector.begin();
 	const_vecIntIt inEnd = jsi.inVector.end();
 
-	for (size_t i = 0; inBegin + i * jsi.groupSize < inEnd ; ++i) {
+	for (size_t i = 0; inBegin + i * pairSize < inEnd ; ++i) {
 		// Insert pend group 
 		const_vecIntIt pendStart = inBegin + i * pairSize;
 		// If not complete group insert and break
