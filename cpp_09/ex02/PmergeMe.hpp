@@ -29,7 +29,7 @@ typedef struct jacobSthalIns_s{
 	size_t				groupNumber;
 	std::vector<int>	mains;
 	std::vector<int>	pends;
-	std::vector<int>	positions;
+	std::vector<size_t>	positions;
 }	jacobSthalIns_t;
 
 class PmergeMe {
