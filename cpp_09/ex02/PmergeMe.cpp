@@ -143,7 +143,8 @@ void PmergeMe::splitGroups(jacobSthalIns_t &jsi) {
 void PmergeMe::adjustPositions(jacobSthalIns_t &jsi, const vecIntIt &pos) {
 	size_t	offset = pos - jsi.mains.begin();
 	for (size_t i = offset; i < jsi.positions.size(); i++)
-		jsi.positions[i] += jsi.groupSize;
+		if (jsi.positions[i] >= offset)
+			jsi.positions[i] += jsi.groupSize;
 }
 
 jacobSthalIns_t		PmergeMe::initJSStruct(const std::vector<int> &inVector, const diff_t &groupSize) {
