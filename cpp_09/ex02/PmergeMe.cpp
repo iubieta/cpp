@@ -166,6 +166,22 @@ jacobSthalIns_t		PmergeMe::initJSStruct(const std::vector<int> &inVector, const 
 	return jsi;
 }
 
+// Binary search comparing only with group leader-elements
+vecIntIt	PmergeMe::groupLowerBound(jacobSthalIns_t &jsi, vecIntIt limit, int target) {
+	vecIntIt low = jsi.mains.begin();
+	vecIntIt high = limit;
+	while (low < high) {
+		vecIntIt	mid = low + ((high - low) / jsi.groupSize / 2) * jsi.groupSize;
+		if (target < *mid)
+			high = mid;
+		else if (target >= *(mid + jsi.groupSize))
+			low = mid + 1;
+		else
+			return mid;
+	}
+	return low;
+}
+
 // Funtion to insert a complete group from pends vector to main vector
 void	PmergeMe::insertIntoMain(jacobSthalIns_t &jsi, size_t group) {
 
