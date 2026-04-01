@@ -14,7 +14,8 @@
 Recorres el contenedor de 2 en 2 grupos (stride = `2 * groupSize`). Comparas los representantes (último elemento de cada grupo). Si el primero es mayor, haces swap del bloque entero de `groupSize` elementos. Si hay un número impar de grupos, el último es el straggler.
 
 ### **Fase 2 — Recursión:**
-`fordJohnson(container, groupSize * 2)`. Los pends viajan con sus winners automáticamente porque forman un bloque contiguo.
+Fusionamos las parejas como nuevo grupo y llamamos de nuevo a fordJohnson
+Los pends viajan con sus winners automáticamente porque forman un bloque contiguo.
 
 ### **Fase 3 — Inserción:**
 Al volver de la recursión:

@@ -6,7 +6,7 @@
 #    By: iubieta- <iubieta@student.42.fr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/24 18:26:22 by iubieta-          #+#    #+#              #
-#    Updated: 2026/03/07 17:54:17 by iubieta-         ###   ########.fr        #
+#    Updated: 2026/04/01 22:49:29 by iubieta-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = PmergeMe
 CXX := c++
 CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -g
 
-SRCS := main.cpp PmergeMe.cpp
+SRCS := main.cpp PmergeMe.cpp Utils.cpp
 OBJS := $(SRCS:%.cpp=%.o)
 
 all : $(NAME)
