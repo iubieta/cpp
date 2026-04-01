@@ -19,7 +19,10 @@
 #include <vector>
 
 typedef std::vector<int>	Group;
+typedef Group::iterator		GroupIt ;
+
 typedef std::vector<Group>	GroupVec;
+typedef GroupVec::iterator	GroupVecIt;
 
 class PmergeMe {
 	public:
@@ -46,7 +49,9 @@ class PmergeMe {
 		//void fordJohnsonList();
 		
 		//Utils
-		static size_t	jacobsthal(size_t n);
 };
+
+bool			groupComparator(Group a, Group b);
+static size_t	jacobsthal(size_t n);
 
 #endif

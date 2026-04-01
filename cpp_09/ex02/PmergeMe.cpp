@@ -109,21 +109,40 @@ void	PmergeMe::fordJohnsonVec(GroupVec &groups) {
 
 	// 3 - Insertion
 	// 3.1 - Split groups back
-	GroupVec unmerge;
-	size_t mid = merge[0].size();
-	for (size_t i = 0; i < groups.size(); ++i) {
-		Group half;
-		half.insert(half.end(), merge[i].begin(), merge[i].begin() + mid);
-		unmerge.push_back(half);
-		half.insert(half.end(), groups[i].begin() + mid, groups[i].end());
-		unmerge.push_back(half);
+	GroupVec winnerChain;
+	GroupVec pendChain;
+	GroupVec mainChain;
+	size_t mid = merged[0].size();
+	for (size_t i = 0; i < merged.size(); ++i) {
+		Group pend;
+		pend.insert(pend.end(), merged[i].begin(), merged[i].begin() + mid);
+		pendChain.push_back(pend);
+		Group winner;
+		winner.insert(winner.end(), merged[i].begin() + mid, merged[i].end());
+		winnerChain.push_back(winner);
+		mainChain.push_back(winner);
 	}
-	// 3.2 - Insert in jacobsthal order
+	// 3.2 - Insert mains and first pend in sorted vec
+	mainChain.insert(mainChain.begin(), pendChain[0]);
+	// 3.3 - Insert in jacobsthal order
+	for (size_t i = 0; jacobsthal(i+1) < pendChain.size(); i = jacobsthal(i + 1)) {
+		for (size_t j = jacobsthal(i+1); j > i; --j) {
+			GroupVecIt first = mainChain.begin();
+			GroupVecIt last = std::lower_bound(first, mainChain.end(), winnerChain[j], groupComparator);
+			GroupVecIt pos = std::lower_bound(first, last, pendChain[j], groupComparator);
+			mainChain.insert(pos, pendChain[j]);
+		}
+	}
 	
+	groups = mainChain;
 	return;
 }
 
-size_t PmergeMe::jacobsthal(size_t i) {
+bool groupComparator(Group a, Group b) {
+	return a.back() < b.back();
+}
+
+size_t jacobsthal(size_t i) {
 	static std::vector<size_t>	cache(2, 1);
 	while (cache.size() <= i)
 		cache.push_back(cache.back() + 2 * cache[cache.size() - 2]);
