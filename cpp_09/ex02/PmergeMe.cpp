@@ -6,7 +6,7 @@
 /*   By: iubieta- <iubieta@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/08 20:29:22 by iubieta-          #+#    #+#             */
-/*   Updated: 2026/04/01 23:18:17 by iubieta-         ###   ########.fr       */
+/*   Updated: 2026/04/02 01:20:35 by iubieta-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,15 +97,15 @@ void	PmergeMe::fordJohnsonVec(GroupVec &groups) {
 		Group	straggler = *(groups.end() - 1);
 	
 	// 2 - Fusion & recursion
-	GroupVec merge;
+	GroupVec merged;
 	for (size_t i = 0; i + 1 < groups.size(); i += 2) {
 		Group fusion;
 		fusion.insert(fusion.end(), groups[i].begin(), groups[i].end());
 		fusion.insert(fusion.end(), groups[i + 1].begin(), groups[i + 1].end());
-		merge.push_back(fusion);
+		merged.push_back(fusion);
 	}
-	if (merge.size() > 1)
-		fordJohnsonVec(merge);
+	if (merged.size() > 1)
+		fordJohnsonVec(merged);
 
 	// 3 - Insertion
 	// 3.1 - Split groups back
