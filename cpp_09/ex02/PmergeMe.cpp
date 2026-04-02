@@ -95,16 +95,25 @@ void	PmergeMe::sort() {
 
 // PRIVATE ====================================================================
 
+// Utils ======================================================================
+
+
 // Ford Johnson algorithm =====================================================
 
 void	PmergeMe::fordJohnsonVec(GroupVec &groups) {
+	// 0 - Return when only 1 group
+	if (groups.size() < 2)
+		return;
+
 	// 1 - Swap group pairs if needed, in order to put the biggest last
 	for(size_t i = 0; i + 1 < groups.size(); i += 2) {
 		if (groups[i].back() > groups [i+1].back())
 			std::swap(groups[i], groups[i+1]);
 	}
-	if (groups.size() / 2 > 0)
-		Group	straggler = *(groups.end() - 1);
+	Group	straggler;
+	if (groups.size() % 2 > 0 && !groups.empty()) {
+		straggler = *(groups.end() - 1);
+	}
 	
 	// 2 - Fusion & recursion
 	GroupVec merged;
@@ -114,15 +123,14 @@ void	PmergeMe::fordJohnsonVec(GroupVec &groups) {
 		fusion.insert(fusion.end(), groups[i + 1].begin(), groups[i + 1].end());
 		merged.push_back(fusion);
 	}
-	if (merged.size() > 1)
-		fordJohnsonVec(merged);
+	fordJohnsonVec(merged);
 
 	// 3 - Insertion
 	// 3.1 - Split groups back
 	GroupVec winnerChain;
 	GroupVec pendChain;
 	GroupVec mainChain;
-	size_t mid = merged[0].size();
+	size_t mid = merged[0].size() / 2;
 	for (size_t i = 0; i < merged.size(); ++i) {
 		Group pend;
 		pend.insert(pend.end(), merged[i].begin(), merged[i].begin() + mid);
@@ -143,14 +151,20 @@ void	PmergeMe::fordJohnsonVec(GroupVec &groups) {
 			mainChain.insert(pos, pendChain[j]);
 		}
 	}
+
+	// 3.4 - Insert straggler if there is one
+	if (!straggler.empty()) {
+		GroupVecIt first = mainChain.begin();
+		GroupVecIt last = mainChain.end();
+		GroupVecIt pos = std::lower_bound(first, last, straggler, groupComparator);
+		mainChain.insert(pos, straggler);
+	}
 	
 	groups = mainChain;
 	return;
 }
 
-bool groupComparator(Group a, Group b) {
-	return a.back() < b.back();
-}
+// NON MEMBER FUNCTIONS =======================================================
 
 size_t jacobsthal(size_t i) {
 	static std::vector<size_t>	cache(2, 1);
