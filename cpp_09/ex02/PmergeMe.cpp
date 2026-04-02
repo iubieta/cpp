@@ -73,6 +73,16 @@ PmergeMe::~PmergeMe() {};
 
 // PUBLIC =====================================================================
 
+// Getters --------------------------------------------------------------------
+
+Group PmergeMe::getInput() const { return _original; }
+Group PmergeMe::getSortedVec() const { return _sortedVec; }
+Group PmergeMe::getSortedList() const { return _sortedList; }
+double PmergeMe::getVecTime() const { return _vecTime; }
+double PmergeMe::getListTime() const { return _vecTime; }
+
+// Methods --------------------------------------------------------------------
+
 void	PmergeMe::sort() {
 	GroupVec	groups;
 	for (size_t i = 0; i < _original.size(); i++)

@@ -31,10 +31,19 @@ class PmergeMe {
 		PmergeMe(const PmergeMe &other);
 		PmergeMe &operator=(const PmergeMe &other);
 		~PmergeMe();
-
+		
+		// Getters
+		Group	getInput() const;
+		Group	getSortedVec() const;
+		Group	getSortedList() const;
+		double	getVecTime() const;
+		double	getListTime() const;
+		
+		// Methods
 		void sort();
 	
 	private:
+		// Atributes
 		Group	_original;
 		Group	_sortedVec;
 		Group	_sortedList;
