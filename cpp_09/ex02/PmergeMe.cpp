@@ -313,3 +313,12 @@ size_t jacobsthal(size_t i) {
 // 	insertExcess(jsi);
 // 	return jsi.mains;
 // }
+std::ostream &operator<<(std::ostream &os, const PmergeMe &obj) {
+	os	<< "Sorting results:" << std::endl
+		<< "  Input: " << obj.getInput() << std::endl
+		<< "  Sorted Vector: " << obj.getSortedVec() << std::endl
+		<< "  Sorting time: " << obj.getVecTime() << std::endl
+		<< "  Sorted List: " << obj.getSortedList() << std::endl
+		<< "  Sorting time: " << obj.getListTime() << std::endl;
+	return os;
+}
