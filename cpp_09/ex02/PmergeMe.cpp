@@ -13,6 +13,7 @@
 #include "PmergeMe.hpp"
 #include "Utils.hpp"
 #include <cstddef>
+#include <ctime>
 #include <iostream>
 #include <iterator>
 #include <stdexcept>
@@ -79,17 +80,20 @@ Group PmergeMe::getInput() const { return _original; }
 Group PmergeMe::getSortedVec() const { return _sortedVec; }
 Group PmergeMe::getSortedList() const { return _sortedList; }
 double PmergeMe::getVecTime() const { return _vecTime; }
-double PmergeMe::getListTime() const { return _vecTime; }
+double PmergeMe::getListTime() const { return _listTime; }
 
 // Methods --------------------------------------------------------------------
 
 void	PmergeMe::sort() {
+	std::clock_t	startTime = clock();
 	GroupVec	groups;
 	for (size_t i = 0; i < _original.size(); i++)
 		groups.push_back(Group(1, _original[i]));
 	fordJohnsonVec(groups);
 	for (size_t i = 0; i < groups.size(); i++)
 		_sortedVec.push_back(groups[i].back());
+	std::clock_t	endTime = clock();
+	_vecTime = static_cast<double>((endTime - startTime) * 1000000/ CLOCKS_PER_SEC);
 }
 
 
@@ -181,8 +185,8 @@ std::ostream &operator<<(std::ostream &os, const PmergeMe &obj) {
 	os	<< "Sorting results:" << std::endl
 		<< "  Input: " << obj.getInput() << std::endl
 		<< "  Sorted Vector: " << obj.getSortedVec() << std::endl
-		<< "  Sorting time: " << obj.getVecTime() << std::endl
+		<< "  Sorting time: " << obj.getVecTime() << " uS" << std::endl 
 		<< "  Sorted List: " << obj.getSortedList() << std::endl
-		<< "  Sorting time: " << obj.getListTime() << std::endl;
+		<< "  Sorting time: " << obj.getListTime() << " uS" << std::endl;
 	return os;
 }
