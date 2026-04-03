@@ -58,10 +58,10 @@ class PmergeMe {
 		//void fordJohnsonList();
 		
 		//Utils
+		static size_t	jacobsthal(size_t i);
 };
 
 bool			groupComparator(Group a, Group b);
-static size_t	jacobsthal(size_t i);
 std::ostream	&operator<<(std::ostream &os, const PmergeMe &obj);
 
 #endif

@@ -100,6 +100,12 @@ void	PmergeMe::sort() {
 // PRIVATE ====================================================================
 
 // Utils ======================================================================
+size_t PmergeMe::jacobsthal(size_t i) {
+	static std::vector<size_t>	cache(2, 1);
+	while (cache.size() <= i)
+		cache.push_back(cache.back() + 2 * cache[cache.size() - 2]);
+	return cache[i];
+}
 
 
 // Ford Johnson algorithm =====================================================
@@ -170,12 +176,6 @@ void	PmergeMe::fordJohnsonVec(GroupVec &groups) {
 
 // NON MEMBER FUNCTIONS =======================================================
 
-size_t jacobsthal(size_t i) {
-	static std::vector<size_t>	cache(2, 1);
-	while (cache.size() <= i)
-		cache.push_back(cache.back() + 2 * cache[cache.size() - 2]);
-	return cache[i];
-}
 
 bool groupComparator(Group a, Group b) {
 	return a.back() < b.back();
