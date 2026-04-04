@@ -60,6 +60,7 @@ class PmergeMe {
 		void	mergeGroups(GroupVec &groups);
 		void	splitGroups(GroupVec &groups, GroupVec &pendChain, GroupVec &winnerChain);
 		void	jacobsthalInsertion(GroupVec &pendChain, GroupVec &winnerChain, GroupVec &mainChain);
+		void	insertStraggler(Group &straggler, GroupVec &mainChain);
 		//void fordJohnsonList();
 		
 		//Utils

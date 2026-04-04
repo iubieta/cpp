@@ -136,12 +136,7 @@ void	PmergeMe::fordJohnsonVec(GroupVec &groups) {
 	// 3.3 - Insert in jacobsthal order
 	jacobsthalInsertion(pendChain, winnerChain, mainChain);
 	// 3.4 - Insert straggler if there is one
-	if (!straggler.empty()) {
-		GroupVecIt first = mainChain.begin();
-		GroupVecIt last = mainChain.end();
-		GroupVecIt pos = std::lower_bound(first, last, straggler, groupComparator);
-		mainChain.insert(pos, straggler);
-	}
+	insertStraggler(straggler, mainChain);
 	
 	groups = mainChain;
 	return;
@@ -194,6 +189,15 @@ void	PmergeMe::jacobsthalInsertion(GroupVec &pendChain, GroupVec &winnerChain, G
 			GroupVecIt pos = std::lower_bound(first, last, pendChain[j], groupComparator);
 			mainChain.insert(pos, pendChain[j]);
 		}
+	}
+}
+
+void	PmergeMe::insertStraggler(Group &straggler, GroupVec &mainChain) {
+	if (!straggler.empty()) {
+		GroupVecIt first = mainChain.begin();
+		GroupVecIt last = mainChain.end();
+		GroupVecIt pos = std::lower_bound(first, last, straggler, groupComparator);
+		mainChain.insert(pos, straggler);
 	}
 }
 
