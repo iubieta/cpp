@@ -116,52 +116,25 @@ void	PmergeMe::fordJohnsonVec(GroupVec &groups) {
 		return;
 
 	// 1 - Swap group pairs if needed, in order to put the biggest last
-	for(size_t i = 0; i + 1 < groups.size(); i += 2) {
-		if (groups[i].back() > groups [i+1].back())
-			std::swap(groups[i], groups[i+1]);
-	}
-	Group	straggler;
-	if (groups.size() % 2 > 0 && !groups.empty()) {
-		straggler = *(groups.end() - 1);
-	}
-	
+	swapGroups(groups);
+	// 1.1 - Extract the straggler if it is one
+	Group	straggler = getStraggler(groups);
+
 	// 2 - Fusion & recursion
-	GroupVec merged;
-	for (size_t i = 0; i + 1 < groups.size(); i += 2) {
-		Group fusion;
-		fusion.insert(fusion.end(), groups[i].begin(), groups[i].end());
-		fusion.insert(fusion.end(), groups[i + 1].begin(), groups[i + 1].end());
-		merged.push_back(fusion);
-	}
-	fordJohnsonVec(merged);
+	mergeGroups(groups);
+	fordJohnsonVec(groups);
 
 	// 3 - Insertion
 	// 3.1 - Split groups back
 	GroupVec winnerChain;
 	GroupVec pendChain;
 	GroupVec mainChain;
-	size_t mid = merged[0].size() / 2;
-	for (size_t i = 0; i < merged.size(); ++i) {
-		Group pend;
-		pend.insert(pend.end(), merged[i].begin(), merged[i].begin() + mid);
-		pendChain.push_back(pend);
-		Group winner;
-		winner.insert(winner.end(), merged[i].begin() + mid, merged[i].end());
-		winnerChain.push_back(winner);
-		mainChain.push_back(winner);
-	}
-	// 3.2 - Insert mains and first pend in sorted vec
+	splitGroups(groups, pendChain, winnerChain);
+	// 3.2 - Insert winners and first pend in mainChain
+	mainChain.insert(mainChain.end(), winnerChain.begin(), winnerChain.end());
 	mainChain.insert(mainChain.begin(), pendChain[0]);
 	// 3.3 - Insert in jacobsthal order
-	for (size_t i = 0; jacobsthal(i+1) < pendChain.size(); i = jacobsthal(i + 1)) {
-		for (size_t j = jacobsthal(i+1); j > i; --j) {
-			GroupVecIt first = mainChain.begin();
-			GroupVecIt last = std::lower_bound(first, mainChain.end(), winnerChain[j], groupComparator);
-			GroupVecIt pos = std::lower_bound(first, last, pendChain[j], groupComparator);
-			mainChain.insert(pos, pendChain[j]);
-		}
-	}
-
+	jacobsthalInsertion(pendChain, winnerChain, mainChain);
 	// 3.4 - Insert straggler if there is one
 	if (!straggler.empty()) {
 		GroupVecIt first = mainChain.begin();
@@ -172,6 +145,56 @@ void	PmergeMe::fordJohnsonVec(GroupVec &groups) {
 	
 	groups = mainChain;
 	return;
+}
+
+// Parts ----------------------------------------------------------------------
+
+void	PmergeMe::swapGroups(GroupVec &groups) {
+	for(size_t i = 0; i + 1 < groups.size(); i += 2) {
+		if (groups[i].back() > groups [i+1].back())
+			std::swap(groups[i], groups[i+1]);
+	}
+}
+
+Group	PmergeMe::getStraggler(GroupVec &groups) {
+	if (groups.size() % 2 > 0 && !groups.empty()) {
+		return *(groups.end() - 1);
+	}
+	return Group();
+}
+
+void	PmergeMe::mergeGroups(GroupVec &groups) {
+	GroupVec merged;
+	for (size_t i = 0; i + 1 < groups.size(); i += 2) {
+		Group fusion;
+		fusion.insert(fusion.end(), groups[i].begin(), groups[i].end());
+		fusion.insert(fusion.end(), groups[i + 1].begin(), groups[i + 1].end());
+		merged.push_back(fusion);
+	}
+	groups = merged;
+}
+
+void	PmergeMe::splitGroups(GroupVec &groups, GroupVec &pendChain, GroupVec &winnerChain) {
+	size_t mid = groups[0].size() / 2;
+	for (size_t i = 0; i < groups.size(); ++i) {
+		Group pend;
+		pend.insert(pend.end(), groups[i].begin(), groups[i].begin() + mid);
+		pendChain.push_back(pend);
+		Group winner;
+		winner.insert(winner.end(), groups[i].begin() + mid, groups[i].end());
+		winnerChain.push_back(winner);
+	}
+}
+
+void	PmergeMe::jacobsthalInsertion(GroupVec &pendChain, GroupVec &winnerChain, GroupVec &mainChain) {
+	for (size_t i = 0; jacobsthal(i+1) < pendChain.size(); i = jacobsthal(i + 1)) {
+		for (size_t j = jacobsthal(i+1); j > i; --j) {
+			GroupVecIt first = mainChain.begin();
+			GroupVecIt last = std::lower_bound(first, mainChain.end(), winnerChain[j], groupComparator);
+			GroupVecIt pos = std::lower_bound(first, last, pendChain[j], groupComparator);
+			mainChain.insert(pos, pendChain[j]);
+		}
+	}
 }
 
 // NON MEMBER FUNCTIONS =======================================================

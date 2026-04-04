@@ -55,6 +55,11 @@ class PmergeMe {
 
 		// Sorting algorithm
 		void	fordJohnsonVec(GroupVec &groups);
+		void	swapGroups(GroupVec &groups);
+		Group	getStraggler(GroupVec &groups);
+		void	mergeGroups(GroupVec &groups);
+		void	splitGroups(GroupVec &groups, GroupVec &pendChain, GroupVec &winnerChain);
+		void	jacobsthalInsertion(GroupVec &pendChain, GroupVec &winnerChain, GroupVec &mainChain);
 		//void fordJohnsonList();
 		
 		//Utils
