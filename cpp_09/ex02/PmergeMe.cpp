@@ -182,8 +182,12 @@ void	PmergeMe::splitGroups(GroupVec &groups, GroupVec &pendChain, GroupVec &winn
 }
 
 void	PmergeMe::jacobsthalInsertion(GroupVec &pendChain, GroupVec &winnerChain, GroupVec &mainChain) {
-	for (size_t i = 0; jacobsthal(i+1) < pendChain.size(); i = jacobsthal(i + 1)) {
-		for (size_t j = jacobsthal(i+1); j > i; --j) {
+	for (size_t i = 1; jacobsthal(i) < pendChain.size(); ++i) {
+		size_t end = jacobsthal(i);
+		size_t start = jacobsthal(i + 1) - 1;
+		while (start > pendChain.size() - 1)
+				--start;
+		for (size_t j = start; j >= end; --j) {
 			GroupVecIt first = mainChain.begin();
 			GroupVecIt last = std::lower_bound(first, mainChain.end(), winnerChain[j], groupComparator);
 			GroupVecIt pos = std::lower_bound(first, last, pendChain[j], groupComparator);
