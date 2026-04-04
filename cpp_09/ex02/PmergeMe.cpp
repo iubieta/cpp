@@ -107,7 +107,6 @@ size_t PmergeMe::jacobsthal(size_t i) {
 	return cache[i];
 }
 
-
 // Ford Johnson algorithm =====================================================
 
 void	PmergeMe::fordJohnsonVec(GroupVec &groups) {
@@ -125,10 +124,10 @@ void	PmergeMe::fordJohnsonVec(GroupVec &groups) {
 	fordJohnsonVec(groups);
 
 	// 3 - Insertion
-	// 3.1 - Split groups back
 	GroupVec winnerChain;
 	GroupVec pendChain;
 	GroupVec mainChain;
+	// 3.1 - Split groups back
 	splitGroups(groups, pendChain, winnerChain);
 	// 3.2 - Insert winners and first pend in mainChain
 	mainChain.insert(mainChain.end(), winnerChain.begin(), winnerChain.end());
