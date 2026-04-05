@@ -20,12 +20,20 @@
 #include <string>
 #include <vector>
 
-void	isTestOk(std::vector<int> expected, std::vector<int> result) {
+void	isVecOk(std::vector<int> expected, std::vector<int> result) {
+	std::cout << "Vector result: ";
 	if (result == expected)
 		std::cout << GREEN << "OK" << RESET << std::endl;
 	else
 		std::cout << RED << "KO" << RESET << std::endl;
-	std::cout << std::endl;
+}
+
+void	isListOk(std::vector<int> expected, std::vector<int> result) {
+	std::cout << "List result: ";
+	if (result == expected)
+		std::cout << GREEN << "OK" << RESET << std::endl;
+	else
+		std::cout << RED << "KO" << RESET << std::endl;
 }
 
 int main(int argc, char *argv[]) {
@@ -39,7 +47,9 @@ int main(int argc, char *argv[]) {
 				std::cout << Pm;
 				int arr[1] = {1};
 				std::vector<int> expected(arr, arr + 1);
-				isTestOk(expected, Pm.getSortedVec());
+				isVecOk(expected, Pm.getSortedVec());
+				isListOk(expected, Pm.getSortedList());
+				std::cout << std::endl;
 			}
 			{
 				PmergeMe Pm(std::string("2 1"));
@@ -48,7 +58,9 @@ int main(int argc, char *argv[]) {
 
 				int arr[2] = {1, 2};
 				std::vector<int> expected(arr, arr + 2);
-				isTestOk(expected, Pm.getSortedVec());
+				isVecOk(expected, Pm.getSortedVec());
+				isListOk(expected, Pm.getSortedList());
+				std::cout << std::endl;
 			}
 			{
 				PmergeMe Pm(std::string("3 2 1"));
@@ -57,20 +69,24 @@ int main(int argc, char *argv[]) {
 
 				int arr[3] = {1, 2, 3};
 				std::vector<int> expected(arr, arr + 3);
-				isTestOk(expected, Pm.getSortedVec());
+				isVecOk(expected, Pm.getSortedVec());
+				isListOk(expected, Pm.getSortedList());
+				std::cout << std::endl;
 			}
 		}
 		if (input == "test2" || input == "test") {
 			std::cout << BLUE << "=== WHOLE PAIRS ==========\n" << RESET ;
-			// {
-			// 	PmergeMe Pm(std::string("4 3 2 1"));
-			// 	Pm.sort();
-			// 	std::cout << Pm;
-			//
-			// 	int arr[4] = {1, 2, 3, 4};
-			// 	std::vector<int> expected(arr, arr + 4);
-			// 	isTestOk(expected, Pm.getSortedVec());
-			// }
+			{
+				PmergeMe Pm(std::string("4 3 2 1"));
+				Pm.sort();
+				std::cout << Pm;
+
+				int arr[4] = {1, 2, 3, 4};
+				std::vector<int> expected(arr, arr + 4);
+				isVecOk(expected, Pm.getSortedVec());
+				isListOk(expected, Pm.getSortedList());
+				std::cout << std::endl;
+			}
 			{
 				PmergeMe Pm(std::string("8 7 6 5 4 3 2 1"));
 				Pm.sort();
@@ -78,7 +94,9 @@ int main(int argc, char *argv[]) {
 
 				int arr[8] = {1, 2, 3, 4, 5, 6, 7, 8};
 				std::vector<int> expected(arr, arr + 8);
-				isTestOk(expected, Pm.getSortedVec());
+				isVecOk(expected, Pm.getSortedVec());
+				isListOk(expected, Pm.getSortedList());
+				std::cout << std::endl;
 			}
 			{
 				PmergeMe Pm(std::string("16 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1"));
@@ -87,7 +105,9 @@ int main(int argc, char *argv[]) {
 
 				int arr[16] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16};
 				std::vector<int> expected(arr, arr + 16);
-				isTestOk(expected, Pm.getSortedVec());
+				isVecOk(expected, Pm.getSortedVec());
+				isListOk(expected, Pm.getSortedList());
+				std::cout << std::endl;
 			}
 			{
 				PmergeMe Pm(std::string("32 31 30 29 28 27 26 25 24 23 22 21 20 19 18 17 16 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1"));
@@ -96,7 +116,9 @@ int main(int argc, char *argv[]) {
 
 				int arr[32] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32};
 				std::vector<int> expected(arr, arr + 32);
-				isTestOk(expected, Pm.getSortedVec());
+				isVecOk(expected, Pm.getSortedVec());
+				isListOk(expected, Pm.getSortedList());
+				std::cout << std::endl;
 			}
 		}
 		if (input == "test3" || input == "test") {
@@ -108,7 +130,9 @@ int main(int argc, char *argv[]) {
 
 				int arr[5] = {1, 2, 3, 4, 5};
 				std::vector<int> expected(arr, arr + 5);
-				isTestOk(expected, Pm.getSortedVec());
+				isVecOk(expected, Pm.getSortedVec());
+				isListOk(expected, Pm.getSortedList());
+				std::cout << std::endl;
 			}
 			{
 				PmergeMe Pm(std::string("7 6 5 4 3 2 1"));
@@ -117,7 +141,9 @@ int main(int argc, char *argv[]) {
 
 				int arr[7] = {1, 2, 3, 4, 5, 6, 7};
 				std::vector<int> expected(arr, arr + 7);
-				isTestOk(expected, Pm.getSortedVec());
+				isVecOk(expected, Pm.getSortedVec());
+				isListOk(expected, Pm.getSortedList());
+				std::cout << std::endl;
 			}
 			{
 				PmergeMe Pm(std::string("9 8 7 6 5 4 3 2 1"));
@@ -126,7 +152,9 @@ int main(int argc, char *argv[]) {
 
 				int arr[9] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
 				std::vector<int> expected(arr, arr + 9);
-				isTestOk(expected, Pm.getSortedVec());
+				isVecOk(expected, Pm.getSortedVec());
+				isListOk(expected, Pm.getSortedList());
+				std::cout << std::endl;
 			}
 		}
 		if (input == "test4" || input == "test") {
@@ -138,7 +166,9 @@ int main(int argc, char *argv[]) {
 
 				int arr[8] = {1, 2, 3, 4, 5, 6, 7, 8};
 				std::vector<int> expected(arr, arr + 8);
-				isTestOk(expected, Pm.getSortedVec());
+				isVecOk(expected, Pm.getSortedVec());
+				isListOk(expected, Pm.getSortedList());
+				std::cout << std::endl;
 			}
 			{
 				PmergeMe Pm(std::string("1 2 3 4 5 6 7 8 9"));
@@ -147,7 +177,9 @@ int main(int argc, char *argv[]) {
 
 				int arr[9] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
 				std::vector<int> expected(arr, arr + 9);
-				isTestOk(expected, Pm.getSortedVec());
+				isVecOk(expected, Pm.getSortedVec());
+				isListOk(expected, Pm.getSortedList());
+				std::cout << std::endl;
 			}
 		}
 		if (input == "test5" || input == "test") {
@@ -159,7 +191,9 @@ int main(int argc, char *argv[]) {
 
 				int arr[6] = {1, 2, 3, 4, 5, 6};
 				std::vector<int> expected(arr, arr + 6);
-				isTestOk(expected, Pm.getSortedVec());
+				isVecOk(expected, Pm.getSortedVec());
+				isListOk(expected, Pm.getSortedList());
+				std::cout << std::endl;
 			}
 			{
 				PmergeMe Pm(std::string("10 9 8 7 6 5 4 3 2 1"));
@@ -168,7 +202,9 @@ int main(int argc, char *argv[]) {
 
 				int arr[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 				std::vector<int> expected(arr, arr + 10);
-				isTestOk(expected, Pm.getSortedVec());
+				isVecOk(expected, Pm.getSortedVec());
+				isListOk(expected, Pm.getSortedList());
+				std::cout << std::endl;
 			}
 			{
 				PmergeMe Pm(std::string("11 10 9 8 7 6 5 4 3 2 1"));
@@ -177,7 +213,9 @@ int main(int argc, char *argv[]) {
 
 				int arr[11] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
 				std::vector<int> expected(arr, arr + 11);
-				isTestOk(expected, Pm.getSortedVec());
+				isVecOk(expected, Pm.getSortedVec());
+				isListOk(expected, Pm.getSortedList());
+				std::cout << std::endl;
 			}
 		}
 		if (input == "test6" || input == "test") {
@@ -189,7 +227,9 @@ int main(int argc, char *argv[]) {
 
 				int arr[4] = {1, 2, 3, 4};
 				std::vector<int> expected(arr, arr + 4);
-				isTestOk(expected, Pm.getSortedVec());
+				isVecOk(expected, Pm.getSortedVec());
+				isListOk(expected, Pm.getSortedList());
+				std::cout << std::endl;
 			}
 			{
 				PmergeMe Pm(std::string("8 7 6 3 4 5 2 1"));
@@ -198,7 +238,9 @@ int main(int argc, char *argv[]) {
 
 				int arr[8] = {1, 2, 3, 4, 5, 6, 7, 8};
 				std::vector<int> expected(arr, arr + 8);
-				isTestOk(expected, Pm.getSortedVec());
+				isVecOk(expected, Pm.getSortedVec());
+				isListOk(expected, Pm.getSortedList());
+				std::cout << std::endl;
 			}
 			{
 				PmergeMe Pm(std::string("16 10 1 2 3 12 11 7 15 13 9 5 6 14 8 4"));
@@ -207,7 +249,9 @@ int main(int argc, char *argv[]) {
 
 				int arr[16] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16};
 				std::vector<int> expected(arr, arr + 16);
-				isTestOk(expected, Pm.getSortedVec());
+				isVecOk(expected, Pm.getSortedVec());
+				isListOk(expected, Pm.getSortedList());
+				std::cout << std::endl;
 			}
 		} else {
 			try {
@@ -217,7 +261,9 @@ int main(int argc, char *argv[]) {
 				
 				std::vector<int> expected(Pm.getInput());
 				std::sort(expected.begin(), expected.end());
-				isTestOk(expected, Pm.getSortedVec());
+				isVecOk(expected, Pm.getSortedVec());
+				isListOk(expected, Pm.getSortedList());
+				std::cout << std::endl;
 			} catch (std::exception &e) {
 				std::cout << e.what();
 			}
