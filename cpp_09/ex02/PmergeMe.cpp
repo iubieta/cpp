@@ -169,7 +169,7 @@ void	PmergeMe::swapGroups(GroupVec &groups) {
 
 Group	PmergeMe::getStraggler(GroupVec &groups) {
 	if (groups.size() % 2 > 0 && !groups.empty()) {
-		return *(groups.end() - 1);
+		return groups.back();
 	}
 	return Group();
 }
