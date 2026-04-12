@@ -72,14 +72,15 @@ int main(int argc, char *argv[]) {
 		try {
 			size_t	index = line.find("|");
 			std::string date = line.substr(0, index);
+			trim(date);
 			if (!isValidDate(date)) {
-				std::cout << "Error: bad input date => " << date << std::endl;
+				std::cout << date << " => Error: bad input date" << std::endl;
 				continue;
 			}
 			float	n;
 			std::istringstream (line.substr(index + 1)) >> n;
 			if (!isValidValue(n)) {
-				std::cout << "Error: bad input value => enter a number between 0 and 1000\n";
+				std::cout << date << " => Error: bad input value, enter a number between 0 and 1000\n";
 				continue;
 			}
 			btc.calc_price(date, n);
