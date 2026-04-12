@@ -57,6 +57,7 @@ void	BtcExch::loadCsv(const std::string &input_file) {
 	floatpair_t		pair;
 	
 	std::getline(input, line);
+	parseCsvHeader(line);
 	while (std::getline(input,line)) {
 		try {
 			trim(line);
@@ -69,6 +70,20 @@ void	BtcExch::loadCsv(const std::string &input_file) {
 	}
 }
 	
+void BtcExch::parseCsvHeader(const std::string &line) {
+	std::string		key;
+	std::string		value_str;
+	
+	size_t	index = line.find_first_of(',');
+	if (index == std::string::npos)
+		throw std::runtime_error("Error: Invalid header format");
+	key = line.substr(0, index);
+	if (key != "date")
+		throw std::runtime_error("Error: Invalid header key");
+	value_str = line.substr(index + 1);
+	if (value_str != "exchange_rate")
+		throw std::runtime_error("Error: Invalid header value");
+}
 BtcExch::floatpair_t BtcExch::parseCsvLine(const std::string &line) {
 	std::string		key;
 	std::string		value_str;

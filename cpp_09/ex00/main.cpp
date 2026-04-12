@@ -6,14 +6,17 @@
 /*   By: iubieta- <iubieta@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/24 18:26:18 by iubieta-          #+#    #+#             */
-/*   Updated: 2026/03/01 16:50:09 by iubieta-         ###   ########.fr       */
+/*   Updated: 2026/04/12 19:55:26 by iubieta-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
+#include <exception>
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <stdexcept>
+#include <string>
 #include "utils.hpp"
 
 
@@ -57,6 +60,21 @@ bool	isValidValue(float n) {
 	return true;
 }
 
+void parseInputHeader(std::string line) {
+	std::string		key;
+	std::string		value_str;
+	
+	size_t	index = line.find_first_of('|');
+	if (index == std::string::npos)
+		throw std::runtime_error("Error: Invalid input header format");
+	key = line.substr(0, index);
+	if (key != "date ")
+		throw std::runtime_error("Error: Invalid input header key");
+	value_str = line.substr(index + 1);
+	if (value_str != " value")
+		throw std::runtime_error("Error: Invalid input header value");
+}
+
 int main(int argc, char *argv[]) {
 	BtcExch btc("data.csv");
 	
@@ -68,6 +86,12 @@ int main(int argc, char *argv[]) {
 	std::string		line;
 	
 	std::getline(input, line);
+	try {
+		parseInputHeader(line);
+	} catch (std::exception &e) {
+		std::cout << e.what() << std::endl;
+		return 2;
+	}
 	while (std::getline(input,line)) {
 		try {
 			size_t	index = line.find("|");

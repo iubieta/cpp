@@ -44,6 +44,7 @@ class BtcExch {
 		floatmap_t	_hist_data;
 
 		void		loadCsv(const std::string &input_file);
+		void		parseCsvHeader(const std::string &line);
 		floatpair_t	parseCsvLine(const std::string &line);
 };
 
