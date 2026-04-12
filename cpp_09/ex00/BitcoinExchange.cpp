@@ -35,10 +35,15 @@ BtcExch::~BtcExch() {};
 
 void	BtcExch::calc_price(const std::string &date, float n) const {
 	const_floatmapiterator_t it = _hist_data.lower_bound(date);
-	if (it == _hist_data.end())
-		throw std::runtime_error("Date not found in database");
-	std::cout << it->first << " => " << n
+
+	if (it->first != date) {
+		if (it == _hist_data.begin() || it == _hist_data.end())
+			throw std::runtime_error(std::string(date) + " => Date not found in database");
+		--it;
+	}
+	std::cout << date << " => " << n
 		<< " = " << it->second * n
+		<< " ( " << it->first << " : " << it->second << " )"
 		<< std::endl;
 }
 
