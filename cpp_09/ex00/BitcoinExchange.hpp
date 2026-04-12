@@ -14,6 +14,7 @@
 #define BITCOINEXCHANGE_HPP
 
 #include "map"
+#include "utils.hpp"
 #include <string>
 #include <cctype>
 #include <cstddef>
@@ -41,8 +42,6 @@ class BtcExch {
 		typedef std::map<std::string, float>::const_iterator const_floatmapiterator_t;
 		
 		floatmap_t	_hist_data;
-
-		void		trim(std::string &str) const;
 
 		void		loadCsv(const std::string &input_file);
 		floatpair_t	parseCsvLine(const std::string &line);

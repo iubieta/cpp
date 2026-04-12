@@ -14,6 +14,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include "utils.hpp"
 
 
 bool	isLeapYear(int year) {
