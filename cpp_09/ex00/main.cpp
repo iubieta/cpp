@@ -98,14 +98,17 @@ int main(int argc, char *argv[]) {
 			std::string date = line.substr(0, index);
 			trim(date);
 			if (!isValidDate(date)) {
-				std::cout << date << " => Error: bad input date" << std::endl;
-				continue;
+				throw std::runtime_error(std::string(date) + " => Error: bad input date \"" + date + "\"");
 			}
 			float	n;
-			std::istringstream (line.substr(index + 1)) >> n;
+			std::string value_str = line.substr(index + 1);
+			trim(value_str);
+			std::istringstream	val_ss(value_str);
+			val_ss >> n;
+			if (val_ss.fail() || !val_ss.eof())
+				throw std::runtime_error(std::string(date) + " => Error: bad input value \"" + value_str + "\"");
 			if (!isValidValue(n)) {
-				std::cout << date << " => Error: bad input value, enter a number between 0 and 1000\n";
-				continue;
+				throw std::runtime_error(std::string(date) + " => Error: bad input value \"" + value_str + "\", enter a number between 0 and 1000");
 			}
 			btc.calc_price(date, n);
 		} catch (std::exception &e)  {
