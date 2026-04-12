@@ -46,7 +46,7 @@ void	BtcExch::calc_price(const std::string &date, float n) const {
 
 void	BtcExch::trim(std::string &str) const {
 	size_t start = str.find_first_not_of(' ');
-	size_t end = str.find_first_not_of(' ', start);
+	size_t end = str.find_first_not_of(start, ' ');
 	str = str.substr(start, end);
 }
 
