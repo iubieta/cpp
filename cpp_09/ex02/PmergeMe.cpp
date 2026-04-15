@@ -86,9 +86,9 @@ double PmergeMe::getListTime() const { return _listTime; }
 
 void	PmergeMe::sort() {
 	GroupVec	groups;
+	std::clock_t	startTime = clock();
 	for (size_t i = 0; i < _original.size(); i++)
 		groups.push_back(Group(1, _original[i]));
-	std::clock_t	startTime = clock();
 	fordJohnsonVec(groups);
 	for (size_t i = 0; i < groups.size(); i++)
 		_sortedVec.push_back(groups[i].back());
@@ -96,12 +96,12 @@ void	PmergeMe::sort() {
 	_vecTime = static_cast<double>((endTime - startTime) * 1000000/ CLOCKS_PER_SEC);
 
 	LGroupList	lgroups;
+	startTime = clock();
 	for (size_t i = 0; i < _original.size(); i++) {
 		LGroup lgroup;
 		lgroup.push_back(_original[i]);
 		lgroups.push_back(lgroup);
 	}
-	startTime = clock();
 	fordJohnsonList(lgroups);
 	for (LGroupListIt it = lgroups.begin(); it != lgroups.end(); ++it) {
 		_sortedList.insert(_sortedList.end(), it->begin(), it->end());
