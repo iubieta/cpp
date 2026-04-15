@@ -348,14 +348,24 @@ bool lgroupComparator(LGroup a, LGroup b) {
 }
 
 std::ostream &operator<<(std::ostream &os, const PmergeMe &obj) {
-	os	<< "Sorting results:" << std::endl;
-	if (obj.getInput().size() < 100)
-		os << "  Input: " << obj.getInput() << std::endl;
-	if (obj.getSortedVec().size() < 100)
-		os << "  Sorted Vector: " << obj.getSortedVec() << std::endl;
-	os << "  Sorting time: " << obj.getVecTime() << " uS" << std::endl;
-	if (obj.getSortedList().size() < 100)
-		os << "  Sorted List: " << obj.getSortedList() << std::endl;
-	os << "  Sorting time: " << obj.getListTime() << " uS" << std::endl;
+	os << "Before: " << obj.getInput() << std::endl;
+	os << "After: " << obj.getSortedVec() << std::endl;
+	os << "Time to procces a range of " << obj.getInput().size() 
+		<< " elements with std::vector<int>: " << obj.getVecTime() << " uS" << std::endl;
+	os << "Time to procces a range of " << obj.getInput().size() 
+		<< " elements with std::list<int>: " << obj.getListTime() << " uS" << std::endl;
 	return os;
 }
+
+// std::ostream &operator<<(std::ostream &os, const PmergeMe &obj) {
+// 	os	<< "Sorting results:" << std::endl;
+// 	if (obj.getInput().size() < 100)
+// 		os << "  Input: " << obj.getInput() << std::endl;
+// 	if (obj.getSortedVec().size() < 100)
+// 		os << "  Sorted Vector: " << obj.getSortedVec() << std::endl;
+// 	os << "  Sorting time: " << obj.getVecTime() << " uS" << std::endl;
+// 	if (obj.getSortedList().size() < 100)
+// 		os << "  Sorted List: " << obj.getSortedList() << std::endl;
+// 	os << "  Sorting time: " << obj.getListTime() << " uS" << std::endl;
+// 	return os;
+// }
