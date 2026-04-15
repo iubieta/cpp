@@ -38,6 +38,10 @@ void	isListOk(std::vector<int> expected, std::vector<int> result) {
 
 int main(int argc, char *argv[]) {
 	if (argc == 2) {
+		if (!argv[1][0]) {
+			std::cout << "ERROR: Empty input" << std::endl;
+			return 1;
+		}
 		std::string input(argv[1]);
 		if (input == "test1" || input == "test") {
 			std::cout << BLUE << "=== BASIC TESTS ==========\n" << RESET ;
