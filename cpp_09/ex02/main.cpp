@@ -61,6 +61,12 @@ int main(int argc, char *argv[]) {
 			PmergeMe Pm(argc, argv);
 			Pm.sort();
 			std::cout << Pm;
+			
+			std::vector<int> expected(Pm.getInput());
+			std::sort(expected.begin(), expected.end());
+			isVecOk(expected, Pm.getSortedVec());
+			isListOk(expected, Pm.getSortedList());
+			std::cout << std::endl;
 		} catch (std::exception &e) {
 			std::cout << e.what();
 		}
