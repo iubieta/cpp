@@ -76,8 +76,6 @@ void parseInputHeader(std::string line) {
 }
 
 int main(int argc, char *argv[]) {
-	BtcExch btc("data.csv");
-	
 	if (argc != 2) {
 		std::cout << "ERROR: check your arguments\n";
 		return 1;
@@ -92,28 +90,34 @@ int main(int argc, char *argv[]) {
 		std::cout << e.what() << std::endl;
 		return 2;
 	}
-	while (std::getline(input,line)) {
-		try {
-			size_t	index = line.find("|");
-			std::string date = line.substr(0, index);
-			trim(date);
-			if (!isValidDate(date)) {
-				throw std::runtime_error(std::string(date) + " => Error: bad input date \"" + date + "\"");
+	try {
+		BtcExch btc("data.csv");
+		while (std::getline(input,line)) {
+			try {
+				size_t	index = line.find("|");
+				std::string date = line.substr(0, index);
+				trim(date);
+				if (!isValidDate(date)) {
+					throw std::runtime_error(std::string(date) + " => Error: bad input date \"" + date + "\"");
+				}
+				float	n;
+				std::string value_str = line.substr(index + 1);
+				trim(value_str);
+				std::istringstream	val_ss(value_str);
+				val_ss >> n;
+				if (val_ss.fail() || !val_ss.eof())
+					throw std::runtime_error(std::string(date) + " => Error: bad input value \"" + value_str + "\"");
+				if (!isValidValue(n)) {
+					throw std::runtime_error(std::string(date) + " => Error: bad input value \"" + value_str + "\", enter a number between 0 and 1000");
+				}
+				btc.calc_price(date, n);
+			} catch (std::exception &e)  {
+				std::cout << e.what() << std::endl;
 			}
-			float	n;
-			std::string value_str = line.substr(index + 1);
-			trim(value_str);
-			std::istringstream	val_ss(value_str);
-			val_ss >> n;
-			if (val_ss.fail() || !val_ss.eof())
-				throw std::runtime_error(std::string(date) + " => Error: bad input value \"" + value_str + "\"");
-			if (!isValidValue(n)) {
-				throw std::runtime_error(std::string(date) + " => Error: bad input value \"" + value_str + "\", enter a number between 0 and 1000");
-			}
-			btc.calc_price(date, n);
-		} catch (std::exception &e)  {
-			std::cout << e.what() << std::endl;
 		}
+	} catch (std::exception &e) {
+		std::cout << e.what();
+		return 3;
 	}
 	return 0;
 }
