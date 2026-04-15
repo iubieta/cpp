@@ -43,7 +43,7 @@ void	BtcExch::calc_price(const std::string &date, float n) const {
 	}
 	std::cout << date << " => " << n
 		<< " = " << it->second * n
-		<< " ( " << it->first << " : " << it->second << " )"
+		//<< " ( " << it->first << " : " << it->second << " )"
 		<< std::endl;
 }
 
@@ -84,6 +84,7 @@ void BtcExch::parseCsvHeader(const std::string &line) {
 	if (value_str != "exchange_rate")
 		throw std::runtime_error("Error: Invalid header value");
 }
+
 BtcExch::floatpair_t BtcExch::parseCsvLine(const std::string &line) {
 	std::string		key;
 	std::string		value_str;
